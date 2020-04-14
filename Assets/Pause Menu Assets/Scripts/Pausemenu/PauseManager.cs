@@ -490,7 +490,7 @@ public AnimationClip mainOut;
                 AudioPanel.SetActive(false);
                 TitleTexts.SetActive(true);
                 Mask.SetActive(true);
-                Time.timeScale = 0;
+                Time.timeScale = 1;
                 for (int i = 0; i < OtherUiElements.Length; i++)
                 {
                     OtherUiElements[i].gameObject.SetActive(false);

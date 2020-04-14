@@ -12,6 +12,7 @@ public class EnterandExit : MonoBehaviour
 	public Transform playerPos;
 	public GameObject Camera;
 	public GameObject carUI;
+  public Transform PlayerHolder;
 
 	void OnTriggerExit (Collider other)
 	{
@@ -21,7 +22,7 @@ public class EnterandExit : MonoBehaviour
 
 	void OnTriggerEnter (Collider Hit)
 	{
-		if (Hit.gameObject == player)
+		if (Hit.gameObject.tag == "Player")
 		{
 				text.gameObject.SetActive(true);
 				enter = true;
@@ -62,5 +63,7 @@ public class EnterandExit : MonoBehaviour
 	{
 		Camera.gameObject.SetActive(false);
 		carControll.enabled = false;
+    if (player == null)
+            player = GameObject.FindWithTag("Player");
 	}
 }

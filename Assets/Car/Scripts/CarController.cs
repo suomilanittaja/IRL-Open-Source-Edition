@@ -31,9 +31,6 @@ public class CarController : MonoBehaviour
     public Transform rearRightTransfrom;
     public Transform rearLeftTransform;
 
-    public WheelFrictionCurve SF;
-    //public WheelFrictionCurve sidewaysFriction;
-
     private void GetInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
