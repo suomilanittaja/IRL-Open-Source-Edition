@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mechanic : MonoBehaviour
 {
-    public RCC_UIDashboardDisplay Rcc;
+    //public RCC_UIDashboardDisplay Rcc;
     public Jobs mechanic;
     // Start is called before the first frame update
     void Start()
@@ -14,7 +14,8 @@ public class Mechanic : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    
+    /*void Update()
     {
       if (Input.GetKeyDown(KeyCode.F2) && mechanic.job == 2 && Rcc.displayType == RCC_UIDashboardDisplay.DisplayType.Full)
       {
@@ -28,5 +29,5 @@ public class Mechanic : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; //lock cursor
         Cursor.visible = false; //disable visible mouse
       }
-    }
+    }*/
 }

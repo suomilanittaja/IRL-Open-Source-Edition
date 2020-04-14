@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 5175626365852754012}
   - component: {fileID: 5175626365852754013}
   - component: {fileID: 5175626365852754014}
+  - component: {fileID: 6717007098794030667}
+  - component: {fileID: 4357261713457151800}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Log
@@ -191,3 +193,32 @@ MonoBehaviour:
   stats: {fileID: 5175626365852754012}
   Text: {fileID: 0}
   rayScript: {fileID: 5175626365852754013}
+--- !u!114 &6717007098794030667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175626365852754004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f04ba0cfeae3c0ab5a50268ac6d774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  job: 10
+  Payed: 0
+  money: {fileID: 0}
+  text: {fileID: 0}
+--- !u!114 &4357261713457151800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175626365852754004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b07f280bd29379aa4af9d09a2b3090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mechanic: {fileID: 6717007098794030667}
