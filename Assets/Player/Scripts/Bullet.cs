@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class MyBullet : MonoBehaviourPun {
+public class Bullet : MonoBehaviourPun {
     public float Speed = 10;
 
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class MyBullet : MonoBehaviourPun {
   void OnCollisionEnter()
   {
     Destroy(gameObject);
-    StartCoroutine(Timer());  
+    StartCoroutine(Timer());
   }
 
   IEnumerator Timer()

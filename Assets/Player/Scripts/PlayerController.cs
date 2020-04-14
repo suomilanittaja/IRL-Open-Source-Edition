@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class MyPlayer : MonoBehaviourPun {
+public class PlayerController : MonoBehaviourPun {
 
 
     public float Speed = 10f;

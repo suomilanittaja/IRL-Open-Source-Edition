@@ -401,13 +401,15 @@ public AnimationClip mainOut;
         /// </summary>
         public void Resume()
         {
-            Time.timeScale = TimeScale;
+            //Time.timeScale = TimeScale;
 
             MainPanel.SetActive(false);
             VidPanel.SetActive(false);
             AudioPanel.SetActive(false);
             TitleTexts.SetActive(false);
             Mask.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked; //lock cursor
+            Cursor.visible = false; //disable visible mouse
             for (int i = 0; i < OtherUiElements.Length; i++)
             {
                 OtherUiElements[i].gameObject.SetActive(true);
