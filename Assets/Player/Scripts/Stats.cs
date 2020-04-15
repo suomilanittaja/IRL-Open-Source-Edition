@@ -6,7 +6,30 @@ using UnityEngine.UI;
 public class Stats : MonoBehaviour
 {
   public PlayerController controll;
+  public float healthOverTimer;
+
+  public float Hunger;
+	public float hungerOverTime;
+
+	public float Thirst;
+	public float thirstOverTime;
+
+	public float Drunk;
+	public float drunkOverTime;
+
+  [Header("Sliders")]
+	public Slider HungerBar;
+	public Slider ThirstBar;
+	public Slider DrunkBar;
   public Slider HealthBar;
+
+  public float minAmount = 0.1f;
+
+  private void Start()
+  {
+		HungerBar.maxValue = Hunger;
+		ThirstBar.maxValue = Thirst;
+  }
 
   void Update()
   {
@@ -23,5 +46,25 @@ public class Stats : MonoBehaviour
   {
     //Health = Mathf.Clamp(Health, 0, 100f);
     HealthBar.value = controll.Health;
+    Hunger = Mathf.Clamp(Hunger, 0, 100f);
+		Thirst = Mathf.Clamp(Thirst, 0, 100f);
+
+    HungerBar.value = Hunger;
+		ThirstBar.value = Thirst;
+    CalculateValues();
   }
+  private void CalculateValues()
+  {
+    Hunger -= hungerOverTime * Time.deltaTime;
+		Thirst -= thirstOverTime * Time.deltaTime;
+
+    if(Hunger <= minAmount || Thirst <= minAmount)
+		{
+			controll.Health -= healthOverTimer * Time.deltaTime;
+		}
+  }
+  public void Drink()
+	{
+		Thirst += 20;
+	}
 }

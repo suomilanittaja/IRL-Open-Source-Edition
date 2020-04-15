@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviourPun {
     private float _yAxisVelocity;
     public GameObject Cam;
     public const string PlayerTag = "Player";
+    public GameObject Minicam;
 
     private void Start()
     {
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviourPun {
         else
         {
             GetComponent<MeshRenderer>().material.color = Color.red;
+            Cam.SetActive(false);
+            Minicam.SetActive(false);
         }
 
         _manager = GameObject.FindWithTag("Manager").GetComponent<Manager>();

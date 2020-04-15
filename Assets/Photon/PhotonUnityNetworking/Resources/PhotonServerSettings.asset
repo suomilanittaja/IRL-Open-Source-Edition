@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 68a69935-b3fe-4ce2-9279-64e5cff29c89
+    AppIdRealtime: 3b6cf44e-a7b8-4ee5-8061-6a8f387bcf82
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: fe4ee921-8421-4d86-9042-8021beb241fb
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -36,6 +36,7 @@ MonoBehaviour:
   - DisableInteractor
   - SyncSeatActiveState
   - SyncSeatDisableState
+  - ChangeColour
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
