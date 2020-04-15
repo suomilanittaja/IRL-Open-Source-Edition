@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnterExitSpawn : MonoBehaviour
+public class VehicleSpawner : MonoBehaviour
 {
     public Transform SpawnPosition;
     public float PositionOffset = 2.0f;
     public GameObject[] PrefabsToInstantiate; // set in inspector
-    public KeyCode SpawnCode;
+    public GameObject Ui;
 
     public virtual void OnEnable()
     {
@@ -19,13 +19,27 @@ public class EnterExitSpawn : MonoBehaviour
     {
         PhotonNetwork.RemoveCallbackTarget(this);
     }
-    public void Update()
+
+    void OnTriggerEnter (Collider other)
     {
-        if (Input.GetKeyDown(SpawnCode))
-        {
-            Spawn();
-        }
+      if (other.gameObject.CompareTag("Player"))
+      {
+        Ui.SetActive(true);
+        Cursor.lockState = CursorLockMode.None; //unlock cursor
+        Cursor.visible = true; //make mouse visible
+      }
     }
+
+    void OnTriggerExit (Collider other)
+    {
+      if (other.gameObject.CompareTag("Player"))
+      {
+        Ui.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked; //lock cursor
+        Cursor.visible = false; //disable visible mouse
+      }
+    }
+
     public void Spawn()
     {
         if (this.PrefabsToInstantiate != null)
@@ -46,6 +60,9 @@ public class EnterExitSpawn : MonoBehaviour
                 Vector3 itempos = spawnPos + this.PositionOffset * random;
 
                 PhotonNetwork.Instantiate(o.name, itempos, Quaternion.identity, 0);
+                Cursor.lockState = CursorLockMode.Locked; //lock cursor
+                Cursor.visible = false; //disable visible mouse
+                Ui.SetActive(false);
             }
         }
     }

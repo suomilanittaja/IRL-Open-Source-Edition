@@ -8,6 +8,8 @@ TagManager:
   - Log
   - Food
   - Manager
+  - Bullet
+  - Gun
   layers:
   - Default
   - TransparentFX

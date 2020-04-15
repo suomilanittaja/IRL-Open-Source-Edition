@@ -13,22 +13,37 @@ public class Drink : MonoBehaviourPunCallbacks
    public GameObject Text;
    private GameObject Beer;
    public Raycast rayScript;
+   public PhotonView PhotonView;
 
    private void Update()
    {
      Beer = rayScript.rayHitted;
+     PhotonView = (PhotonView)Beer.GetComponent(typeof(PhotonView));
      if (rayScript.rayHitted.CompareTag(selectableTag) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
      {
-     stats.Drink();
-     print("key was pressed");
-     PhotonNetwork.Destroy(Beer);
+       TransferOwnership();
+       stats.Drink();
+       print("key was pressed");
      }
 
      if (rayScript.rayHitted.CompareTag(selectableTag) && rayScript.hitDis <= 5)
      {
-      Text.gameObject.SetActive(true);
+       Text.gameObject.SetActive(true);
      }
      else
       Text.gameObject.SetActive(false);
+
+   }
+
+   public void TransferOwnership()
+   {
+       if (PhotonView.Owner.IsLocal == false)
+       {
+           Debug.Log("Requesting Ownership");
+           PhotonView.RequestOwnership();
+           PhotonNetwork.Destroy(Beer);
+       }
+       else
+        PhotonNetwork.Destroy(Beer);
    }
 }

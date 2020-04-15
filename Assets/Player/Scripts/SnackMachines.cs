@@ -6,34 +6,53 @@ public class SnackMachines : MonoBehaviourPunCallbacks
 {
 
    public Money money;
-   public GameObject Text;
+   public GameObject Ui;
    public GameObject lemonadePrefab;
+   public GameObject gunPrefab;
    public Transform Spawn;
 
 
    void Start()
    {
-     Text.gameObject.SetActive(false);
+     Ui.gameObject.SetActive(false);
    }
 
    void OnTriggerEnter (Collider other)
    {
-     Text.gameObject.SetActive(true);
-   }
-
-   void OnTriggerStay (Collider other)
-   {
-     if (money.money >= 20 && Input.GetKeyDown(KeyCode.F))
+     if (other.gameObject.CompareTag("Player"))
      {
-       money.money -= 20;
-       //Instantiate(Drink, new Vector3(354, 38, 581), Quaternion.identity);
-       PhotonNetwork.Instantiate(lemonadePrefab.name, Spawn.transform.position, Spawn.rotation);
+       Ui.gameObject.SetActive(true);
+       Cursor.lockState = CursorLockMode.None; //unlock cursor
+       Cursor.visible = true; //make mouse visible
      }
    }
 
    void OnTriggerExit (Collider other)
    {
-     Text.gameObject.SetActive(false);
+     Ui.gameObject.SetActive(false);
    }
 
+   public void lemonade()
+   {
+     if (money.money >= 20)
+     {
+       money.money -= 20;
+       PhotonNetwork.Instantiate(lemonadePrefab.name, Spawn.transform.position, Spawn.rotation);
+       Ui.gameObject.SetActive(false);
+       Cursor.lockState = CursorLockMode.Locked; //lock cursor
+       Cursor.visible = false; //disable visible mouse
+     }
+   }
+
+   public void gun()
+   {
+     if (money.money >= 50)
+     {
+       money.money -= 50;
+       PhotonNetwork.Instantiate(gunPrefab.name, Spawn.transform.position, Spawn.rotation);
+       Ui.gameObject.SetActive(false);
+       Cursor.lockState = CursorLockMode.Locked; //lock cursor
+       Cursor.visible = false; //disable visible mouse
+     }
+   }
 }

@@ -37,6 +37,7 @@ MonoBehaviour:
   - SyncSeatActiveState
   - SyncSeatDisableState
   - ChangeColour
+  - pickUp
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 2847414281061954841}
   - component: {fileID: 798207857349460031}
   - component: {fileID: 6153643831524099082}
+  - component: {fileID: 3205948532126092354}
   m_Layer: 0
   m_Name: PhotonPlayer
   m_TagString: Untagged
@@ -231,6 +232,7 @@ Transform:
   - {fileID: 4940688637605964}
   - {fileID: 127102963520208224}
   - {fileID: 7875817260813764183}
+  - {fileID: 1616246734629126474}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -403,7 +405,8 @@ MonoBehaviour:
   sprintSpeedMultiplier: 2
   jumpHeight: 3
   Cam: {fileID: 6643795843294771443}
-  Minicam: {fileID: 0}
+  Minicam: {fileID: 8813861846284949202}
+  hasGun: 0
 --- !u!114 &6153643831524099082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +425,53 @@ MonoBehaviour:
   - {fileID: 798207857349460031}
   - {fileID: 7908043893954881246}
   InVehicle: 0
+--- !u!114 &3205948532126092354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900248133779332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94847c889729f70eb3190c40430f1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableTag: Gun
+  pickGun: {fileID: 0}
+  Gun: {fileID: 6563961044034073668}
+  controller: {fileID: 798207857349460031}
+  rayScript: {fileID: 0}
+--- !u!1 &4876767611667753450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1616246734629126474}
+  m_Layer: 0
+  m_Name: gunPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1616246734629126474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4876767611667753450}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0.472, y: 0.152, z: 0.799}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_Children: []
+  m_Father: {fileID: 4630059191498462}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 180, y: 90, z: 0}
 --- !u!1 &6643795843294771443
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +667,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 74831693651451361, guid: 151d3e5646405c3afbe1b31257838be5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 221495015307260592, guid: 151d3e5646405c3afbe1b31257838be5,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -707,23 +762,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3986392516774588402, guid: 151d3e5646405c3afbe1b31257838be5,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3986392516774588402, guid: 151d3e5646405c3afbe1b31257838be5,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3986392516774588402, guid: 151d3e5646405c3afbe1b31257838be5,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 151d3e5646405c3afbe1b31257838be5, type: 3}
+--- !u!1 &6563961044034073668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 74831693651451361, guid: 151d3e5646405c3afbe1b31257838be5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6493632994101569957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7875817260813764183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3986392516774588402, guid: 151d3e5646405c3afbe1b31257838be5,

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviourPun {
     public GameObject Cam;
     public const string PlayerTag = "Player";
     public GameObject Minicam;
+    public bool hasGun = false;
 
     private void Start()
     {
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviourPun {
         if (photonView.IsMine)
         {
             InputMovement();
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && hasGun == true)
             {
                 Fire();
             }
