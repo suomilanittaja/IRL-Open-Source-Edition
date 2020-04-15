@@ -492,6 +492,8 @@ public AnimationClip mainOut;
                 AudioPanel.SetActive(false);
                 TitleTexts.SetActive(true);
                 Mask.SetActive(true);
+                Cursor.lockState = CursorLockMode.None; //unlock cursor
+                Cursor.visible = true; //make mouse visible
                 Time.timeScale = 1;
                 for (int i = 0; i < OtherUiElements.Length; i++)
                 {

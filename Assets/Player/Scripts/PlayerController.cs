@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviourPun {
 
     public float Speed = 10f;
     public float Health = 100;
-    public Image healthBar;
     public Transform shotPos;
     public GameObject bulletPrefab;
     public Manager _manager;
@@ -22,13 +21,14 @@ public class PlayerController : MonoBehaviourPun {
     private float _gravity = -10f;
     private float _yAxisVelocity;
     public GameObject Cam;
-
+    public const string PlayerTag = "Player";
 
     private void Start()
     {
         if (photonView.IsMine)
         {
             GetComponent<MeshRenderer>().material.color = Color.blue;
+            gameObject.tag = "Player";
         }
         else
         {
@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviourPun {
 
     private void Update()
     {
-        healthBar.fillAmount = Health / 100;
 
         if (photonView.IsMine)
         {
@@ -118,6 +117,4 @@ public class PlayerController : MonoBehaviourPun {
 
       characterController.Move(movement);
   }
-
-
 }
