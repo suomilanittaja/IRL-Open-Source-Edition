@@ -22,7 +22,6 @@ public class Drink : MonoBehaviourPunCallbacks
      stats.Drink();
      print("key was pressed");
      PhotonNetwork.Destroy(Beer);
-     //Beer.gameObject.SetActive(false);
      }
 
      if (rayScript.rayHitted.CompareTag(selectableTag) && rayScript.hitDis <= 5)
