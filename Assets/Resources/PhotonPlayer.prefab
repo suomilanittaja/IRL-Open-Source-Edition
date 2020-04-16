@@ -531,7 +531,6 @@ GameObject:
   m_Component:
   - component: {fileID: 127102963520208224}
   - component: {fileID: 4405118599764900150}
-  - component: {fileID: 7626301225572310696}
   m_Layer: 0
   m_Name: Minimap
   m_TagString: Untagged
@@ -596,14 +595,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7626301225572310696
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8813861846284949202}
-  m_Enabled: 1
 --- !u!1001 &6493632994101569957
 PrefabInstance:
   m_ObjectHideFlags: 0

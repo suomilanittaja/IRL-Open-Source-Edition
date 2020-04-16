@@ -16,6 +16,8 @@ public class EnterandExit : MonoBehaviourPunCallbacks
   private GameObject player;
   private PlayerController playerControll;
   private Transform playerPos;
+  private Raycast RaycastScript;
+  private GameObject manager;
 
 	void OnTriggerExit (Collider other)
 	{
@@ -35,6 +37,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 		{
       TransferOwnership();
       carControll.enabled = true;
+      RaycastScript.enabled = false;
       Camera.gameObject.SetActive(true);
       playerControll.isEntered = true;
       photonView.RPC("Enter", RpcTarget.All);
@@ -45,6 +48,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
       playerPos.transform.position = exitPoint.transform.position;
       player.gameObject.SetActive(true);
       carControll.enabled = false;
+      RaycastScript.enabled = true;
       Camera.gameObject.SetActive(false);
       playerControll.isEntered = false;
       photonView.RPC("Exit", RpcTarget.All);
@@ -60,6 +64,8 @@ public class EnterandExit : MonoBehaviourPunCallbacks
             player = GameObject.FindWithTag("Player");
             playerPos = (Transform)player.GetComponent(typeof(Transform));
             playerControll = (PlayerController)player.GetComponent(typeof(PlayerController));
+            manager = GameObject.FindWithTag("Manager");
+            RaycastScript = (Raycast)manager.GetComponent(typeof(Raycast));
 	}
 
   IEnumerator Timer()

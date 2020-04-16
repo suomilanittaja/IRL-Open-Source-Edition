@@ -300,7 +300,6 @@ public AnimationClip mainOut;
         /// </summary>
         public void Start()
         {
-
             ReadUseSimpleTerrain = UseSimpleTerrain;
             if (UseSimpleTerrain)
             {
