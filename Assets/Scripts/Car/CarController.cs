@@ -17,7 +17,8 @@ public class CarController : MonoBehaviour
     [Header("Car Settings")]
     public Drivetrain drivetrain = Drivetrain.FWD;
     public float maxSteeringAngle = 30;
-    public float torque = 60;
+    public float torque = 1000;
+    public float brakeTorque = 1000;
 
     [Header("Wheel Colliders")]
     public WheelCollider frontRightWheel;
@@ -101,6 +102,9 @@ public class CarController : MonoBehaviour
         myWfc.stiffness = 0.1f;
         rearRightWheel.sidewaysFriction = myWfc;
         rearLeftWheel.sidewaysFriction = myWfc;
+
+        rearLeftWheel.brakeTorque = brakeTorque;
+        rearRightWheel.brakeTorque = brakeTorque;
       }
       else
       {
@@ -111,6 +115,9 @@ public class CarController : MonoBehaviour
         myWfc.extremumSlip = 0.2f;
         rearRightWheel.sidewaysFriction = myWfc;
         rearLeftWheel.sidewaysFriction = myWfc;
+
+        rearLeftWheel.brakeTorque = 0;
+        rearRightWheel.brakeTorque = 0;
       }
     }
 }
