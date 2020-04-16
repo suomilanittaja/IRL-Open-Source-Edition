@@ -7,23 +7,30 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviourPun {
 
-
+    [Header("Floats")]
     public float Speed = 10f;
     public float Health = 100;
-    public Transform shotPos;
-    public GameObject bulletPrefab;
-    public Manager _manager;
-    public CharacterController characterController;
-
     public float moveSpeed;
     public float sprintSpeedMultiplier = 2f;
     public float jumpHeight = 3f;
+
+    [Header("GameObjects")]
+    public GameObject bulletPrefab;
+    public GameObject Minicam;
+    public GameObject Cam;
+
+    [Header("Bools")]
+    public bool hasGun = false;
+    public bool isEntered;
+
+    [Header("Others")]
+    public Transform shotPos;
+    public CharacterController characterController;
+    public const string PlayerTag = "Player";
+
+    private Manager _manager;
     private float _gravity = -10f;
     private float _yAxisVelocity;
-    public GameObject Cam;
-    public const string PlayerTag = "Player";
-    public GameObject Minicam;
-    public bool hasGun = false;
 
     private void Start()
     {
@@ -59,6 +66,16 @@ public class PlayerController : MonoBehaviourPun {
         {
           _manager.died = true;
           PhotonNetwork.Destroy(gameObject);
+        }
+
+        if (isEntered == true)
+        {
+          photonView.RPC("enter", RpcTarget.All);
+        }
+
+        if (isEntered == false)
+        {
+          photonView.RPC("exit", RpcTarget.All);
         }
 
     }
@@ -120,5 +137,17 @@ public class PlayerController : MonoBehaviourPun {
       movement.y = _yAxisVelocity * Time.deltaTime;
 
       characterController.Move(movement);
+  }
+
+  [PunRPC]
+  void enter()
+  {
+    this.gameObject.SetActive(false);
+  }
+
+  [PunRPC]
+  void exit()
+  {
+    this.gameObject.SetActive(true);
   }
 }

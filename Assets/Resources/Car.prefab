@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4147600197055895461}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 14.154, y: -12.667001, z: -3.1460001}
 --- !u!20 &561845009184898082
 Camera:
@@ -553,9 +553,8 @@ Transform:
   - {fileID: 4147600196162590964}
   - {fileID: 4147600196768951619}
   - {fileID: 2648500848638968963}
-  - {fileID: 5587286959386262973}
   - {fileID: 7930693935671246308}
-  - {fileID: 4633427384598404930}
+  - {fileID: 5587286959386262973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -584,10 +583,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4147600197055895462}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ebab417f632e3459d798ac419ae658, type: 3}
+  m_Script: {fileID: 11500000, guid: 59153fa61aabc52efa2255b7f1a68c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drivetrain: 1
+  drivetrain: 0
   maxSteeringAngle: 30
   torque: 1000
   frontRightWheel: {fileID: 4147600195813746960}
@@ -645,39 +644,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4147600197055895462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb9bbf4c488f4911c80bbeb50be893ca, type: 3}
+  m_Script: {fileID: 11500000, guid: a42e7418179c9c68d93cb545b53c1f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnterKey: 101
-  IsLocal: 0
-  AutoSlowStop: 1
-  CanExit: 0
-  IsEntering: 0
-  LocalPlayerSeatIndex: 0
-  SlowDownRatio: 1
-  TimeBetweenStates: 3
-  PhotonView: {fileID: 7950207718840567008}
-  EnterExitModule: {fileID: 0}
-  EnterExitSeats:
-  - Chair: {fileID: 7930693935671246308}
-    ExitLocation: {fileID: 5587286959386262973}
-    Playertransform: {fileID: 0}
-    IsOccupied: 0
-    TakeOwnership: 1
-    ViewID: 0
-    SeatMonos:
-    - {fileID: 4147600197055895463}
-    m_editorVisable: 1
-    Name: Driver
-  - Chair: {fileID: 7930693935671246308}
-    ExitLocation: {fileID: 4633427384598404930}
-    Playertransform: {fileID: 0}
-    IsOccupied: 0
-    TakeOwnership: 0
-    ViewID: 0
-    SeatMonos: []
-    m_editorVisable: 1
-    Name: Passager
+  carControll: {fileID: 4147600197055895463}
+  exitPoint: {fileID: 5587286959386262973}
+  Camera: {fileID: 537345821891706004}
+  photonview: {fileID: 7950207718840567008}
+  canEnter: 0
+  isEntered: 0
 --- !u!114 &1009067117857702177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,36 +798,6 @@ Transform:
   m_Father: {fileID: 4147600196259389123}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5460294729406328034
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4633427384598404930}
-  m_Layer: 0
-  m_Name: Exit Passenger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4633427384598404930
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5460294729406328034}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.94, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4147600197055895461}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7162796211829645987
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5587286959386262973}
   m_Layer: 0
-  m_Name: Exit Driver
+  m_Name: Exit Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -881,7 +826,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4147600197055895461}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7532229579153596439
 GameObject:

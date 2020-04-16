@@ -38,6 +38,10 @@ MonoBehaviour:
   - SyncSeatDisableState
   - ChangeColour
   - pickUp
+  - enter
+  - Enter
+  - exit
+  - Exit
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

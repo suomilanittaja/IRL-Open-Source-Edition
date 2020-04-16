@@ -206,7 +206,6 @@ GameObject:
   - component: {fileID: 3275764558448840604}
   - component: {fileID: 2847414281061954841}
   - component: {fileID: 798207857349460031}
-  - component: {fileID: 6153643831524099082}
   - component: {fileID: 3205948532126092354}
   m_Layer: 0
   m_Name: PhotonPlayer
@@ -396,35 +395,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   Health: 100
-  shotPos: {fileID: 6416763360154917653}
-  bulletPrefab: {fileID: 1696170245520886, guid: db3ec868aa3273989862e0016295f347,
-    type: 3}
-  _manager: {fileID: 0}
-  characterController: {fileID: 3275764558448840604}
   moveSpeed: 2
   sprintSpeedMultiplier: 2
   jumpHeight: 3
-  Cam: {fileID: 6643795843294771443}
+  bulletPrefab: {fileID: 1696170245520886, guid: db3ec868aa3273989862e0016295f347,
+    type: 3}
   Minicam: {fileID: 8813861846284949202}
+  Cam: {fileID: 6643795843294771443}
   hasGun: 0
---- !u!114 &6153643831524099082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900248133779332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: decc615b31250f301bde9950c3fa5b56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PhotonView: {fileID: 114385621667294620}
-  Camera: {fileID: 6643795843294771443}
-  PlayerMonos:
-  - {fileID: 798207857349460031}
-  - {fileID: 7908043893954881246}
-  InVehicle: 0
+  isEntered: 0
+  shotPos: {fileID: 6416763360154917653}
+  characterController: {fileID: 3275764558448840604}
 --- !u!114 &3205948532126092354
 MonoBehaviour:
   m_ObjectHideFlags: 0
