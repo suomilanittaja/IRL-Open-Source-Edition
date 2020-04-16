@@ -2,7 +2,7 @@
 using System.Collections;
 using Photon.Pun;
 
-public class SnackMachines : MonoBehaviourPunCallbacks
+public class Shop : MonoBehaviourPunCallbacks
 {
 
    public Money money;

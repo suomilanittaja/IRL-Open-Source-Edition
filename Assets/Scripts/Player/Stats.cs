@@ -36,8 +36,7 @@ public class Stats : MonoBehaviour
   {
     if (controll == null)
     {
-      GameObject tempobj = GameObject.FindWithTag("Player");
-      controll = (PlayerController)tempobj.GetComponent(typeof(PlayerController));
+      controll = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
       HealthBar.maxValue = controll.Health;
     }
     updateUI();

@@ -64,8 +64,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
             player = GameObject.FindWithTag("Player");
             playerPos = (Transform)player.GetComponent(typeof(Transform));
             playerControll = (PlayerController)player.GetComponent(typeof(PlayerController));
-            manager = GameObject.FindWithTag("Manager");
-            RaycastScript = (Raycast)manager.GetComponent(typeof(Raycast));
+            RaycastScript = GameObject.FindWithTag("Manager").GetComponent<Raycast>();
 	}
 
   IEnumerator Timer()
