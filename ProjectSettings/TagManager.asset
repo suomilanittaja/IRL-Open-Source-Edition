@@ -10,6 +10,8 @@ TagManager:
   - Manager
   - Bullet
   - Gun
+  - VehicleCam
+  - Vehicle
   layers:
   - Default
   - TransparentFX

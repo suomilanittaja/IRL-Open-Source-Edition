@@ -17,7 +17,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
   private PlayerController playerControll;
   private Transform playerPos;
   private Raycast RaycastScript;
-  private GameObject manager;
+  private CameraController cameraController;
 
 	void OnTriggerExit (Collider other)
 	{
@@ -33,23 +33,30 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 	}
 	void Update()
 	{
+    if (Camera == null)
+      Camera = GameObject.FindWithTag("VehicleCam");
+      cameraController = (CameraController)Camera.GetComponent(typeof(CameraController));
+
 		if (canEnter == true && Input.GetKeyDown(KeyCode.Return))
 		{
       TransferOwnership();
+      gameObject.tag = "Vehicle";
+      cameraController.Check();
       carControll.enabled = true;
       RaycastScript.enabled = false;
-      Camera.gameObject.SetActive(true);
       playerControll.isEntered = true;
       photonView.RPC("Enter", RpcTarget.All);
+      //Camera.gameObject.SetActive(true);
 		}
 
 		if (canEnter == false && Input.GetKeyDown(KeyCode.Return))
 		{
+      gameObject.tag = "Untagged";
       playerPos.transform.position = exitPoint.transform.position;
       player.gameObject.SetActive(true);
       carControll.enabled = false;
       RaycastScript.enabled = true;
-      Camera.gameObject.SetActive(false);
+      //Camera.gameObject.SetActive(false);
       playerControll.isEntered = false;
       photonView.RPC("Exit", RpcTarget.All);
 		}
@@ -58,7 +65,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 
 	void Start ()
 	{
-		Camera.gameObject.SetActive(false);
+		//Camera.gameObject.SetActive(false);
 		carControll.enabled = false;
     if (player == null)
             player = GameObject.FindWithTag("Player");

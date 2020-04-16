@@ -30,4 +30,9 @@ public class CameraController : MonoBehaviour
         LookAt();
         MoveTo();
     }
+
+    public void Check()
+    {
+        target = GameObject.FindWithTag("Vehicle").GetComponent<Transform>();
+    }
 }

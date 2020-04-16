@@ -389,6 +389,7 @@ MonoBehaviour:
   hasGun: 0
   isEntered: 0
   tabPressed: 0
+  disableMouselook: 0
   shotPos: {fileID: 6416763360154917653}
   characterController: {fileID: 3275764558448840604}
   pickUp: {fileID: 3205948532126092354}

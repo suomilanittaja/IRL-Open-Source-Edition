@@ -1,88 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &537345821891706004
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7930693935671246308}
-  - component: {fileID: 561845009184898082}
-  - component: {fileID: 605983351327487181}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7930693935671246308
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537345821891706004}
-  m_LocalRotation: {x: 0.12541379, y: -0.1060721, z: -0.013487339, w: 0.9863256}
-  m_LocalPosition: {x: 2.0099983, y: 1.6719999, z: -4.7599983}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4147600197055895461}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 14.154, y: -12.667001, z: -3.1460001}
---- !u!20 &561845009184898082
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537345821891706004}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &605983351327487181
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537345821891706004}
-  m_Enabled: 1
 --- !u!1 &1877357959755341561
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +450,7 @@ GameObject:
   - component: {fileID: 1009067117857702177}
   m_Layer: 0
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Vehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -553,7 +470,6 @@ Transform:
   - {fileID: 4147600196162590964}
   - {fileID: 4147600196768951619}
   - {fileID: 2648500848638968963}
-  - {fileID: 7930693935671246308}
   - {fileID: 5587286959386262973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -650,7 +566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carControll: {fileID: 4147600197055895463}
   exitPoint: {fileID: 5587286959386262973}
-  Camera: {fileID: 537345821891706004}
+  Camera: {fileID: 0}
   photonview: {fileID: 7950207718840567008}
   canEnter: 0
   isEntered: 0
@@ -827,7 +743,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4147600197055895461}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7532229579153596439
 GameObject:
