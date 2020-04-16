@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Raycast : MonoBehaviour
 {
-   public Transform _selection;
-   public GameObject Text;
+   [Header("Managers")]
    public float hitDis;
+
+   [Header("GameObjects")]
+   public GameObject Text;
    public GameObject rayHitted;
 
    private void Update()
    {
-
-	   //Check if ray dont touch it anymore
-	   if (_selection != null)
-	   {
-		   _selection = null;
-		   Text.gameObject.SetActive(false);
-	   }
 
 	   //Creating a Ray
 	   var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2f, Screen.height/2f, 0f));

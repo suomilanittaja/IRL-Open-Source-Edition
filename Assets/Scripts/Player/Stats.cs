@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
-  public PlayerController controll;
+  [Header("Settings")]
   public float healthOverTimer;
 
   public float Hunger;
@@ -23,7 +23,8 @@ public class Stats : MonoBehaviour
 	public Slider DrunkBar;
   public Slider HealthBar;
 
-  public float minAmount = 0.1f;
+  private float minAmount = 0.1f;
+  private PlayerController controll;
 
   private void Start()
   {

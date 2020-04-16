@@ -5,12 +5,17 @@ using Photon.Pun;
 
 public class PickUp : MonoBehaviourPunCallbacks
 {
+	[Header("GameObjects")]
+	public GameObject pickGun;
+	public GameObject Gun;
+
+	[Header("Scripts")]
+	public PlayerController controller;
+	private Raycast rayScript;
+
+	[Header("Others")]
 	[SerializeField] private string selectableTag = "Gun";
 	private Transform _selection;
-	public GameObject pickGun;
-  public GameObject Gun;
-	public PlayerController controller;
-	public Raycast rayScript;
 
 	void Start()
 	{

@@ -6,14 +6,20 @@ using Photon.Pun;
 
 public class Drink : MonoBehaviourPunCallbacks
 {
+   [Header("Settings")]
    [SerializeField] private string selectableTag = "Selectable";
 
-   private Transform _selection;
-   public Stats stats;
+   [Header("GameObjects")]
    public GameObject Text;
    private GameObject Beer;
+
+   [Header("Scripts")]
+   public Stats stats;
    public Raycast rayScript;
-   public PhotonView PhotonView;
+   private PhotonView PhotonView;
+
+   private Transform _selection;
+
 
    private void Update()
    {
