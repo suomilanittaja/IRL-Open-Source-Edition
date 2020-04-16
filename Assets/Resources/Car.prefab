@@ -589,6 +589,7 @@ MonoBehaviour:
   drivetrain: 0
   maxSteeringAngle: 30
   torque: 1000
+  brakeTorque: 1000
   frontRightWheel: {fileID: 4147600195813746960}
   frontLeftWheel: {fileID: 4147600196986678972}
   rearRightWheel: {fileID: 4147600196761816069}

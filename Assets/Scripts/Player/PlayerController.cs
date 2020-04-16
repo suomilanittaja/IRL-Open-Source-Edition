@@ -55,6 +55,15 @@ public class PlayerController : MonoBehaviourPun {
         if (photonView.IsMine)
         {
             InputMovement();
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+
+            }
+            else if (Input.GetKeyUp(KeyCode.Tab))
+            {
+              
+            }
+
             if (Input.GetMouseButtonDown(0) && hasGun == true)
             {
                 Fire();

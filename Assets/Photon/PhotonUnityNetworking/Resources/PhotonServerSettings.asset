@@ -42,6 +42,11 @@ MonoBehaviour:
   - Enter
   - exit
   - Exit
+  - UpdateWheelPoses
+  - Steer
+  - GetInput
+  - Accelerate
+  - UpdateWheelPose
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -86,13 +86,11 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetInput();
-        Steer();
-        Accelerate();
-        UpdateWheelPoses();
-    }
-    public void Update()
-    {
+      GetInput();
+      Steer();
+      Accelerate();
+      UpdateWheelPoses();
+
       if(Input.GetKey(KeyCode.Space))
       {
         WheelFrictionCurve myWfc;
