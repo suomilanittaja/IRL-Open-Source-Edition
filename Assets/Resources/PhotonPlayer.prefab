@@ -403,8 +403,10 @@ MonoBehaviour:
   Cam: {fileID: 6643795843294771443}
   hasGun: 0
   isEntered: 0
+  tabPressed: 0
   shotPos: {fileID: 6416763360154917653}
   characterController: {fileID: 3275764558448840604}
+  pickUp: {fileID: 3205948532126092354}
 --- !u!114 &3205948532126092354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +423,7 @@ MonoBehaviour:
   Gun: {fileID: 6563961044034073668}
   controller: {fileID: 798207857349460031}
   selectableTag: Gun
+  usingGun: 0
 --- !u!1 &6643795843294771443
 GameObject:
   m_ObjectHideFlags: 0

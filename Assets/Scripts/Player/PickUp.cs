@@ -16,6 +16,7 @@ public class PickUp : MonoBehaviourPunCallbacks
 	[Header("Others")]
 	[SerializeField] private string selectableTag = "Gun";
 	private Transform _selection;
+	public bool usingGun = false;
 
 	void Start()
 	{
@@ -32,8 +33,18 @@ public class PickUp : MonoBehaviourPunCallbacks
 		       print("key was pressed");
            PhotonNetwork.Destroy(pickGun);
            controller.hasGun = true;
+					 usingGun = true;
 		       photonView.RPC("pickUp", RpcTarget.All);
 		   }
+			 if (usingGun == false)
+			 {
+				 photonView.RPC("useHand2", RpcTarget.All);
+			 }
+
+			 if (usingGun == true)
+			 {
+				 photonView.RPC("useGun2", RpcTarget.All);
+			 }
      }
    }
 
@@ -42,4 +53,16 @@ public class PickUp : MonoBehaviourPunCallbacks
    {
      Gun.gameObject.SetActive(true);
    }
+
+	 [PunRPC]
+	 void useGun2()
+	 {
+		 Gun.gameObject.SetActive(true);
+	 }
+
+	 [PunRPC]
+	 void useHand2()
+	 {
+		 Gun.gameObject.SetActive(false);
+	 }
 }

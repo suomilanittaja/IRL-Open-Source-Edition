@@ -22,11 +22,13 @@ public class PlayerController : MonoBehaviourPun {
     [Header("Bools")]
     public bool hasGun = false;
     public bool isEntered;
+    public bool tabPressed;
 
     [Header("Others")]
     public Transform shotPos;
     public CharacterController characterController;
     public const string PlayerTag = "Player";
+    public PickUp pickUp;
 
     private Manager _manager;
     private float _gravity = -10f;
@@ -57,14 +59,18 @@ public class PlayerController : MonoBehaviourPun {
             InputMovement();
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-
+              tabPressed = true;
+              Cursor.lockState = CursorLockMode.None; //unlock cursor
+              Cursor.visible = true; //make mouse visible
             }
             else if (Input.GetKeyUp(KeyCode.Tab))
             {
-              
+              tabPressed = false;
+              Cursor.lockState = CursorLockMode.Locked; //lock cursor
+              Cursor.visible = false; //disable visible mouse
             }
 
-            if (Input.GetMouseButtonDown(0) && hasGun == true)
+            if (Input.GetMouseButtonDown(0) && hasGun == true && pickUp.usingGun == true && Cursor.visible == false)
             {
                 Fire();
             }
