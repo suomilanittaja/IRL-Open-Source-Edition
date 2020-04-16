@@ -19,4 +19,5 @@ Money Job And Shop System
 ETC...  
 
 Want help us?  
-<a href="https://github.com/suomilanittaja/IRL-Open-Source-Edition/projects/1">ToDo-List</a>
+<a href="https://github.com/suomilanittaja/IRL-Open-Source-Edition/projects/1">ToDo-List</a>  
+![alt text](https://i.ibb.co/1XZfj7d/Background.png)
