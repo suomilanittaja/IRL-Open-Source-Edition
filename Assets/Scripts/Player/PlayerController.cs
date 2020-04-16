@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviourPun {
     public bool hasGun = false;
     public bool isEntered;
     public bool tabPressed;
+    public bool disableMouselook = false;
 
     [Header("Others")]
     public Transform shotPos;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviourPun {
     public const string PlayerTag = "Player";
     public PickUp pickUp;
 
+    private PlayerCamera playerCamera;
     private Manager _manager;
     private float _gravity = -10f;
     private float _yAxisVelocity;
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviourPun {
         }
 
         _manager = GameObject.FindWithTag("Manager").GetComponent<Manager>();
+        playerCamera = Cam.GetComponent<PlayerCamera>();
     }
 
     private void Update()
@@ -75,6 +78,11 @@ public class PlayerController : MonoBehaviourPun {
                 Fire();
             }
             Cam.gameObject.SetActive(true);
+
+            if (disableMouselook == true)
+              playerCamera.enabled = false;
+            else
+              playerCamera.enabled = true;
         }
 
         if (Health <= 0)
