@@ -8,6 +8,7 @@ public class Shop : MonoBehaviourPunCallbacks
    public Money money;
    public GameObject Ui;
    public GameObject lemonadePrefab;
+   public GameObject macaroniCasserolePrefab;
    public GameObject gunPrefab;
    public Transform Spawn;
    private PlayerController controll;
@@ -39,10 +40,23 @@ public class Shop : MonoBehaviourPunCallbacks
 
    public void lemonade()
    {
-     if (money.money >= 20)
+     if (money.money >= 10)
      {
-       money.money -= 20;
+       money.money -= 10;
        PhotonNetwork.Instantiate(lemonadePrefab.name, Spawn.transform.position, Spawn.rotation);
+       Ui.gameObject.SetActive(false);
+       Cursor.lockState = CursorLockMode.Locked; //lock cursor
+       Cursor.visible = false; //disable visible mouse
+       controll.disableMouselook = false;
+     }
+   }
+
+   public void macaroniCasserole()
+   {
+     if (money.money >= 15)
+     {
+       money.money -= 15;
+       PhotonNetwork.Instantiate(macaroniCasserolePrefab.name, Spawn.transform.position, Spawn.rotation);
        Ui.gameObject.SetActive(false);
        Cursor.lockState = CursorLockMode.Locked; //lock cursor
        Cursor.visible = false; //disable visible mouse

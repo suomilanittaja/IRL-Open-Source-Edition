@@ -67,4 +67,9 @@ public class Stats : MonoBehaviour
 	{
 		Thirst += 20;
 	}
+
+  public void Eat()
+  {
+    Hunger += 20;
+  }
 }
