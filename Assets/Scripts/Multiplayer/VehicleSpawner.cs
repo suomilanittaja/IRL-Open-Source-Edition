@@ -15,9 +15,7 @@ public class VehicleSpawner : MonoBehaviourPunCallbacks
       if (other.gameObject.CompareTag("Player"))
       {
         Ui.SetActive(true);
-        Cursor.lockState = CursorLockMode.None; //unlock cursor
-        Cursor.visible = true; //make mouse visible
-        controll.disableMouselook = true;
+        controll.UnLock();
       }
     }
 
@@ -26,19 +24,15 @@ public class VehicleSpawner : MonoBehaviourPunCallbacks
       if (other.gameObject.CompareTag("Player"))
       {
         Ui.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked; //lock cursor
-        Cursor.visible = false; //disable visible mouse
-        controll.disableMouselook = false;
+        controll.Lock();
       }
     }
 
     public void Spawn()
     {
-      Cursor.lockState = CursorLockMode.Locked; //lock cursor
-      Cursor.visible = false; //disable visible mouse
+      controll.Lock();
       Ui.SetActive(false);
       PhotonNetwork.Instantiate(carPrefab.name, spawnPos.transform.position, spawnPos.rotation);
-      controll.disableMouselook = false;
     }
 
     void Update()

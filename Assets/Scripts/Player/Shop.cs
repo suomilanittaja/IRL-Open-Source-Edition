@@ -23,19 +23,15 @@ public class Shop : MonoBehaviourPunCallbacks
    {
      if (other.gameObject.CompareTag("Player"))
      {
-       controll.disableMouselook = true;
        Ui.gameObject.SetActive(true);
-       Cursor.lockState = CursorLockMode.None; //unlock cursor
-       Cursor.visible = true; //make mouse visible
+       controll.UnLock();
      }
    }
 
    void OnTriggerExit (Collider other)
    {
      Ui.gameObject.SetActive(false);
-     controll.disableMouselook = false;
-     Cursor.lockState = CursorLockMode.Locked; //unlock cursor
-     Cursor.visible = false; //make mouse visible
+     controll.Lock();
    }
 
    public void lemonade()
@@ -45,9 +41,7 @@ public class Shop : MonoBehaviourPunCallbacks
        money.money -= 10;
        PhotonNetwork.Instantiate(lemonadePrefab.name, Spawn.transform.position, Spawn.rotation);
        Ui.gameObject.SetActive(false);
-       Cursor.lockState = CursorLockMode.Locked; //lock cursor
-       Cursor.visible = false; //disable visible mouse
-       controll.disableMouselook = false;
+       controll.Lock();
      }
    }
 
@@ -58,9 +52,7 @@ public class Shop : MonoBehaviourPunCallbacks
        money.money -= 15;
        PhotonNetwork.Instantiate(macaroniCasserolePrefab.name, Spawn.transform.position, Spawn.rotation);
        Ui.gameObject.SetActive(false);
-       Cursor.lockState = CursorLockMode.Locked; //lock cursor
-       Cursor.visible = false; //disable visible mouse
-       controll.disableMouselook = false;
+       controll.Lock();
      }
    }
 
@@ -71,9 +63,7 @@ public class Shop : MonoBehaviourPunCallbacks
        money.money -= 50;
        PhotonNetwork.Instantiate(gunPrefab.name, Spawn.transform.position, Spawn.rotation);
        Ui.gameObject.SetActive(false);
-       Cursor.lockState = CursorLockMode.Locked; //lock cursor
-       Cursor.visible = false; //disable visible mouse
-       controll.disableMouselook = false;
+       controll.Lock();
      }
    }
 

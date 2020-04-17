@@ -56,6 +56,20 @@ public class PlayerController : MonoBehaviourPun {
         playerCamera = Cam.GetComponent<PlayerCamera>();
     }
 
+    public void Lock()
+    {
+      Cursor.lockState = CursorLockMode.Locked; //lock cursor
+      Cursor.visible = false; //disable visible mouse
+      disableMouselook = false;
+    }
+
+    public void UnLock()
+    {
+      disableMouselook = true;
+      Cursor.lockState = CursorLockMode.None; //unlock cursor
+      Cursor.visible = true; //make mouse visible
+    }
+
     private void Update()
     {
 
@@ -65,14 +79,12 @@ public class PlayerController : MonoBehaviourPun {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
               tabPressed = true;
-              Cursor.lockState = CursorLockMode.None; //unlock cursor
-              Cursor.visible = true; //make mouse visible
+              UnLock();
             }
             else if (Input.GetKeyUp(KeyCode.Tab))
             {
               tabPressed = false;
-              Cursor.lockState = CursorLockMode.Locked; //lock cursor
-              Cursor.visible = false; //disable visible mouse
+              Lock();
             }
 
             if (Input.GetMouseButtonDown(0) && hasGun == true && pickUp.usingGun == true && Cursor.visible == false)
