@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59153fa61aabc52efa2255b7f1a68c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drivetrain: 0
+  drivetrain: 2
   maxSteeringAngle: 30
   torque: 1000
   brakeTorque: 1000
