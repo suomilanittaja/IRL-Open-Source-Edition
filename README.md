@@ -1,4 +1,4 @@
-# IRL-Open-Source-Edition
+# IRL
 
   
 IRL is  game Inspired By <a href="https://fivem.net/">FiveM</a> And <a href="https://www.youtube.com/watch?v=dhoJgTQjWNQ">Tiny Gta</a>.  
