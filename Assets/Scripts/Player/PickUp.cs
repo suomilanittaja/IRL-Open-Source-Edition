@@ -8,6 +8,7 @@ public class PickUp : MonoBehaviourPunCallbacks
 	[Header("GameObjects")]
 	public GameObject pickGun;
 	public GameObject Gun;
+	public GameObject remoteGun;
 
 	[Header("Scripts")]
 	public PlayerController controller;
@@ -52,17 +53,20 @@ public class PickUp : MonoBehaviourPunCallbacks
    void pickUp()
    {
      Gun.gameObject.SetActive(true);
+		 remoteGun.gameObject.SetActive(true);
    }
 
 	 [PunRPC]
 	 void useGun2()
 	 {
 		 Gun.gameObject.SetActive(true);
+		 remoteGun.gameObject.SetActive(true);
 	 }
 
 	 [PunRPC]
 	 void useHand2()
 	 {
 		 Gun.gameObject.SetActive(false);
+		 remoteGun.gameObject.SetActive(false);
 	 }
 }

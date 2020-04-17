@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviourPun {
     public GameObject bulletPrefab;
     public GameObject Minicam;
     public GameObject Cam;
+    public GameObject Remote;
 
     [Header("Bools")]
     public bool hasGun = false;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviourPun {
         {
             GetComponent<MeshRenderer>().material.color = Color.blue;
             gameObject.tag = "Player";
+            Remote.SetActive(false);
         }
         else
         {

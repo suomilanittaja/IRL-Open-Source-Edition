@@ -46,7 +46,6 @@ public class EnterandExit : MonoBehaviourPunCallbacks
       RaycastScript.enabled = false;
       playerControll.isEntered = true;
       photonView.RPC("Enter", RpcTarget.All);
-      //Camera.gameObject.SetActive(true);
 		}
 
 		if (canEnter == false && Input.GetKeyDown(KeyCode.Return))
@@ -56,7 +55,6 @@ public class EnterandExit : MonoBehaviourPunCallbacks
       player.gameObject.SetActive(true);
       carControll.enabled = false;
       RaycastScript.enabled = true;
-      //Camera.gameObject.SetActive(false);
       playerControll.isEntered = false;
       photonView.RPC("Exit", RpcTarget.All);
 		}
@@ -65,7 +63,6 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 
 	void Start ()
 	{
-		//Camera.gameObject.SetActive(false);
 		carControll.enabled = false;
     if (player == null)
             player = GameObject.FindWithTag("Player");
