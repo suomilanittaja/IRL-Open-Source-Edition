@@ -19,6 +19,8 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle = 30;
     public float torque = 1000;
     public float brakeTorque = 1000;
+    public Transform CenterOfMass;
+    public Rigidbody RigidBody;
 
     [Header("Wheel Colliders")]
     public WheelCollider frontRightWheel;
@@ -38,6 +40,10 @@ public class CarController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
     }
 
+    void Start()
+    {
+      RigidBody.centerOfMass = CenterOfMass.localPosition;
+    }
     private void Accelerate()
     {
         switch (drivetrain)
