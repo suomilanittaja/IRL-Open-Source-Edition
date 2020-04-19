@@ -1,11 +1,11 @@
 # IRL
 
   
-IRL is  game Inspired By <a href="https://fivem.net/">FiveM</a> And <a href="https://www.youtube.com/watch?v=dhoJgTQjWNQ">Tiny Gta</a>.  
+IRL is  game Inspired By <a href="https://store.steampowered.com/app/516750/My_Summer_Car/">My Summer Car</a> And <a href="https://www.youtube.com/watch?v=dhoJgTQjWNQ">Tiny Gta</a>.  
 
 This is still in develop and not ready to play!!  
 
-Please use unity 2019.3.9f1 or later  
+Recommended to use unity 2019.3.10f1 or later  
 
 Join our <a href="https://discord.me/volfase">Discord</a> for latest updates.  
 
