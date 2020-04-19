@@ -110,7 +110,7 @@ public class CarController : MonoBehaviour
         myWfc = rearRightWheel.sidewaysFriction;
         myWfc = rearLeftWheel.sidewaysFriction;
         myWfc.stiffness = 1f;
-        myWfc.extremumSlip = 0.2f;
+        myWfc.extremumSlip = 1f;
         rearRightWheel.sidewaysFriction = myWfc;
         rearLeftWheel.sidewaysFriction = myWfc;
 
