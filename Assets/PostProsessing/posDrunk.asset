@@ -12,4 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
   m_Name: posDrunk
   m_EditorClassIdentifier: 
-  settings: []
+  settings:
+  - {fileID: 160928334735517512}
+--- !u!114 &160928334735517512
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba183ddb19ebac7cd83376ec3dc8ef34, type: 3}
+  m_Name: PPP_Drunk
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  amplitude:
+    overrideState: 1
+    value: 0.017
+  frequency:
+    overrideState: 1
+    value: 7
+  speed:
+    overrideState: 1
+    value: {x: 2.32, y: 1, z: 1.23, w: 1.78}
+  size:
+    overrideState: 1
+    value: {x: 2.37, y: 1, z: 1.06, w: 0.51}

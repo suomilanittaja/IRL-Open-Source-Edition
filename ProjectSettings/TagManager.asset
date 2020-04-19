@@ -12,6 +12,7 @@ TagManager:
   - Gun
   - VehicleCam
   - Vehicle
+  - Drink
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Postprosessing
   - 
   - 
   - 

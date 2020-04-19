@@ -10,6 +10,7 @@ public class Shop : MonoBehaviourPunCallbacks
    public GameObject lemonadePrefab;
    public GameObject macaroniCasserolePrefab;
    public GameObject gunPrefab;
+   public GameObject beerPrefab;
    public Transform Spawn;
    private PlayerController controll;
 
@@ -62,6 +63,17 @@ public class Shop : MonoBehaviourPunCallbacks
      {
        money.money -= 50;
        PhotonNetwork.Instantiate(gunPrefab.name, Spawn.transform.position, Spawn.rotation);
+       Ui.gameObject.SetActive(false);
+       controll.Lock();
+     }
+   }
+
+   public void beer()
+   {
+     if (money.money >= 20)
+     {
+       money.money -= 20;
+       PhotonNetwork.Instantiate(beerPrefab.name, Spawn.transform.position, Spawn.rotation);
        Ui.gameObject.SetActive(false);
        controll.Lock();
      }

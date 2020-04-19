@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26ce0c490cf1f7c18927b18a40b29fc2, type: 2}
+  - {fileID: 2100000, guid: 51cc46216cec9ebda90e8cdc80691bcb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,8 +93,8 @@ GameObject:
   - component: {fileID: 1349126688210214661}
   - component: {fileID: 475812044733365132}
   m_Layer: 0
-  m_Name: lemonade
-  m_TagString: Drink
+  m_Name: Beer
+  m_TagString: Beer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

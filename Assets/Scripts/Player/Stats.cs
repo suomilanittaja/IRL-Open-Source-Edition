@@ -26,6 +26,9 @@ public class Stats : MonoBehaviour
   private float minAmount = 0.1f;
   private PlayerController controll;
 
+  public GameObject PPP_Drunk;
+	public GameObject PPP_Player;
+
   private void Start()
   {
 		HungerBar.maxValue = Hunger;
@@ -51,6 +54,8 @@ public class Stats : MonoBehaviour
 
     HungerBar.value = Hunger;
 		ThirstBar.value = Thirst;
+    Drunk = Mathf.Clamp(Drunk, 0, 100f);
+    DrunkBar.value = Drunk;
     CalculateValues();
   }
   private void CalculateValues()
@@ -62,10 +67,32 @@ public class Stats : MonoBehaviour
 		{
 			controll.Health -= healthOverTimer * Time.deltaTime;
 		}
+
+    if(Drunk <= 0)
+    {
+      PPP_Drunk.gameObject.SetActive(false);
+      PPP_Player.gameObject.SetActive(true);
+    }
+    else
+    {
+      if(Drunk >= 0)
+      {
+        PPP_Player.gameObject.SetActive(false);
+        PPP_Drunk.gameObject.SetActive(true);
+      }
+      Drunk -= drunkOverTime * Time.deltaTime;
+
+    }
   }
   public void Drink()
 	{
 		Thirst += 20;
+	}
+
+  public void drunk()
+	{
+		Thirst += 10;
+    Drunk += 20;
 	}
 
   public void Eat()

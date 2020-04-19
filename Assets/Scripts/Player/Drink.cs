@@ -8,10 +8,11 @@ public class Drink : MonoBehaviourPunCallbacks
 {
    [Header("Settings")]
    [SerializeField] private string selectableTag = "Selectable";
+   [SerializeField] private string selectableTag2 = "Selectable";
 
    [Header("GameObjects")]
    public GameObject Text;
-   private GameObject Beer;
+   private GameObject drink;
 
    [Header("Scripts")]
    public Stats stats;
@@ -23,13 +24,19 @@ public class Drink : MonoBehaviourPunCallbacks
 
    private void Update()
    {
-     Beer = rayScript.rayHitted;
-     PhotonView = (PhotonView)Beer.GetComponent(typeof(PhotonView));
+     drink = rayScript.rayHitted;
+     PhotonView = (PhotonView)drink.GetComponent(typeof(PhotonView));
+
      if (rayScript.rayHitted.CompareTag(selectableTag) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
      {
        TransferOwnership();
+       stats.drunk();
+     }
+
+     if (rayScript.rayHitted.CompareTag(selectableTag2) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
+     {
+       TransferOwnership();
        stats.Drink();
-       print("key was pressed");
      }
 
      if (rayScript.rayHitted.CompareTag(selectableTag) && rayScript.hitDis <= 5)
@@ -47,9 +54,9 @@ public class Drink : MonoBehaviourPunCallbacks
        {
            Debug.Log("Requesting Ownership");
            PhotonView.RequestOwnership();
-           PhotonNetwork.Destroy(Beer);
+           PhotonNetwork.Destroy(drink);
        }
        else
-        PhotonNetwork.Destroy(Beer);
+        PhotonNetwork.Destroy(drink);
    }
 }
