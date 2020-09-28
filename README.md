@@ -1,7 +1,7 @@
 # IRL
 
   
-IRL is  game Inspired By <a href="https://store.steampowered.com/app/516750/My_Summer_Car/">My Summer Car</a> And <a href="https://www.youtube.com/watch?v=dhoJgTQjWNQ">Tiny Gta</a>.  
+IRL open source edition is  game Inspired By <a href="https://store.steampowered.com/app/516750/My_Summer_Car/">My Summer Car</a> And <a href="https://www.youtube.com/watch?v=dhoJgTQjWNQ">Tiny Gta</a>.  
 
 This is still in develop and not ready to play!!  
 
