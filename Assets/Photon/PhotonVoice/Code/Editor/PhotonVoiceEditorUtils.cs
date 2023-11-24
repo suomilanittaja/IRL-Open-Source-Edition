@@ -143,7 +143,7 @@ namespace Photon.Voice.Unity.Editor
 		public static bool IsPrefab(GameObject go)
 		{
             #if UNITY_2018_3_OR_NEWER
-            return UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetPrefabStage(go) != null || EditorUtility.IsPersistent(go);
+            return UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(go) != null || EditorUtility.IsPersistent(go);
             #else
             return EditorUtility.IsPersistent(go);
 			#endif

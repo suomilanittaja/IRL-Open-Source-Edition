@@ -12,13 +12,13 @@ public class Shop : MonoBehaviourPunCallbacks
    public GameObject gunPrefab;
    public GameObject beerPrefab;
    public Transform Spawn;
-   private PlayerController controll;
+   public PlayerController controll;
 
 
    void Start()
    {
      Ui.gameObject.SetActive(false);
-   }
+    }
 
    void OnTriggerEnter (Collider other)
    {
@@ -79,9 +79,18 @@ public class Shop : MonoBehaviourPunCallbacks
      }
    }
 
-   void Update()
+   void FixedUpdate()
    {
      if (controll == null)
         controll = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-   }
+
+     if (Ui == null)
+        {
+            Ui = GameObject.FindGameObjectWithTag("ShopUi");
+            Ui.gameObject.SetActive(false);
+        }
+
+     if (money == null)
+        money = GameObject.FindWithTag("Player").GetComponent<Money>();
+    }
 }

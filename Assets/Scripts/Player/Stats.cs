@@ -21,7 +21,7 @@ public class Stats : MonoBehaviour
 	public Slider HungerBar;
 	public Slider ThirstBar;
 	public Slider DrunkBar;
-  public Slider HealthBar;
+    public Slider HealthBar;
 
   private float minAmount = 0.1f;
   private PlayerController controll;
@@ -31,7 +31,7 @@ public class Stats : MonoBehaviour
 
   private void Start()
   {
-		HungerBar.maxValue = Hunger;
+        HungerBar.maxValue = Hunger;
 		ThirstBar.maxValue = Thirst;
   }
 

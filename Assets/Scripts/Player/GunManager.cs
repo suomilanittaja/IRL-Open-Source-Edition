@@ -9,6 +9,8 @@ public class GunManager : MonoBehaviourPunCallbacks
     public PickUp pickUp;
     public GameObject Ui;
 
+ 
+
     void Update()
     {
       if (controller == null)

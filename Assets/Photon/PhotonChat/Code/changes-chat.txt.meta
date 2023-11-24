@@ -5,3 +5,10 @@ TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119922
+  packageName: PUN 2 - FREE
+  packageVersion: 2.43
+  assetPath: Assets/Photon/PhotonChat/Code/changes-chat.txt
+  uploadId: 609016

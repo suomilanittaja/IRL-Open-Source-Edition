@@ -13,7 +13,9 @@ public class NetworkController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-      PhotonNetwork.ConnectUsingSettings();//Connects to photon master servers
+        PhotonNetwork.SendRate = 40;
+        PhotonNetwork.SerializationRate = 40;
+        PhotonNetwork.ConnectUsingSettings();//Connects to photon master servers
     }
 
     public override void OnConnectedToMaster()

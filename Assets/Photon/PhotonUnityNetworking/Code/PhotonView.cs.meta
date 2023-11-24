@@ -6,7 +6,18 @@ labels:
 - Photon
 - Networking
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
-  executionOrder: 0
+  executionOrder: -16000
   icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119922
+  packageName: PUN 2 - FREE
+  packageVersion: 2.43
+  assetPath: Assets/Photon/PhotonUnityNetworking/Code/PhotonView.cs
+  uploadId: 609016

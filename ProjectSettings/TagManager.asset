@@ -13,6 +13,13 @@ TagManager:
   - VehicleCam
   - Vehicle
   - Drink
+  - Bullet2
+  - CarShopUi
+  - ShopUi
+  - GunUI
+  - vehSpawner
+  - shopSpawner
+  - AtmUi
   layers:
   - Default
   - TransparentFX

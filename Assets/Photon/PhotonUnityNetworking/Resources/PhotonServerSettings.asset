@@ -13,19 +13,22 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 3b6cf44e-a7b8-4ee5-8061-6a8f387bcf82
+    AppIdRealtime: 4ce9d6df-fada-4d27-9056-698beee16c57
+    AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: fe4ee921-8421-4d86-9042-8021beb241fb
+    AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: eu
     Server: 
     Port: 0
+    ProxyServer: 
     Protocol: 0
+    EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: 
+  DevRegion: eu
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -49,6 +52,8 @@ MonoBehaviour:
   - UpdateWheelPose
   - useGun2
   - useHand2
+  - spawn
+  - Createplayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

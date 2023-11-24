@@ -13,11 +13,11 @@ public class EnterandExit : MonoBehaviourPunCallbacks
   public bool canEnter;
   public bool isEntered;
 
-  private GameObject player;
-  private PlayerController playerControll;
-  private Transform playerPos;
-  private Raycast RaycastScript;
-  private CameraController cameraController;
+  public GameObject player;
+  public PlayerController playerControll;
+  public Transform playerPos;
+  public Raycast RaycastScript;
+  public CameraController cameraController;
 
 	void OnTriggerExit (Collider other)
 	{
@@ -40,6 +40,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 		if (canEnter == true && Input.GetKeyDown(KeyCode.Return) && isEntered == false)
 		{
       TransferOwnership();
+      RaycastScript = GameObject.FindWithTag("Player").GetComponent<Raycast>();
       gameObject.tag = "Vehicle";
       cameraController.Check();
       carControll.enabled = true;
@@ -49,7 +50,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
       photonView.RPC("Enter", RpcTarget.All);
 		}
 
-		if (canEnter == false && Input.GetKeyDown(KeyCode.Return) && isEntered == true)
+		if (canEnter == false && Input.GetKeyDown(KeyCode.Return) && isEntered == true && photonView.Owner.IsLocal == true)
 		{
       gameObject.tag = "Untagged";
       playerPos.transform.position = exitPoint.transform.position;
@@ -82,9 +83,14 @@ public class EnterandExit : MonoBehaviourPunCallbacks
   [PunRPC]
   void Enter()
   {
-    isEntered = true;
-    StartCoroutine(Timer());
-  }
+        isEntered = true;
+        StartCoroutine(Timer());
+        IEnumerator Timer()
+        {
+            yield return new WaitForSeconds(1);
+            canEnter = false;
+        }
+    }
 
   [PunRPC]
   void Exit()

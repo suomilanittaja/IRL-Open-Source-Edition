@@ -12,17 +12,14 @@ public class PickUp : MonoBehaviourPunCallbacks
 
 	[Header("Scripts")]
 	public PlayerController controller;
-	private Raycast rayScript;
+	public Raycast rayScript;
 
 	[Header("Others")]
 	[SerializeField] private string selectableTag = "Gun";
 	private Transform _selection;
 	public bool usingGun = false;
 
-	void Start()
-	{
-    rayScript = GameObject.FindWithTag("Manager").GetComponent<Raycast>();
-	}
+
 
 	private void Update()
    {

@@ -11,7 +11,7 @@ public class Raycast : MonoBehaviour
    public GameObject Text;
    public GameObject rayHitted;
 
-   private void Update()
+   private void FixedUpdate()
    {
 
 	   //Creating a Ray

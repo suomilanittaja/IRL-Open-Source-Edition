@@ -10,6 +10,7 @@ public class VehicleSpawner : MonoBehaviourPunCallbacks
     public GameObject carPrefab;
     private PlayerController controll;
 
+
     void OnTriggerEnter (Collider other)
     {
       if (other.gameObject.CompareTag("Player"))
@@ -35,9 +36,15 @@ public class VehicleSpawner : MonoBehaviourPunCallbacks
       PhotonNetwork.Instantiate(carPrefab.name, spawnPos.transform.position, spawnPos.rotation);
     }
 
-    void Update()
+    void FixedUpdate()
     {
       if (controll == null)
          controll = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+      
+      if (Ui == null)
+        {
+           Ui = GameObject.FindGameObjectWithTag("CarShopUi");
+           Ui.SetActive(false);
+        }
     }
   }

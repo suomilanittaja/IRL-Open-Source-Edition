@@ -8,7 +8,10 @@ public class Bullet : MonoBehaviourPun {
 
 	// Use this for initialization
 	void Start () {
-
+		if (photonView.IsMine)
+		{
+            gameObject.tag = "Bullet2";
+        }
 	}
 
 	// Update is called once per frame

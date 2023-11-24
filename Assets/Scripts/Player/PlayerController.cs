@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviourPun {
+public class PlayerController : MonoBehaviourPun, IPunObservable
+{
 
     [Header("Floats")]
     public float Speed = 10f;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviourPun {
     public GameObject Minicam;
     public GameObject Cam;
     public GameObject Remote;
+    public GameObject Canvas;
 
     [Header("Bools")]
     public bool hasGun = false;
@@ -31,28 +32,15 @@ public class PlayerController : MonoBehaviourPun {
     public CharacterController characterController;
     public const string PlayerTag = "Player";
     public PickUp pickUp;
+    public PlayerController playerController;
 
     private PlayerCamera playerCamera;
-    private Manager _manager;
+    public Manager _manager;
     private float _gravity = -10f;
     private float _yAxisVelocity;
 
     private void Start()
-    {
-        if (photonView.IsMine)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
-            gameObject.tag = "Player";
-            Remote.SetActive(false);
-        }
-        else
-        {
-            GetComponent<MeshRenderer>().material.color = Color.red;
-            Cam.SetActive(false);
-            Minicam.SetActive(false);
-        }
-
-        _manager = GameObject.FindWithTag("Manager").GetComponent<Manager>();
+    {       
         playerCamera = Cam.GetComponent<PlayerCamera>();
     }
 
@@ -70,8 +58,31 @@ public class PlayerController : MonoBehaviourPun {
       Cursor.visible = true; //make mouse visible
     }
 
+    public void check()
+    {
+        if (photonView.IsMine)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.blue;
+            gameObject.tag = "Player";
+            Remote.SetActive(false);
+            Canvas.SetActive(true);
+        }
+        else
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+            Cam.SetActive(false);
+            Minicam.SetActive(false);
+            Remote.SetActive(true);
+            Canvas.SetActive(false);
+            //GetComponent<CharacterController>().enabled = false;
+            GetComponent<PickUp> ().enabled = false;
+            //GetComponent<PlayerController>().enabled = false;
+        }
+    }
+
     private void Update()
     {
+        check();
 
         if (photonView.IsMine)
         {
@@ -97,24 +108,24 @@ public class PlayerController : MonoBehaviourPun {
               playerCamera.enabled = false;
             else
               playerCamera.enabled = true;
-        }
 
-        if (Health <= 0)
-        {
-          _manager.died = true;
-          PhotonNetwork.Destroy(gameObject);
-        }
 
-        if (isEntered == true)
-        {
-          photonView.RPC("enter", RpcTarget.All);
-        }
+            if (Health <= 0)
+            {
+                _manager.died = true;
+                StartCoroutine(Kuolema());
+            }
 
-        if (isEntered == false)
-        {
-          photonView.RPC("exit", RpcTarget.All);
-        }
+            if (isEntered == true)
+            {
+                photonView.RPC("enter", RpcTarget.All);
+            }
 
+            if (isEntered == false)
+            {
+                photonView.RPC("exit", RpcTarget.All);
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -132,14 +143,18 @@ public class PlayerController : MonoBehaviourPun {
     {
         if (stream.IsWriting)
         {
-            Vector3 pos = transform.localPosition;
-            stream.Serialize(ref pos);
+            //Vector3 pos = transform.localPosition;
+            //stream.Serialize(ref pos);
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
             stream.SendNext(Health);
         }
         else
         {
-            Vector3 pos = Vector3.zero;
-            stream.Serialize(ref pos);  // pos gets filled-in. must be used somewhere
+            //Vector3 pos = Vector3.zero;
+            //stream.Serialize(ref pos);  // pos gets filled-in. must be used somewhere
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
             Health = (float)stream.ReceiveNext();
         }
     }
@@ -151,30 +166,31 @@ public class PlayerController : MonoBehaviourPun {
 
     void InputMovement()
     {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-      float horizontal = Input.GetAxis("Horizontal");
-      float vertical = Input.GetAxis("Vertical");
+        if (Input.GetKey(KeyCode.LeftShift))
+            vertical *= sprintSpeedMultiplier;
 
-      if (Input.GetKey(KeyCode.LeftShift))
-      vertical *= sprintSpeedMultiplier;
+        Vector3 movement = horizontal * moveSpeed * Time.deltaTime * transform.right +
+                           vertical * moveSpeed * Time.deltaTime * transform.forward;
 
-      Vector3 movement = horizontal * moveSpeed * Time.deltaTime * transform.right +
-                         vertical * moveSpeed * Time.deltaTime * transform.forward;
-
-      if (characterController.isGrounded)
-          _yAxisVelocity = -0.5f;
+        if (characterController.isGrounded)
+            _yAxisVelocity = -0.5f;
 
 
-      if (Input.GetKeyDown(KeyCode.Space))
-      {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             _yAxisVelocity = Mathf.Sqrt(jumpHeight * -2f * _gravity);
-      }
+        }
 
-      _yAxisVelocity += _gravity * Time.deltaTime;
-      movement.y = _yAxisVelocity * Time.deltaTime;
+        _yAxisVelocity += _gravity * Time.deltaTime;
+        movement.y = _yAxisVelocity * Time.deltaTime;
 
-      characterController.Move(movement);
-  }
+        characterController.Move(movement);
+
+
+    }
 
   [PunRPC]
   void enter()
@@ -187,4 +203,10 @@ public class PlayerController : MonoBehaviourPun {
   {
     this.gameObject.SetActive(true);
   }
+
+    IEnumerator Kuolema()
+    {
+        yield return new WaitForSeconds(5);         //yield on a new YieldInstruction that waits for 5 seconds.
+        PhotonNetwork.Destroy(gameObject);
+    }
 }
