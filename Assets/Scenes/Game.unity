@@ -165,11 +165,10 @@ GameObject:
   - component: {fileID: 136900181}
   - component: {fileID: 136900180}
   - component: {fileID: 136900179}
-  - component: {fileID: 136900178}
   - component: {fileID: 136900177}
   m_Layer: 0
   m_Name: Desk
-  m_TagString: shopSpawner
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,29 +210,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 1, z: 1}
   m_Center: {x: -0.0000009536743, y: 0, z: 0}
---- !u!114 &136900178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136900175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a1880afe036adb6e9b7c5c2b391358c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: {fileID: 0}
-  Ui: {fileID: 0}
-  lemonadePrefab: {fileID: 8841248707605193858, guid: 659ce359f3f64de11b58a38dcc8b36f6,
-    type: 3}
-  macaroniCasserolePrefab: {fileID: 5537098090911493484, guid: 447f7e1de2923f920ae689713f5798fc,
-    type: 3}
-  gunPrefab: {fileID: 74831693651451361, guid: 713ded10d2e48efe8b43ebdf607dbb54, type: 3}
-  beerPrefab: {fileID: 8841248707605193858, guid: 8fdb3522e11ca62efa606d5e13d2937a,
-    type: 3}
-  Spawn: {fileID: 988746570}
-  controll: {fileID: 0}
 --- !u!65 &136900179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -825,10 +801,9 @@ GameObject:
   - component: {fileID: 475936882}
   - component: {fileID: 475936881}
   - component: {fileID: 475936880}
-  - component: {fileID: 475936883}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Atm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -921,19 +896,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475936878}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &475936883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475936878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c990acd4be6ccd04eaba1a40203558aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Ui: {fileID: 0}
 --- !u!1 &501882911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,76 +1784,6 @@ Transform:
   - {fileID: 467071373}
   m_Father: {fileID: 162872586}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1226815716
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1226815717}
-  - component: {fileID: 1226815718}
-  - component: {fileID: 1226815719}
-  m_Layer: 0
-  m_Name: Manager
-  m_TagString: vehSpawner
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1226815717
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226815716}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1812709772}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1226815718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226815716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb2fc3524e692515a55b4a22e7c362e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPos: {fileID: 82807063}
-  Ui: {fileID: 0}
-  carPrefab: {fileID: 4147600197055895462, guid: 992a7916d20ebb175babb484b340374a,
-    type: 3}
---- !u!65 &1226815719
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226815716}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 2.3990798}
-  m_Center: {x: 0, y: 0, z: 0.69954056}
 --- !u!1 &1234965365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,6 +2263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1747652093}
   - component: {fileID: 1747652094}
+  - component: {fileID: 1747652095}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -2405,6 +2298,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503b96d30659ec33f9c34260c8bc31c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1747652095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747652092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e75c116eadcd1547aa4d81dc6d4b2c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableTag: Shop
+  ShopUi: {fileID: 0}
+  lemonadePrefab: {fileID: 8841248707605193858, guid: 659ce359f3f64de11b58a38dcc8b36f6,
+    type: 3}
+  macaroniCasserolePrefab: {fileID: 5537098090911493484, guid: 447f7e1de2923f920ae689713f5798fc,
+    type: 3}
+  gunPrefab: {fileID: 74831693651451361, guid: 713ded10d2e48efe8b43ebdf607dbb54, type: 3}
+  beerPrefab: {fileID: 8841248707605193858, guid: 8fdb3522e11ca62efa606d5e13d2937a,
+    type: 3}
+  ShopItemSpawn: {fileID: 988746570}
+  selectableTag2: VehicleShop
+  VehicleSpawn: {fileID: 82807063}
+  VehicleUi: {fileID: 0}
+  carPrefab: {fileID: 4147600197055895462, guid: 992a7916d20ebb175babb484b340374a,
+    type: 3}
+  selectableTag3: Atm
+  AtmUi: {fileID: 0}
+  money: {fileID: 0}
+  controll: {fileID: 0}
+  stats: {fileID: 0}
+  rayScript: {fileID: 0}
 --- !u!1 &1812709771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,7 +2345,7 @@ GameObject:
   - component: {fileID: 1812709773}
   m_Layer: 0
   m_Name: Get
-  m_TagString: Untagged
+  m_TagString: VehicleShop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2436,8 +2362,7 @@ Transform:
   m_LocalPosition: {x: 1.722, y: 0.55, z: 0}
   m_LocalScale: {x: 0.5, y: 1.3, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1226815717}
+  m_Children: []
   m_Father: {fileID: 467071373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1812709773

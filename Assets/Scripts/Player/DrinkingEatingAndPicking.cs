@@ -18,14 +18,11 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
 
     [Header("GameObjects for Drinking")]
     public GameObject DrinkText;
-    private GameObject Drink;
 
     [Header("GameObjects for Eating")]
     public GameObject EatText;
-    private GameObject Food;
 
     [Header("GameObjects for picking Gun")]
-    private GameObject pickGun;
     public GameObject Gun;
     public GameObject remoteGun;
 
@@ -38,23 +35,24 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
     [Header("Others")]
     public bool usingGun = false;
     private Transform _selection;
+    private GameObject Hit;
 
     private void Update()
     {
-        Drink = rayScript.rayHitted;
+        Hit = rayScript.rayHitted;
 
         if (rayScript.rayHitted != null)
         {
             if (rayScript.rayHitted.CompareTag(selectableTag) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Drink.GetComponent(typeof(PhotonView));
+                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 TransferOwnershipDrink();
                 stats.drunk();
             }
 
             if (rayScript.rayHitted.CompareTag(selectableTag2) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Drink.GetComponent(typeof(PhotonView));
+                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 TransferOwnershipDrink();
                 stats.Drink();
             }
@@ -67,13 +65,12 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
                 DrinkText.gameObject.SetActive(false);
         }
 
-        Food = rayScript.rayHitted;
 
         if (rayScript.rayHitted != null)
         {
             if (rayScript.rayHitted.CompareTag(selectableTag3) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Food.GetComponent(typeof(PhotonView));
+                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 TransferOwnershipFood();
                 stats.Eat();
                 print("key was pressed");
@@ -87,15 +84,14 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
                 EatText.gameObject.SetActive(false);
         }
 
-        pickGun = rayScript.rayHitted;
 
         if (rayScript.rayHitted != null)
         {
             if (rayScript.rayHitted.CompareTag(selectableTag4) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Gun.GetComponent(typeof(PhotonView));
+                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 print("key was pressed");
-                PhotonNetwork.Destroy(pickGun);
+                PhotonNetwork.Destroy(Hit);
                 controller.hasGun = true;
                 usingGun = true;
                 photonView.RPC("pickUp", RpcTarget.All);
@@ -119,10 +115,10 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
        {
            Debug.Log("Requesting Ownership");
            PhotonView.RequestOwnership();
-           PhotonNetwork.Destroy(Drink);
+           PhotonNetwork.Destroy(Hit);
        }
        else
-        PhotonNetwork.Destroy(Drink);
+        PhotonNetwork.Destroy(Hit);
    }
 
     public void TransferOwnershipFood()
@@ -131,10 +127,10 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
         {
             Debug.Log("Requesting Ownership");
             PhotonView.RequestOwnership();
-            PhotonNetwork.Destroy(Food);
+            PhotonNetwork.Destroy(Hit);
         }
         else
-            PhotonNetwork.Destroy(Food);
+            PhotonNetwork.Destroy(Hit);
     }
 
     [PunRPC]

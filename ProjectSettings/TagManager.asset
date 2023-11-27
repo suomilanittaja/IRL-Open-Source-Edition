@@ -17,9 +17,10 @@ TagManager:
   - CarShopUi
   - ShopUi
   - GunUI
-  - vehSpawner
-  - shopSpawner
   - AtmUi
+  - Shop
+  - VehicleShop
+  - Atm
   layers:
   - Default
   - TransparentFX

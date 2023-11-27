@@ -13,8 +13,8 @@ public class NetworkController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.SendRate = 15;
-        PhotonNetwork.SerializationRate = 10;
+        PhotonNetwork.SendRate = 100;
+        PhotonNetwork.SerializationRate = 100;
         PhotonNetwork.ConnectUsingSettings();//Connects to photon master servers
     }
 

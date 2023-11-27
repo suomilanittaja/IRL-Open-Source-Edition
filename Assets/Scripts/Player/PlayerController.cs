@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     public bool hasGun = false;
     public bool isEntered;
     public bool isTabPressed;
+    public bool Cursorlock = true;
 
     [Header("Others")]
     public Transform shotPos;
@@ -51,15 +52,18 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
             // Handle player movement
             HandleMovement();
 
-            // Handle player look (mouse input)
-            HandleMouseLook();
-
             // Handle jumping
             HandleJump();
 
             CheckHealth();
 
             HandleEntryExit();        
+
+            if (Cursorlock)
+            {
+                // Handle player look (mouse input)
+                HandleMouseLook();
+            }
         }
     }
 
@@ -115,7 +119,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         transform.Rotate(Vector3.up * mouseX);  // Rotate the player based on mouse input
         float currentRotation = Camera.main.transform.eulerAngles.x; // Rotate the camera (up and down) based on mouse input
         float newRotation = currentRotation - mouseY;
-        newRotation = Mathf.Clamp(newRotation, 0f, 90f); // Limit the camera rotation to avoid flipping
+        newRotation = Mathf.Clamp(newRotation, 0f, 180f); // Limit the camera rotation to avoid flipping
         Camera.main.transform.localRotation = Quaternion.Euler(newRotation, 0f, 0f);
     }
 
@@ -190,6 +194,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !lockCursor;
+        Cursorlock = lockCursor;
     }
 
     private void HandleEntryExit()

@@ -4,41 +4,37 @@ using UnityEngine;
 
 public class ShopButtons : MonoBehaviour
 {
-
-
-    public VehicleSpawner vehSpawn;
-    public Shop shopSpawn;
+    public Shops shop;
 
     public void Update()
     {
-        if (vehSpawn == null)
-            vehSpawn = GameObject.FindWithTag("vehSpawner").GetComponent<VehicleSpawner>();
-        if (shopSpawn == null)
-            shopSpawn = GameObject.FindWithTag("shopSpawner").GetComponent<Shop>();
+        if (shop == null)
+            shop = GameObject.FindWithTag("Manager").GetComponent<Shops>();
     }
+
     public void SpawnVEh()
     {
-        vehSpawn.Spawn();
+        shop.Spawn();
     }
 
     public void SpawnGun()
     {
-        shopSpawn.gun();
+        shop.gun();
     }
 
     public void SpawnLemonade()
     {
-        shopSpawn.lemonade();
+        shop.lemonade();
     }
 
     public void SpawnBeer()
     {
-        shopSpawn.beer();
+        shop.beer();
     }
 
     public void SpawnMacaroniCasserole()
     {
-        shopSpawn.macaroniCasserole();
+        shop.macaroniCasserole();
     }
 
 }

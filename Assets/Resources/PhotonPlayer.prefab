@@ -5691,6 +5691,7 @@ MonoBehaviour:
   main: {fileID: 4193740952248790421}
   options: {fileID: 2557294461410785342}
   controll: {fileID: 998164041074541116}
+  isOpened: 0
 --- !u!1 &3666322566434028118
 GameObject:
   m_ObjectHideFlags: 0
@@ -13877,7 +13878,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &998164041074541116
 MonoBehaviour:
@@ -13906,6 +13907,7 @@ MonoBehaviour:
   hasGun: 0
   isEntered: 0
   isTabPressed: 0
+  Cursorlock: 0
   shotPos: {fileID: 6295229584634085325}
   pickUp: {fileID: 4679559903994211586}
   rb: {fileID: 4104660592540973693}
@@ -14111,8 +14113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b176d524c1fe1e4f9a97157ca92fd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vehSpawn: {fileID: 0}
-  shopSpawn: {fileID: 0}
+  shop: {fileID: 0}
 --- !u!114 &4679559903994211586
 MonoBehaviour:
   m_ObjectHideFlags: 0

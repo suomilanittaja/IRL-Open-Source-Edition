@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject main;
     public GameObject options;
     public PlayerController controll;
-    private bool isOpened = false;
+    public bool isOpened = false;
 
     void Start()
     {
