@@ -24,7 +24,7 @@ public class Stats : MonoBehaviour
     public Slider HealthBar;
 
   private float minAmount = 0.1f;
-  private PlayerController controll;
+  public PlayerController controll;
 
   public GameObject PPP_Drunk;
 	public GameObject PPP_Player;
@@ -37,23 +37,18 @@ public class Stats : MonoBehaviour
 
   void Update()
   {
-    if (controll == null)
-    {
-      controll = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-      HealthBar.maxValue = controll.Health;
-    }
-    updateUI();
+        HealthBar.maxValue = controll.Health;
+        updateUI();
   }
 
   private void updateUI()
   {
-    //Health = Mathf.Clamp(Health, 0, 100f);
     HealthBar.value = controll.Health;
     Hunger = Mathf.Clamp(Hunger, 0, 100f);
-		Thirst = Mathf.Clamp(Thirst, 0, 100f);
+	Thirst = Mathf.Clamp(Thirst, 0, 100f);
 
     HungerBar.value = Hunger;
-		ThirstBar.value = Thirst;
+	ThirstBar.value = Thirst;
     Drunk = Mathf.Clamp(Drunk, 0, 100f);
     DrunkBar.value = Drunk;
     CalculateValues();

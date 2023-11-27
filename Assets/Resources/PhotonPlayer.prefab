@@ -975,7 +975,6 @@ GameObject:
   - component: {fileID: 3348886367102800612}
   - component: {fileID: 1939318640694032519}
   - component: {fileID: 4563830421817755178}
-  - component: {fileID: 8641382662126902661}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -1085,7 +1084,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8641382662126902661}
+      - m_Target: {fileID: 3176683488793873311}
         m_TargetAssemblyTypeName: ShopButtons, Assembly-CSharp
         m_MethodName: SpawnVEh
         m_Mode: 1
@@ -1097,20 +1096,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8641382662126902661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 544467359714262286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b176d524c1fe1e4f9a97157ca92fd51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vehSpawn: {fileID: 0}
-  shopSpawn: {fileID: 0}
 --- !u!1 &603487443676714095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,7 +2643,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8641382662126902661}
+      - m_Target: {fileID: 3176683488793873311}
         m_TargetAssemblyTypeName: ShopButtons, Assembly-CSharp
         m_MethodName: SpawnBeer
         m_Mode: 1
@@ -4574,12 +4559,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7552188158477345073}
+  m_Father: {fileID: 7201452026824786996}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 60.200073, y: -1}
-  m_SizeDelta: {x: -387.59998, y: -427.50107}
+  m_AnchoredPosition: {x: -49.999886, y: -1}
+  m_SizeDelta: {x: -167.19998, y: -509.78107}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3244600565543292031
 CanvasRenderer:
@@ -4744,8 +4729,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5859152131339677430}
-        m_TargetAssemblyTypeName: Robbery, Assembly-CSharp
+      - m_Target: {fileID: 4155297826840434253}
+        m_TargetAssemblyTypeName: Money, Assembly-CSharp
         m_MethodName: ROB
         m_Mode: 1
         m_Arguments:
@@ -5705,6 +5690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   main: {fileID: 4193740952248790421}
   options: {fileID: 2557294461410785342}
+  controll: {fileID: 998164041074541116}
 --- !u!1 &3666322566434028118
 GameObject:
   m_ObjectHideFlags: 0
@@ -6864,7 +6850,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3838401403974556026}
   m_Father: {fileID: 7552188158477345073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6954,8 +6941,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6298421633912981818}
-        m_TargetAssemblyTypeName: GunManager, Assembly-CSharp
+      - m_Target: {fileID: 998164041074541116}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: useGun
         m_Mode: 1
         m_Arguments:
@@ -7181,7 +7168,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8347327078302312201}
   m_Father: {fileID: 7552188158477345073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7271,8 +7259,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6298421633912981818}
-        m_TargetAssemblyTypeName: GunManager, Assembly-CSharp
+      - m_Target: {fileID: 998164041074541116}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: useHand
         m_Mode: 1
         m_Arguments:
@@ -8198,7 +8186,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2390736403031424561}
   - component: {fileID: 9007017218661552423}
-  - component: {fileID: 2384308103436474483}
   - component: {fileID: 7079766728195172370}
   - component: {fileID: 3003503070403836519}
   m_Layer: 0
@@ -8275,22 +8262,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &2384308103436474483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5280032346201372117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c5a1d19da60ac1ff96f4e32384aca93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivity: 2
-  smoothing: 2
-  character: {fileID: 7290150893343431833}
-  cursor: 1
 --- !u!81 &7079766728195172370
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8602,12 +8573,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7552188158477345073}
+  m_Father: {fileID: 5307017695432929457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -56.19998, y: -5}
-  m_SizeDelta: {x: -392.9, y: -446.60107}
+  m_AnchoredPosition: {x: 54.00004, y: -4.9999833}
+  m_SizeDelta: {x: -172.5, y: -528.8811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4393081682249130154
 CanvasRenderer:
@@ -9815,9 +9786,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6872870924507747589}
-  - {fileID: 3838401403974556026}
   - {fileID: 3023225790122535344}
-  - {fileID: 8347327078302312201}
   - {fileID: 5307017695432929457}
   - {fileID: 7201452026824786996}
   m_Father: {fileID: 1774280389451629246}
@@ -10365,7 +10334,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8641382662126902661}
+      - m_Target: {fileID: 3176683488793873311}
         m_TargetAssemblyTypeName: ShopButtons, Assembly-CSharp
         m_MethodName: SpawnMacaroniCasserole
         m_Mode: 1
@@ -13696,21 +13665,18 @@ GameObject:
   - component: {fileID: 9105952786088929351}
   - component: {fileID: 2417595531822381871}
   - component: {fileID: 5490050896572223714}
+  - component: {fileID: -6653322903352479971}
+  - component: {fileID: 4302356752880969232}
   - component: {fileID: 4104660592540973693}
-  - component: {fileID: 8442966154076055867}
   - component: {fileID: 998164041074541116}
-  - component: {fileID: 707974069354007066}
   - component: {fileID: 2200483145837878988}
   - component: {fileID: 8397725459413943916}
-  - component: {fileID: 6298421633912981818}
   - component: {fileID: 2781320059568432450}
   - component: {fileID: 4155297826840434253}
   - component: {fileID: 8641951858696576615}
-  - component: {fileID: 4778185639421363263}
-  - component: {fileID: 7562869552663236438}
   - component: {fileID: 8023655723943318838}
-  - component: {fileID: 7222761389749416537}
-  - component: {fileID: 5859152131339677430}
+  - component: {fileID: 3176683488793873311}
+  - component: {fileID: 4679559903994211586}
   m_Layer: 0
   m_Name: PhotonPlayer
   m_TagString: Untagged
@@ -13761,7 +13727,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -13828,14 +13794,64 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 0
   ObservedComponents:
-  - {fileID: 998164041074541116}
+  - {fileID: 4302356752880969232}
+  - {fileID: -6653322903352479971}
   sceneViewId: 0
   InstantiationId: 10
   isRuntimeInstantiated: 0
+--- !u!114 &-6653322903352479971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290150893343431833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
+--- !u!114 &4302356752880969232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290150893343431833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!54 &4104660592540973693
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13858,37 +13874,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!143 &8442966154076055867
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290150893343431833}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &998164041074541116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13901,45 +13891,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8014c90de9a3fa9199ada2484a42773a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
   Health: 100
-  moveSpeed: 2
-  sprintSpeedMultiplier: 2
-  jumpHeight: 3
+  walkSpeed: 5
+  jumpForce: 5
+  sensitivity: 2
   bulletPrefab: {fileID: 1696170245520886, guid: db3ec868aa3273989862e0016295f347,
     type: 3}
   Minicam: {fileID: 2444921321452935177}
   Cam: {fileID: 5280032346201372117}
   Remote: {fileID: 6314222579918884377}
   Canvas: {fileID: 1955866874997560908}
+  GunUi: {fileID: 5621752652556975008}
+  isGrounded: 0
   hasGun: 0
   isEntered: 0
-  tabPressed: 0
-  disableMouselook: 0
+  isTabPressed: 0
   shotPos: {fileID: 6295229584634085325}
-  characterController: {fileID: 8442966154076055867}
-  pickUp: {fileID: 707974069354007066}
-  playerController: {fileID: 998164041074541116}
+  pickUp: {fileID: 4679559903994211586}
+  rb: {fileID: 4104660592540973693}
   _manager: {fileID: 8397725459413943916}
---- !u!114 &707974069354007066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290150893343431833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94847c889729f70eb3190c40430f1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickGun: {fileID: 0}
-  Gun: {fileID: 8648223928987561405}
-  remoteGun: {fileID: 3524958327567653614}
-  controller: {fileID: 998164041074541116}
-  rayScript: {fileID: 8641951858696576615}
-  selectableTag: Gun
-  usingGun: 0
 --- !u!82 &2200483145837878988
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14051,21 +14021,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   died: 0
   Respawn: {fileID: 0}
---- !u!114 &6298421633912981818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290150893343431833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 951a80572b8064ce18615a16a1c9fc37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 998164041074541116}
-  pickUp: {fileID: 707974069354007066}
-  Ui: {fileID: 5621752652556975008}
 --- !u!114 &2781320059568432450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14089,6 +14044,7 @@ MonoBehaviour:
   ThirstBar: {fileID: 7379303933768548488}
   DrunkBar: {fileID: 5837617801400874925}
   HealthBar: {fileID: 8428055144884085836}
+  controll: {fileID: 998164041074541116}
   PPP_Drunk: {fileID: 171740461120384325}
   PPP_Player: {fileID: 6762086930933310792}
 --- !u!114 &4155297826840434253
@@ -14104,7 +14060,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
+  job: 10
+  RobbingUi: {fileID: 1670746751769019544}
+  RobbingInfo: {fileID: 6779330661941724849}
   text: {fileID: 7566429815570193622}
+  rewardText: {fileID: 6205180148753531294}
+  Payed: 0
 --- !u!114 &8641951858696576615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14117,42 +14078,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3bb1dcee2d80977bfba2c7b9a6ccc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitDis: 0
+  hitDis: 5
   Text: {fileID: 8204207223924305860}
   rayHitted: {fileID: 0}
---- !u!114 &4778185639421363263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290150893343431833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac217d4e846bd025e91442bacd84bb15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectableTag: Drink
-  selectableTag2: Beer
-  Text: {fileID: 8842316190661042667}
-  stats: {fileID: 2781320059568432450}
-  rayScript: {fileID: 8641951858696576615}
---- !u!114 &7562869552663236438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290150893343431833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb4c88d8528466dbdaccd0b531a86052, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectableTag: Food
-  Text: {fileID: 6845472473393647564}
-  stats: {fileID: 2781320059568432450}
-  rayScript: {fileID: 8641951858696576615}
 --- !u!114 &8023655723943318838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14170,8 +14098,8 @@ MonoBehaviour:
   jobMenu: {fileID: 295503244916531464}
   usingPhone: 0
   text: {fileID: 680654783755686009}
-  jobs: {fileID: 7222761389749416537}
---- !u!114 &7222761389749416537
+  jobs: {fileID: 4155297826840434253}
+--- !u!114 &3176683488793873311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14180,14 +14108,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7290150893343431833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180172577014b3d0a91b2712578610cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b176d524c1fe1e4f9a97157ca92fd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  job: 10
-  Payed: 0
-  money: {fileID: 4155297826840434253}
-  text: {fileID: 6205180148753531294}
---- !u!114 &5859152131339677430
+  vehSpawn: {fileID: 0}
+  shopSpawn: {fileID: 0}
+--- !u!114 &4679559903994211586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14196,12 +14122,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7290150893343431833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e13cafe186c5b47b6c46b09de605c1, type: 3}
+  m_Script: {fileID: 11500000, guid: e9aa1b2977f98854b9cef67a17ed1807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ui: {fileID: 1670746751769019544}
-  Info: {fileID: 6779330661941724849}
-  money: {fileID: 4155297826840434253}
+  selectableTag: Beer
+  selectableTag2: Drink
+  selectableTag3: Food
+  selectableTag4: Gun
+  DrinkText: {fileID: 8842316190661042667}
+  EatText: {fileID: 6845472473393647564}
+  Gun: {fileID: 8648223928987561405}
+  remoteGun: {fileID: 3524958327567653614}
+  controller: {fileID: 998164041074541116}
+  stats: {fileID: 2781320059568432450}
+  rayScript: {fileID: 8641951858696576615}
+  usingGun: 0
 --- !u!1 &7300264418473541587
 GameObject:
   m_ObjectHideFlags: 0
@@ -14544,7 +14479,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8641382662126902661}
+      - m_Target: {fileID: 3176683488793873311}
         m_TargetAssemblyTypeName: ShopButtons, Assembly-CSharp
         m_MethodName: SpawnGun
         m_Mode: 1
@@ -15568,7 +15503,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8641382662126902661}
+      - m_Target: {fileID: 3176683488793873311}
         m_TargetAssemblyTypeName: ShopButtons, Assembly-CSharp
         m_MethodName: SpawnLemonade
         m_Mode: 1

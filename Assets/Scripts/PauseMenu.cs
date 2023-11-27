@@ -6,8 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject main;
     public GameObject options;
-    private PlayerController controll;
-    private bool Opened = false;
+    public PlayerController controll;
+    private bool isOpened = false;
 
     void Start()
     {
@@ -16,28 +16,28 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-      if (controll == null)
-         controll = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-
-      if (Input.GetKeyDown(KeyCode.Escape) && Opened == false)
-      {
-        Opened = true;
-        main.SetActive(true);
-        controll.UnLock();
-      }
-      else if (Input.GetKeyDown(KeyCode.Escape) && Opened == true)
-      {
-        Opened = false;
-        main.SetActive(false);
-        controll.Lock();
-      }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (!isOpened)
+            {
+                isOpened = true;
+                main.SetActive(true);
+                controll?.ToggleCursorLock(false);
+            }
+            else
+            {
+                isOpened = false;
+                main.SetActive(false);
+                controll?.ToggleCursorLock(true);
+            }
+        }
     }
 
-    public void Resume()
+    public void Resume() //resume button
     {
       main.SetActive(false);
-      controll.Lock();
-      Opened = false;
+      controll.ToggleCursorLock(true);
+      isOpened = false;
     }
 
     public void SetQuality (int qualityIndex)
@@ -50,7 +50,7 @@ public class PauseMenu : MonoBehaviour
       Screen.fullScreen = isFullscreen;
     }
 
-    public void Options()
+    public void Options() 
     {
       main.SetActive(false);
       options.SetActive(true);

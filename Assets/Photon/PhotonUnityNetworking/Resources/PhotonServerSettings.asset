@@ -54,6 +54,7 @@ MonoBehaviour:
   - useHand2
   - spawn
   - Createplayer
+  - EnterExit
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

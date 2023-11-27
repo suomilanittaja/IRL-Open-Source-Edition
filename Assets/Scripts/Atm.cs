@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Atm : MonoBehaviour
 {
-    public GameObject Ui;
-    private PlayerController controll;
+    public GameObject Ui;   //Ui for ATM
+    private PlayerController controll;   //Player controller script
 
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)  //when something enter close to atm
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")) //check if it  is player
         {
             Ui.SetActive(true);
-            controll.UnLock();
+            controll.ToggleCursorLock(false);
         }
     }
 
@@ -22,17 +22,17 @@ public class Atm : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Ui.SetActive(false);
-            controll.Lock();
+            controll.ToggleCursorLock(true);
         }
     }
 
 
     void FixedUpdate()
     {
-        if (controll == null)
+        if (controll == null) //find player
             controll = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
-        if (Ui == null)
+        if (Ui == null)  //find ui
         {
             Ui = GameObject.FindGameObjectWithTag("AtmUi");
             Ui.SetActive(false);

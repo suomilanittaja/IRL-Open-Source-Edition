@@ -8,11 +8,10 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 {
 
     [Header("Floats")]
-    public float Speed = 10f;
     public float Health = 100;
-    public float moveSpeed;
-    public float sprintSpeedMultiplier = 2f;
-    public float jumpHeight = 3f;
+    public float walkSpeed = 5f;  //new
+    public float jumpForce = 5f;
+    public float sensitivity = 2f;
 
     [Header("GameObjects")]
     public GameObject bulletPrefab;
@@ -20,45 +19,145 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     public GameObject Cam;
     public GameObject Remote;
     public GameObject Canvas;
+    public GameObject GunUi;
 
     [Header("Bools")]
+    public bool isGrounded;
     public bool hasGun = false;
     public bool isEntered;
-    public bool tabPressed;
-    public bool disableMouselook = false;
+    public bool isTabPressed;
 
     [Header("Others")]
     public Transform shotPos;
-    public CharacterController characterController;
     public const string PlayerTag = "Player";
-    public PickUp pickUp;
-    public PlayerController playerController;
+    public DrinkingEatingAndPicking pickUp;
+    public Rigidbody rb;
+   
 
-    private PlayerCamera playerCamera;
     public Manager _manager;
-    private float _gravity = -10f;
-    private float _yAxisVelocity;
 
     private void Start()
-    {       
-        playerCamera = Cam.GetComponent<PlayerCamera>();
-    }
-
-    public void Lock()
     {
-      Cursor.lockState = CursorLockMode.Locked; //lock cursor
-      Cursor.visible = false; //disable visible mouse
-      disableMouselook = false;
+        rb = GetComponent<Rigidbody>();
+        CheckOwnership();
     }
 
-    public void UnLock()
+
+
+    private void Update()
     {
-      disableMouselook = true;
-      Cursor.lockState = CursorLockMode.None; //unlock cursor
-      Cursor.visible = true; //make mouse visible
+        if (photonView.IsMine)
+        {
+            // Handle player movement
+            HandleMovement();
+
+            // Handle player look (mouse input)
+            HandleMouseLook();
+
+            // Handle jumping
+            HandleJump();
+
+            CheckHealth();
+
+            HandleEntryExit();        
+        }
     }
 
-    public void check()
+
+    // used as Observed component in a PhotonView, this only reads/writes the position
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            //stream.SendNext(transform.position);
+            //stream.SendNext(transform.rotation);
+            stream.SendNext(Health);
+        }
+        else
+        {
+            //transform.position = (Vector3)stream.ReceiveNext();
+            //transform.rotation = (Quaternion)stream.ReceiveNext();
+            Health = (float)stream.ReceiveNext();
+        }
+    }
+
+
+    private void HandleMovement()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector3 moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector3 moveAmount = moveDirection * walkSpeed * Time.deltaTime;
+        transform.Translate(moveAmount); // Move the player
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            GunUi.SetActive(true);
+            ToggleCursorLock(false);
+        }
+        else if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            GunUi.SetActive(false);
+            ToggleCursorLock(true);
+        }
+
+        if (Input.GetMouseButtonDown(0) && hasGun && pickUp.usingGun && !Cursor.visible)
+        {
+            Fire();
+        }
+        Cam.gameObject.SetActive(true);
+    }
+
+    private void HandleMouseLook()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
+        transform.Rotate(Vector3.up * mouseX);  // Rotate the player based on mouse input
+        float currentRotation = Camera.main.transform.eulerAngles.x; // Rotate the camera (up and down) based on mouse input
+        float newRotation = currentRotation - mouseY;
+        newRotation = Mathf.Clamp(newRotation, 0f, 90f); // Limit the camera rotation to avoid flipping
+        Camera.main.transform.localRotation = Quaternion.Euler(newRotation, 0f, 0f);
+    }
+
+    private void HandleJump()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange); // Apply a vertical force for jumping
+            isGrounded = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        // Check if the player is grounded
+        isGrounded = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bullet")
+            ChangeHealth(-10);
+    }
+
+    void ChangeHealth(float value)
+    {
+        Health += value;
+    }
+
+    private void Fire()
+    {
+        PhotonNetwork.Instantiate(bulletPrefab.name, shotPos.transform.position, shotPos.rotation);
+    }
+
+    [PunRPC]
+    private void EnterExit(bool enter)
+    {
+        gameObject.SetActive(!enter);
+    }
+
+
+    private void CheckOwnership()
     {
         if (photonView.IsMine)
         {
@@ -74,137 +173,47 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
             Minicam.SetActive(false);
             Remote.SetActive(true);
             Canvas.SetActive(false);
-            //GetComponent<CharacterController>().enabled = false;
-            GetComponent<PickUp> ().enabled = false;
-            //GetComponent<PlayerController>().enabled = false;
+            GetComponent<DrinkingEatingAndPicking>().enabled = false;
         }
     }
 
-    private void Update()
+    private void CheckHealth()
     {
-        check();
-
-        if (photonView.IsMine)
+        if (Health <= 0)
         {
-            InputMovement();
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-              tabPressed = true;
-              UnLock();
-            }
-            else if (Input.GetKeyUp(KeyCode.Tab))
-            {
-              tabPressed = false;
-              Lock();
-            }
-
-            if (Input.GetMouseButtonDown(0) && hasGun == true && pickUp.usingGun == true && Cursor.visible == false)
-            {
-                Fire();
-            }
-            Cam.gameObject.SetActive(true);
-
-            if (disableMouselook == true)
-              playerCamera.enabled = false;
-            else
-              playerCamera.enabled = true;
-
-
-            if (Health <= 0)
-            {
-                _manager.died = true;
-                StartCoroutine(Kuolema());
-            }
-
-            if (isEntered == true)
-            {
-                photonView.RPC("enter", RpcTarget.All);
-            }
-
-            if (isEntered == false)
-            {
-                photonView.RPC("exit", RpcTarget.All);
-            }
+            _manager.died = true;
+            StartCoroutine(Die());
         }
     }
-    private void OnTriggerEnter(Collider other)
+
+    public void ToggleCursorLock(bool lockCursor)
     {
-        if(other.gameObject.tag == "Bullet")
-        ChangeHealth(-10);
+        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !lockCursor;
     }
 
-    void ChangeHealth(float value)
+    private void HandleEntryExit()
     {
-        Health += value;
-    }
-
-    // used as Observed component in a PhotonView, this only reads/writes the position
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            //Vector3 pos = transform.localPosition;
-            //stream.Serialize(ref pos);
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
-            stream.SendNext(Health);
-        }
+        if (isEntered)
+            photonView.RPC("EnterExit", RpcTarget.All, true);
         else
+            photonView.RPC("EnterExit", RpcTarget.All, false);
+    }
+
+    public void useGun()
+    {
+        if (hasGun)
         {
-            //Vector3 pos = Vector3.zero;
-            //stream.Serialize(ref pos);  // pos gets filled-in. must be used somewhere
-            transform.position = (Vector3)stream.ReceiveNext();
-            transform.rotation = (Quaternion)stream.ReceiveNext();
-            Health = (float)stream.ReceiveNext();
+            pickUp.usingGun = true;
         }
     }
 
-    void Fire()
+    public void useHand()
     {
-        PhotonNetwork.Instantiate(bulletPrefab.name, shotPos.transform.position, shotPos.rotation);
+        pickUp.usingGun = false;
     }
 
-    void InputMovement()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        if (Input.GetKey(KeyCode.LeftShift))
-            vertical *= sprintSpeedMultiplier;
-
-        Vector3 movement = horizontal * moveSpeed * Time.deltaTime * transform.right +
-                           vertical * moveSpeed * Time.deltaTime * transform.forward;
-
-        if (characterController.isGrounded)
-            _yAxisVelocity = -0.5f;
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _yAxisVelocity = Mathf.Sqrt(jumpHeight * -2f * _gravity);
-        }
-
-        _yAxisVelocity += _gravity * Time.deltaTime;
-        movement.y = _yAxisVelocity * Time.deltaTime;
-
-        characterController.Move(movement);
-
-
-    }
-
-  [PunRPC]
-  void enter()
-  {
-    this.gameObject.SetActive(false);
-  }
-
-  [PunRPC]
-  void exit()
-  {
-    this.gameObject.SetActive(true);
-  }
-
-    IEnumerator Kuolema()
+    IEnumerator Die()
     {
         yield return new WaitForSeconds(5);         //yield on a new YieldInstruction that waits for 5 seconds.
         PhotonNetwork.Destroy(gameObject);

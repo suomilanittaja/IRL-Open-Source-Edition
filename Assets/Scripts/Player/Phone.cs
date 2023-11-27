@@ -10,7 +10,7 @@ public class Phone : MonoBehaviour
     public GameObject jobMenu;
     public bool usingPhone = false;
     public TextMeshProUGUI text;
-    public Jobs jobs;
+    public Money jobs;
     // Start is called before the first frame update
     void Start()
     {

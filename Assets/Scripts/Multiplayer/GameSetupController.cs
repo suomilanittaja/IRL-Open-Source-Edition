@@ -7,7 +7,8 @@ public class GameSetupController : MonoBehaviourPun
 
     public void CreatePlayer()
     {
-      Debug.Log("Creating player");
-      PhotonNetwork.Instantiate(Path.Combine("PhotonPlayer"), Vector3.zero, Quaternion.identity);
+        PhotonNetwork.AutomaticallySyncScene = true;
+        Debug.Log("Creating player");
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPlayer"), Vector3.zero, Quaternion.identity);
     }
 }
