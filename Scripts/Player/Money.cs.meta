@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d50f46a2e011a12cb8288ee1ff47d106
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - RobbingUi: {instanceID: 0}
+  - RobbingInfo: {instanceID: 0}
+  - text: {instanceID: 0}
+  - rewardText: {instanceID: 0}
+  - policeMaterial: {fileID: 2100000, guid: 74826f69ff94aad468ff9e3c093c48ef, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
