@@ -47,31 +47,27 @@ public class Money : MonoBehaviour
 
         if (job == 3 && Given == false)
         {
-            // Hae kaikki objektit, joilla on "Waypoint" tagi
-            GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+            GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Waypoint"); // Find all objects with Waypoint tag
 
-            // Varmista, että listassa on objekteja ennen satunnaista valintaa
-            if (waypoints.Length > 0)
+
+            if (waypoints.Length > 0)                                               //Chech if there is objects before random choice
             {
-                // Valitse satunnainen indeksi
-                int randomIndex = Random.Range(0, waypoints.Length);
+                int randomIndex = Random.Range(0, waypoints.Length);                //Choice random waypoint
 
-                // Hae satunnainen waypoint-objekti
-                GameObject randomWaypoint = waypoints[randomIndex];
+                GameObject randomWaypoint = waypoints[randomIndex];                 //find random waypoint object
 
-                // Siirrä objekti Y-akselilla 100 yksikköä ylöspäin
+                //Move object +100 y
                 Vector3 newPosition = randomWaypoint.transform.position;
                 newPosition.y += yOffset;
                 randomWaypoint.transform.position = newPosition;
 
-                // Varmista, että objekti on aktiivinen
-                randomWaypoint.SetActive(true);
+                randomWaypoint.SetActive(true);                                     //set object active
 
                 Given = true;
             }
             else
             {
-                Debug.LogWarning("Ei löydetty yhtään objektia tagilla 'Waypoint'.");
+                Debug.LogWarning("object could not found 'Waypoint'.");
             }
         }
     }

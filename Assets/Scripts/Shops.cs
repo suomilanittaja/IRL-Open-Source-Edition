@@ -7,40 +7,41 @@ public class Shops : MonoBehaviourPunCallbacks
 {
     [Header("Shop")]
     [SerializeField] private string selectableTag = "Selectable";
-    public GameObject ShopUi;
+    public GameObject shopUi;
     public GameObject lemonadePrefab;
     public GameObject macaroniCasserolePrefab;
     public GameObject gunPrefab;
     public GameObject beerPrefab;
-    public Transform ShopItemSpawn;
+    public Transform shopItemSpawn;
 
     [Header("VehicleSpawn")]
     [SerializeField] private string selectableTag2 = "Selectable";
-    public Transform VehicleSpawn;  //car spawning position
-    public GameObject VehicleUi;       //car spawning ui
-    public GameObject carPrefab; //car prefab
+    public Transform vehicleSpawn;           //car spawning position
+    public GameObject vehicleUi;             //car spawning ui
+    public GameObject carPrefab;             //car prefab
+
 
     [Header("Atm")]
     [SerializeField] private string selectableTag3 = "Selectable";
-    public GameObject AtmUi;   //Ui for ATM
+    public GameObject atmUi;                 //Ui for ATM
 
     [Header("Scripts")]
-    public Money money;
-    public PlayerController controll; //player controller
-    public Stats stats;
+    public Money moneyScript;
+    public PlayerController playerControllerScript; //player controller
+    public Stats statsScript;
     public Raycast rayScript;
     public GameSetupController GameSetupControllerScript;
 
     [Header("Others")]
     private Transform _selection;
-    private GameObject Hit;
-    public bool isOpen = false;
-    private bool canOpen = true;
+    private GameObject Hit;                 //gameobject what is hitted by raycast
+    public bool isOpen = false;             //is it open
+    private bool canOpen = true;            //can i open it
 
     // Start is called before the first frame update
     void Start()
     {
-        ShopUi.gameObject.SetActive(false);
+        shopUi.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,69 +49,76 @@ public class Shops : MonoBehaviourPunCallbacks
     {
         if (GameSetupControllerScript.PlayerSpawned == true)
         {
-            if (controll == null)
-                controll = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            if (playerControllerScript == null)                                       //if controll empty
+                playerControllerScript = GameObject.FindWithTag("Player").GetComponent<PlayerController>();  //find it with tag
 
-            if (ShopUi == null)
+
+            if (shopUi == null)                                         //if shopui empty
             {
-                ShopUi = GameObject.FindGameObjectWithTag("ShopUi");
-                ShopUi.gameObject.SetActive(false);
+                shopUi = GameObject.FindGameObjectWithTag("ShopUi");    //find it with tag
+                shopUi.gameObject.SetActive(false);                     //and set it false
             }
 
-            if (VehicleUi == null)
+
+            if (vehicleUi == null)                                      //if VehicleUi empty
             {
-                VehicleUi = GameObject.FindGameObjectWithTag("CarShopUi");
-                VehicleUi.SetActive(false);
+                vehicleUi = GameObject.FindGameObjectWithTag("CarShopUi");                      //find it with tag
+                vehicleUi.SetActive(false);                             //and set it false
             }
 
-            if (money == null)
-                money = GameObject.FindWithTag("Player").GetComponent<Money>();
 
-            if (rayScript == null)
-                rayScript = GameObject.FindWithTag("Player").GetComponent<Raycast>();
+            if (moneyScript == null)                                          //if money empty 
+                moneyScript = GameObject.FindWithTag("Player").GetComponent<Money>();                 //find it with tag
 
-            if (stats == null)
-                stats = GameObject.FindWithTag("Player").GetComponent<Stats>();
 
-            if (AtmUi == null)  //find AtmUi
+            if (rayScript == null)                                      //if raySript emty
+                rayScript = GameObject.FindWithTag("Player").GetComponent<Raycast>();           //find it with tag
+
+
+            if (statsScript == null)                                          //if stats empty
+                statsScript = GameObject.FindWithTag("Player").GetComponent<Stats>();                 //find it with tag
+
+
+            if (atmUi == null)                                          //if AtmUi empty
             {
-                AtmUi = GameObject.FindGameObjectWithTag("AtmUi");
-                AtmUi.SetActive(false);
+                atmUi = GameObject.FindGameObjectWithTag("AtmUi");      //find it with tag
+                atmUi.SetActive(false);                                 //and set it false
             }
 
-            Hit = rayScript.rayHitted;
 
-            if (rayScript.rayHitted != null)
+            Hit = rayScript.rayHitted;                                  //what it hitted
+
+            if (rayScript.rayHitted != null)                            //if it has hitted something
             {
-                if (rayScript.rayHitted.CompareTag(selectableTag) && rayScript.hitDis <= 2 && canOpen == true)
+                if (rayScript.rayHitted.CompareTag(selectableTag) && rayScript.hitDis <= 2 && canOpen == true)  //if it hitted this tag from close distance and can open ui 
                 {
-                    ShopUi.gameObject.SetActive(true);
-                    controll.ToggleCursorLock(false);
-                    isOpen = true;
+                    shopUi.gameObject.SetActive(true);                  //open ui
+                    playerControllerScript.ToggleCursorLock(false);                   //free the mouse
+                    isOpen = true;                                      //shop has opened
                 }
 
 
                 if (rayScript.rayHitted.CompareTag(selectableTag2) && rayScript.hitDis <= 2 && canOpen == true)
                 {
-                    VehicleUi.gameObject.SetActive(true);
-                    controll.ToggleCursorLock(false);
+                    vehicleUi.gameObject.SetActive(true);
+                    playerControllerScript.ToggleCursorLock(false);
                     isOpen = true;
                 }
                 
 
                 if (rayScript.rayHitted.CompareTag(selectableTag3) && rayScript.hitDis <= 2 && canOpen == true)
                 {
-                    AtmUi.gameObject.SetActive(true);
-                    controll.ToggleCursorLock(false);
+                    atmUi.gameObject.SetActive(true);
+                    playerControllerScript.ToggleCursorLock(false);
                     isOpen = true;
                 }
 
                 if (rayScript.rayHitted.CompareTag(selectableTag) == false && rayScript.rayHitted.CompareTag(selectableTag2) == false && rayScript.rayHitted.CompareTag(selectableTag3) == false && isOpen == true)
                 {
-                    AtmUi.gameObject.SetActive(false);
-                    VehicleUi.gameObject.SetActive(false);
-                    ShopUi.gameObject.SetActive(false);
-                    controll.ToggleCursorLock(true);
+                    atmUi.gameObject.SetActive(false);
+                    vehicleUi.gameObject.SetActive(false);
+                    shopUi.gameObject.SetActive(false);
+                    playerControllerScript.ToggleCursorLock(true);
                     isOpen = false;
                     canOpen = false;
                     StartCoroutine(Wait());
@@ -121,50 +129,50 @@ public class Shops : MonoBehaviourPunCallbacks
 
     private void InstantiatePrefab(GameObject prefab, int cost)
     {
-        if (money.money >= cost)
+        if (moneyScript.money >= cost)
         {
-            money.money -= cost;
-            PhotonNetwork.Instantiate(prefab.name, ShopItemSpawn.position, ShopItemSpawn.rotation);
-            ShopUi.SetActive(false);
-            controll.ToggleCursorLock(true);
+            moneyScript.money -= cost;
+            PhotonNetwork.Instantiate(prefab.name, shopItemSpawn.position, shopItemSpawn.rotation);
+            shopUi.SetActive(false);
+            playerControllerScript.ToggleCursorLock(true);
         }
     }
 
-    public void lemonade()
+    public void SpawnLemonade()
     {
         InstantiatePrefab(lemonadePrefab, 10);
         StartCoroutine(Wait());
         canOpen = false;
     }
 
-    public void macaroniCasserole()
+    public void SpawnMacaroniCasserole()
     {
         InstantiatePrefab(macaroniCasserolePrefab, 15);
         StartCoroutine(Wait());
         canOpen = false;
     }
 
-    public void gun()
+    public void SpawnGun()
     {
         InstantiatePrefab(gunPrefab, 50);
         StartCoroutine(Wait());
         canOpen = false;
     }
 
-    public void beer()
+    public void SpawnBeer()
     {
         InstantiatePrefab(beerPrefab, 20);
         StartCoroutine(Wait());
         canOpen = false;
     }
 
-    public void Spawn() //spawn car
+    public void SpawnCar() //spawn car
     {
-        controll.ToggleCursorLock(true);
-        VehicleUi.SetActive(false);
+        playerControllerScript.ToggleCursorLock(true);
+        vehicleUi.SetActive(false);
         StartCoroutine(Wait());
         canOpen = false;
-        PhotonNetwork.Instantiate(carPrefab.name, VehicleSpawn.transform.position, VehicleSpawn.rotation);
+        PhotonNetwork.Instantiate(carPrefab.name, vehicleSpawn.transform.position, vehicleSpawn.rotation);
     }
 
     IEnumerator Wait()
