@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: d8040d310df77714a90a561261bfb2cb
-timeCreated: 1557919981
-licenseType: Store
 DefaultImporter:
   userData: 
   assetBundleName: 
@@ -10,6 +8,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 119922
   packageName: PUN 2 - FREE
-  packageVersion: 2.43
+  packageVersion: 2.49
   assetPath: Assets/Photon/PhotonLibs/changes-library.txt
-  uploadId: 609016
+  uploadId: 722643

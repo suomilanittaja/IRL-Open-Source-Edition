@@ -55,6 +55,14 @@ MonoBehaviour:
   - spawn
   - Createplayer
   - EnterExit
+  - RPCChat
+  - SetMaterialToPolice
+  - SetMaterialToRobber
+  - SetMaterialToPizzaguy
+  - EnterVehicle
+  - ExitVehicle
+  - SetPlayerVisibility
+  - UpdateRemotePlayerVisibility
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

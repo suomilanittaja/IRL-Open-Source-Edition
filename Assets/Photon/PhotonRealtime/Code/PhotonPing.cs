@@ -303,28 +303,28 @@ namespace Photon.Realtime
 
 
     #if NATIVE_SOCKETS
-	/// <summary>Abstract base class to provide proper resource management for the below native ping implementations</summary>
-	public abstract class PingNative : PhotonPing
-	{
-		// Native socket states - according to EnetConnect.h state definitions
-		protected enum NativeSocketState : byte
-		{
-			Disconnected = 0,
-			Connecting = 1,
-			Connected = 2,
-			ConnectionError = 3,
-			SendError = 4,
-			ReceiveError = 5,
-			Disconnecting = 6
-		}
+    /// <summary>Abstract base class to provide proper resource management for the below native ping implementations</summary>
+    public abstract class PingNative : PhotonPing
+    {
+        // Native socket states - according to EnetConnect.h state definitions
+        protected enum NativeSocketState : byte
+        {
+            Disconnected = 0,
+            Connecting = 1,
+            Connected = 2,
+            ConnectionError = 3,
+            SendError = 4,
+            ReceiveError = 5,
+            Disconnecting = 6
+        }
 
-		protected IntPtr pConnectionHandler = IntPtr.Zero;
+        protected IntPtr pConnectionHandler = IntPtr.Zero;
 
-		~PingNative()
-		{
-			Dispose();
-		}
-	}
+        ~PingNative()
+        {
+            Dispose();
+        }
+    }
 
     /// <summary>Uses dynamic linked native Photon socket library via DllImport("PhotonSocketPlugin") attribute (as done by Unity Android and Unity PS3).</summary>
     public class PingNativeDynamic : PingNative
@@ -335,17 +335,17 @@ namespace Photon.Realtime
             {
                 base.Init();
 
-				if(pConnectionHandler == IntPtr.Zero)
-				{
-					pConnectionHandler = SocketUdpNativeDynamic.egconnect(ip);
-					SocketUdpNativeDynamic.egservice(pConnectionHandler);
-					byte state = SocketUdpNativeDynamic.eggetState(pConnectionHandler);
-					while (state == (byte) NativeSocketState.Connecting)
-					{
-						SocketUdpNativeDynamic.egservice(pConnectionHandler);
-						state = SocketUdpNativeDynamic.eggetState(pConnectionHandler);
-					}
-				}
+                if(pConnectionHandler == IntPtr.Zero)
+                {
+                    pConnectionHandler = SocketUdpNativeDynamic.egconnect(ip);
+                    SocketUdpNativeDynamic.egservice(pConnectionHandler);
+                    byte state = SocketUdpNativeDynamic.eggetState(pConnectionHandler);
+                    while (state == (byte) NativeSocketState.Connecting)
+                    {
+                        SocketUdpNativeDynamic.egservice(pConnectionHandler);
+                        state = SocketUdpNativeDynamic.eggetState(pConnectionHandler);
+                    }
+                }
 
                 PingBytes[PingBytes.Length - 1] = PingId;
                 SocketUdpNativeDynamic.egsend(pConnectionHandler, PingBytes, PingBytes.Length);
@@ -397,24 +397,24 @@ namespace Photon.Realtime
     /// <summary>Uses static linked native Photon socket library via DllImport("__Internal") attribute (as done by Unity iOS and Unity Switch).</summary>
     public class PingNativeStatic : PingNative
     {
-		public override bool StartPing(string ip)
+        public override bool StartPing(string ip)
         {
             base.Init();
 
             lock (SocketUdpNativeStatic.syncer)
-			{
-				if(pConnectionHandler == IntPtr.Zero)
-				{
-					pConnectionHandler = SocketUdpNativeStatic.egconnect(ip);
-					SocketUdpNativeStatic.egservice(pConnectionHandler);
-					byte state = SocketUdpNativeStatic.eggetState(pConnectionHandler);
-					while (state == (byte) NativeSocketState.Connecting)
-					{
-						SocketUdpNativeStatic.egservice(pConnectionHandler);
-						state = SocketUdpNativeStatic.eggetState(pConnectionHandler);
-						Thread.Sleep(0); // suspending execution for a moment is critical on Switch for the OS to update the socket
-					}
-				}
+            {
+                if(pConnectionHandler == IntPtr.Zero)
+                {
+                    pConnectionHandler = SocketUdpNativeStatic.egconnect(ip);
+                    SocketUdpNativeStatic.egservice(pConnectionHandler);
+                    byte state = SocketUdpNativeStatic.eggetState(pConnectionHandler);
+                    while (state == (byte) NativeSocketState.Connecting)
+                    {
+                        SocketUdpNativeStatic.egservice(pConnectionHandler);
+                        state = SocketUdpNativeStatic.eggetState(pConnectionHandler);
+                        Thread.Sleep(0); // suspending execution for a moment is critical on Switch for the OS to update the socket
+                    }
+                }
 
                 PingBytes[PingBytes.Length - 1] = PingId;
                 SocketUdpNativeStatic.egsend(pConnectionHandler, PingBytes, PingBytes.Length);
@@ -474,7 +474,10 @@ namespace Photon.Realtime
         {
             base.Init();
 
-            address = "https://" + address + "/photon/m/?ping&r=" + UnityEngine.Random.Range(0, 10000);
+            // to work around an issue with UnityWebRequest in Editor (2021 at least), use http to ping in-Editor
+            string scheme = UnityEngine.Application.isEditor ? "http://" : "https://";
+            address = $"{scheme}{address}/photon/m/?ping&r={UnityEngine.Random.Range(0, 10000)}";
+
             this.webRequest = UnityWebRequest.Get(address);
             this.webRequest.SendWebRequest();
             return true;

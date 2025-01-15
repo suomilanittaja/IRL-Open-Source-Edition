@@ -156,15 +156,16 @@ namespace Photon.Realtime
 
             set
             {
-                if (value != this.maxPlayers)
+                if (value >= 0 && value != this.maxPlayers)
                 {
-                    byte maxPlayersPropValue = (byte)value;     // TODO: when the server accepts int typed MaxPlayers, remove this
+                    // the following code is for compatibility with old and new servers. old use MaxPlayers, which has to be byte typed. MaxPlayersInt is available on new servers to allow int typed MaxPlayer values.
+                    // added to server 5.0.19.xyz / 6.0.19.xyz respectively
+                    this.maxPlayers = value;
+                    byte maxPlayersAsByte = value <= byte.MaxValue ? (byte)value : (byte)0;
                     if (!this.isOffline)
                     {
-                        this.LoadBalancingClient.OpSetPropertiesOfRoom(new Hashtable() { { GamePropertyKey.MaxPlayers, maxPlayersPropValue } });
+                        this.LoadBalancingClient.OpSetPropertiesOfRoom(new Hashtable() { { GamePropertyKey.MaxPlayers, maxPlayersAsByte }, { GamePropertyKey.MaxPlayersInt, this.maxPlayers } });
                     }
-
-                    this.maxPlayers = maxPlayersPropValue;
                 }
             }
         }
@@ -312,6 +313,7 @@ namespace Photon.Realtime
         /// <summary>Creates a Room (representation) with given name and properties and the "listing options" as provided by parameters.</summary>
         /// <param name="roomName">Name of the room (can be null until it's actually created on server).</param>
         /// <param name="options">Room options.</param>
+        /// <param name="isOffline">Signal if this room is only used locally.</param>
         public Room(string roomName, RoomOptions options, bool isOffline = false) : base(roomName, options != null ? options.CustomRoomProperties : null)
         {
             // base() sets name and (custom)properties. here we set "well known" properties

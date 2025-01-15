@@ -1,19 +1,30 @@
 fileFormatVersion: 2
 guid: 04bb5f307f2e48b4fbaa6da865fd4091
 PluginImporter:
-  serializedVersion: 1
+  externalObjects: {}
+  serializedVersion: 2
   iconMap: {}
   executionOrder: {}
+  defineConstraints: []
   isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
   platformData:
-    Any:
+  - first:
+      Any: 
+    second:
       enabled: 0
       settings: {}
-    Editor:
+  - first:
+      Editor: Editor
+    second:
       enabled: 0
       settings:
         DefaultValueInitialized: true
-    WebGL:
+  - first:
+      WebGL: WebGL
+    second:
       enabled: 1
       settings: {}
   userData: 
@@ -23,6 +34,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 119922
   packageName: PUN 2 - FREE
-  packageVersion: 2.43
+  packageVersion: 2.49
   assetPath: Assets/Photon/PhotonLibs/WebSocket/WebSocket.jslib
-  uploadId: 609016
+  uploadId: 722643

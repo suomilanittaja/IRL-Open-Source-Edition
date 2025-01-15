@@ -218,7 +218,11 @@ namespace Photon.Realtime
             }
 
             // fetch the "well known" properties of the room, if available
-            if (propertiesToCache.ContainsKey(GamePropertyKey.MaxPlayers))
+            if (propertiesToCache.ContainsKey(GamePropertyKey.MaxPlayersInt))
+            {
+                this.maxPlayers = Convert.ToInt32(propertiesToCache[GamePropertyKey.MaxPlayersInt]);
+            }
+            else if (propertiesToCache.ContainsKey(GamePropertyKey.MaxPlayers))
             {
                 this.maxPlayers = Convert.ToInt32(propertiesToCache[GamePropertyKey.MaxPlayers]);
             }

@@ -9,7 +9,6 @@
 // <author>developer@photonengine.com</author>
 // ----------------------------------------------------------------------------
 
-
 #if UNITY_4_7 || UNITY_5 || UNITY_5_3_OR_NEWER
 #define SUPPORTED_UNITY
 #endif
@@ -17,6 +16,7 @@
 #if UNITY_WEBGL
 #define PING_VIA_COROUTINE
 #endif
+
 
 namespace Photon.Realtime
 {
@@ -99,7 +99,19 @@ namespace Photon.Realtime
 
                 this.EnabledRegions.Sort((a, b) => a.Ping.CompareTo(b.Ping));
 
-                this.bestRegionCache = this.EnabledRegions[0];
+                // in some locations, clients will get very similar results to various regions.
+                // in those places, it is best to select alphabetical from those with very similar ping.
+                int similarPingCutoff = (int)(this.EnabledRegions[0].Ping * pingSimilarityFactor);
+                Region firstFromSimilar = this.EnabledRegions[0];
+                foreach (Region region in this.EnabledRegions)
+                {
+                    if (region.Ping <= similarPingCutoff && region.Code.CompareTo(firstFromSimilar.Code) < 0)
+                    {
+                        firstFromSimilar = region;
+                    }
+                }
+
+                this.bestRegionCache = firstFromSimilar;
                 return this.bestRegionCache;
             }
         }
@@ -141,7 +153,7 @@ namespace Photon.Realtime
         }
 
         /// <summary>Initializes the regions of this RegionHandler with values provided from the Name Server (as OperationResponse for OpGetRegions).</summary>
-        public void SetRegions(OperationResponse opGetRegions)
+        public void SetRegions(OperationResponse opGetRegions, LoadBalancingClient loadBalancingClient = null)
         {
             if (opGetRegions.OperationCode != OperationCode.GetRegions)
             {
@@ -157,8 +169,10 @@ namespace Photon.Realtime
             string[] servers = opGetRegions[ParameterCode.Address] as string[];
             if (regions == null || servers == null || regions.Length != servers.Length)
             {
-                //TODO: log error
-                //Debug.LogError("The region arrays from Name Server are not ok. Must be non-null and same length. " + (regions == null) + " " + (servers == null) + "\n" + opGetRegions.ToStringFull());
+                if (loadBalancingClient != null)
+                {
+                    loadBalancingClient.DebugReturn(DebugLevel.ERROR, "RegionHandler.SetRegions() failed. Received regions and servers must be non null and of equal length. Could not read regions.");
+                }
                 return;
             }
 
@@ -171,6 +185,11 @@ namespace Photon.Realtime
                 if (PortToPingOverride != 0)
                 {
                     server = LoadBalancingClient.ReplacePortWithAlternative(servers[i], PortToPingOverride);
+                }
+
+                if (loadBalancingClient != null && loadBalancingClient.AddressRewriter != null)
+                {
+                    server = loadBalancingClient.AddressRewriter(server, ServerConnection.MasterServer);
                 }
 
                 Region tmp = new Region(regions[i], server);
@@ -189,19 +208,16 @@ namespace Photon.Realtime
         private readonly List<RegionPinger> pingerList = new List<RegionPinger>();
         private Action<RegionHandler> onCompleteCall;
         private int previousPing;
-
-
         private string previousSummaryProvided;
 
         /// <summary>If non-zero, this port will be used to ping Master Servers on.</summary>
         protected internal static ushort PortToPingOverride;
 
-        /// <summary>True if the available regions are being pinged currently.</summary>
-        public bool IsPinging { get; private set; }
+        /// <summary>If the previous Best Region's ping is now higher by this much, ping all regions and find a new Best Region.</summary>
+        private float rePingFactor = 1.2f;
 
-        /// <summary>True if the pinging of regions is being aborted.</summary>
-        /// <see cref="Abort"/>
-        public bool Aborted { get; private set; }
+        /// <summary>How much higher a region's ping can be from the absolute best, to be considered the Best Region (by ping and name).</summary>
+        private float pingSimilarityFactor = 1.2f;
 
         /// <summary>If the region from a previous BestRegionSummary now has a ping higher than this limit, all regions get pinged again to find a better. Default: 90ms.</summary>
         /// <remarks>
@@ -211,8 +227,19 @@ namespace Photon.Realtime
         /// </remarks>
         public int BestRegionSummaryPingLimit = 90;
 
+
+        /// <summary>True if the available regions are being pinged currently.</summary>
+        public bool IsPinging { get; private set; }
+
+        /// <summary>True if the pinging of regions is being aborted.</summary>
+        /// <see cref="Abort"/>
+        public bool Aborted { get; private set; }
         #if SUPPORTED_UNITY
         private MonoBehaviourEmpty emptyMonoBehavior;
+        #endif
+
+        #if PHOTON_LOCATION
+        internal Location Location = new Location();
         #endif
 
         /// <summary>Creates a new RegionHandler.</summary>
@@ -258,6 +285,15 @@ namespace Photon.Realtime
             #else
             this.onCompleteCall = onCompleteCallback;
             #endif
+
+            #if PHOTON_LOCATION
+            #if SUPPORTED_UNITY
+            this.Location.FetchLocation(this.emptyMonoBehavior, null);
+            #else
+            this.Location.FetchLocation();
+            #endif
+            #endif
+
 
             if (string.IsNullOrEmpty(previousSummary))
             {
@@ -342,7 +378,7 @@ namespace Photon.Realtime
 
         private void OnPreferredRegionPinged(Region preferredRegion)
         {
-            if (preferredRegion.Ping > this.BestRegionSummaryPingLimit || preferredRegion.Ping > this.previousPing * 1.50f)
+            if (preferredRegion.Ping > this.BestRegionSummaryPingLimit || preferredRegion.Ping > this.previousPing * this.rePingFactor)
             {
                 this.PingEnabledRegions();
             }
@@ -354,6 +390,8 @@ namespace Photon.Realtime
         }
 
 
+        /// <summary>Privately used to ping regions if the current best one isn't as fast as earlier.</summary>
+        /// <returns>If pinging can be started.</returns>
         private bool PingEnabledRegions()
         {
             if (this.EnabledRegions == null || this.EnabledRegions.Count == 0)
@@ -617,10 +655,13 @@ namespace Photon.Realtime
             this.Done = true;
             this.ping.Dispose();
 
-            int bestRtt = this.rttResults.Min();
-            int worstRtt = this.rttResults.Max();
-            int weighedRttSum = rttSum - worstRtt + bestRtt;
-            this.region.Ping = (int)(weighedRttSum / replyCount);   // now, we can create a weighted ping value
+            if (this.rttResults.Count > 1 && replyCount > 0)
+            {
+                int bestRtt = this.rttResults.Min();
+                int worstRtt = this.rttResults.Max();
+                int weighedRttSum = rttSum - worstRtt + bestRtt;
+                this.region.Ping = (int)(weighedRttSum / replyCount); // now, we can create a weighted ping value
+            }
 
             this.onDoneCall(this.region);
             return false;
@@ -697,10 +738,15 @@ namespace Photon.Realtime
             //Debug.Log("Done: "+ this.region.Code);
             this.Done = true;
             this.ping.Dispose();
-            int bestRtt = this.rttResults.Min();
-            int worstRtt = this.rttResults.Max();
-            int weighedRttSum = rttSum - worstRtt + bestRtt;
-            this.region.Ping = (int)(weighedRttSum / replyCount); // now, we can create a weighted ping value
+
+            if (this.rttResults.Count > 1 && replyCount > 0)
+            {
+                int bestRtt = this.rttResults.Min();
+                int worstRtt = this.rttResults.Max();
+                int weighedRttSum = rttSum - worstRtt + bestRtt;
+                this.region.Ping = (int)(weighedRttSum / replyCount); // now, we can create a weighted ping value
+            }
+
             this.onDoneCall(this.region);
             yield return null;
         }

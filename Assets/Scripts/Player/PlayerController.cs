@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviourPun, IPunObservable
 {
-
     [Header("Floats")]
     public float Health = 100;
-    public float walkSpeed = 5f;  //new
+    public float walkSpeed = 5f;
     public float jumpForce = 5f;
     public float sensitivity = 2f;
+    public float interpolationSpeed = 10f;
 
     [Header("GameObjects")]
     public GameObject bulletPrefab;
@@ -25,25 +24,30 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     public bool isGrounded;
     public bool hasGun = false;
     public bool isEntered;
+    public bool canEnter;
     public bool isTabPressed;
     public bool Cursorlock = true;
 
     [Header("Others")]
     public Transform shotPos;
-    public const string PlayerTag = "Player";
     public DrinkingEatingAndPicking pickUp;
     public Rigidbody rb;
-   
 
     public Manager _manager;
+
+    private Vector3 targetPosition;
+    private Quaternion targetRotation;
+    private Vector3 networkVelocity;
+    private Vector3 networkAngularVelocity;
+    private float lastNetworkUpdateTime;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         CheckOwnership();
+        targetPosition = transform.position;
+        targetRotation = transform.rotation;
     }
-
-
 
     private void Update()
     {
@@ -51,40 +55,53 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         {
             // Handle player movement
             HandleMovement();
-
-            // Handle jumping
             HandleJump();
-
             CheckHealth();
-
-            HandleEntryExit();        
+            HandleEntryExit();
 
             if (Cursorlock)
             {
-                // Handle player look (mouse input)
                 HandleMouseLook();
             }
         }
+        else
+        {
+            SmoothMovement();
+        }
     }
 
-
-    // used as Observed component in a PhotonView, this only reads/writes the position
+    // Photon serialization to sync position, rotation, velocity, and health across clients
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            //stream.SendNext(transform.position);
-            //stream.SendNext(transform.rotation);
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext(rb.linearVelocity);
+            stream.SendNext(rb.angularVelocity);
             stream.SendNext(Health);
         }
         else
         {
-            //transform.position = (Vector3)stream.ReceiveNext();
-            //transform.rotation = (Quaternion)stream.ReceiveNext();
+            targetPosition = (Vector3)stream.ReceiveNext();
+            targetRotation = (Quaternion)stream.ReceiveNext();
+            networkVelocity = (Vector3)stream.ReceiveNext();
+            networkAngularVelocity = (Vector3)stream.ReceiveNext();
             Health = (float)stream.ReceiveNext();
+
+            lastNetworkUpdateTime = Time.time;
         }
     }
 
+    private void SmoothMovement()
+    {
+        float timeSinceUpdate = Time.time - lastNetworkUpdateTime;
+        Vector3 extrapolatedPosition = targetPosition + networkVelocity * timeSinceUpdate;
+        Quaternion extrapolatedRotation = targetRotation * Quaternion.Euler(networkAngularVelocity * Mathf.Rad2Deg * timeSinceUpdate);
+
+        transform.position = Vector3.Lerp(transform.position, extrapolatedPosition, Time.deltaTime * interpolationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, extrapolatedRotation, Time.deltaTime * interpolationSpeed);
+    }
 
     private void HandleMovement()
     {
@@ -92,7 +109,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         float vertical = Input.GetAxis("Vertical");
         Vector3 moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
         Vector3 moveAmount = moveDirection * walkSpeed * Time.deltaTime;
-        transform.Translate(moveAmount); // Move the player
+        transform.Translate(moveAmount);
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -116,10 +133,10 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
-        transform.Rotate(Vector3.up * mouseX);  // Rotate the player based on mouse input
-        float currentRotation = Camera.main.transform.eulerAngles.x; // Rotate the camera (up and down) based on mouse input
+        transform.Rotate(Vector3.up * mouseX);
+        float currentRotation = Camera.main.transform.eulerAngles.x;
         float newRotation = currentRotation - mouseY;
-        newRotation = Mathf.Clamp(newRotation, 0f, 180f); // Limit the camera rotation to avoid flipping
+        newRotation = Mathf.Clamp(newRotation, 0f, 180f);
         Camera.main.transform.localRotation = Quaternion.Euler(newRotation, 0f, 0f);
     }
 
@@ -127,21 +144,22 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange); // Apply a vertical force for jumping
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             isGrounded = false;
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        // Check if the player is grounded
         isGrounded = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
+        {
             ChangeHealth(-10);
+        }
     }
 
     void ChangeHealth(float value)
@@ -151,34 +169,35 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void Fire()
     {
-        PhotonNetwork.Instantiate(bulletPrefab.name, shotPos.transform.position, shotPos.rotation);
+        PhotonNetwork.Instantiate(bulletPrefab.name, shotPos.position, shotPos.rotation);
     }
-
-    [PunRPC]
-    private void EnterExit(bool enter)
-    {
-        gameObject.SetActive(!enter);
-    }
-
 
     private void CheckOwnership()
     {
         if (photonView.IsMine)
         {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
+            //GetComponent<MeshRenderer>().material.color = Color.blue;
             gameObject.tag = "Player";
             Remote.SetActive(false);
             Canvas.SetActive(true);
         }
         else
         {
-            GetComponent<MeshRenderer>().material.color = Color.red;
+            //GetComponent<MeshRenderer>().material.color = Color.red;
             Cam.SetActive(false);
             Minicam.SetActive(false);
             Remote.SetActive(true);
             Canvas.SetActive(false);
             GetComponent<DrinkingEatingAndPicking>().enabled = false;
         }
+    }
+
+    private void HandleEntryExit()
+    {
+            if (isEntered)
+                photonView.RPC("EnterExit", RpcTarget.All, true);
+            if (isEntered == false && canEnter == true)
+                photonView.RPC("EnterExit", RpcTarget.All, false);
     }
 
     private void CheckHealth()
@@ -197,14 +216,6 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         Cursorlock = lockCursor;
     }
 
-    private void HandleEntryExit()
-    {
-        if (isEntered)
-            photonView.RPC("EnterExit", RpcTarget.All, true);
-        else
-            photonView.RPC("EnterExit", RpcTarget.All, false);
-    }
-
     public void useGun()
     {
         if (hasGun)
@@ -220,7 +231,17 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     IEnumerator Die()
     {
-        yield return new WaitForSeconds(5);         //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(2);
         PhotonNetwork.Destroy(gameObject);
     }
+
+    [PunRPC]
+    private void EnterExit(bool enter)
+    {
+        gameObject.SetActive(!enter);
+    }
 }
+
+
+
+

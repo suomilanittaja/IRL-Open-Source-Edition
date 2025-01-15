@@ -35,7 +35,11 @@ namespace Photon.Pun
             {
                 if (instance == null)
                 {
+                    #if UNITY_6000_0_OR_NEWER
+                    instance = FindFirstObjectByType<PhotonHandler>();
+                    #else
                     instance = FindObjectOfType<PhotonHandler>();
+                    #endif
                     if (instance == null)
                     {
                         GameObject obj = new GameObject();
@@ -117,8 +121,8 @@ namespace Photon.Pun
                 this.supportLoggerComponent.Client = PhotonNetwork.NetworkingClient;
             }
 
-            this.UpdateInterval = 40 / PhotonNetwork.SendRate;
-            this.UpdateIntervalOnSerialize = 40 / PhotonNetwork.SerializationRate;
+            this.UpdateInterval = 1000 / PhotonNetwork.SendRate;
+            this.UpdateIntervalOnSerialize = 1000 / PhotonNetwork.SerializationRate;
 
             PhotonNetwork.AddCallbackTarget(this);
             this.StartFallbackSendAckThread();  // this is not done in the base class
@@ -326,8 +330,9 @@ namespace Photon.Pun
 
         public void OnLeftRoom()
         {
-            // Destroy spawned objects and reset scene objects
-            PhotonNetwork.LocalCleanupAnythingInstantiated(true);
+            // destroying the objects here is not a good option. LocalCleanupAnythingInstantiated is called from another place, which checks auto cleanup properly, too.
+            //// Destroy spawned objects and reset scene objects
+            //PhotonNetwork.LocalCleanupAnythingInstantiated(true);
         }
 
 

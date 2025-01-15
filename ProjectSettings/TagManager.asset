@@ -2,25 +2,25 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
-  - Beer
-  - Log
-  - Food
-  - Manager
-  - Bullet
-  - Gun
-  - VehicleCam
   - Vehicle
-  - Drink
-  - Bullet2
-  - CarShopUi
-  - ShopUi
   - GunUI
   - AtmUi
+  - ShopUi
+  - CarShopUi
   - Shop
-  - VehicleShop
+  - Waypoint
   - Atm
+  - VehicleCam
+  - Manager
+  - VehicleShop
+  - Undefined
+  - Beer
+  - Food
+  - Gun
+  - Drink
+  - Bullet2
   layers:
   - Default
   - TransparentFX
@@ -28,9 +28,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - Postprosessing
+  - drivable
+  - carbody
+  - SphereRB
   - 
   - 
   - 
@@ -58,3 +58,5 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  m_RenderingLayers:
+  - Default

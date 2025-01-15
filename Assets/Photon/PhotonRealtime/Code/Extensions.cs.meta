@@ -1,10 +1,5 @@
 fileFormatVersion: 2
 guid: 3c0464991e33a70498abdd85c150cc59
-labels:
-- ExitGames
-- PUN
-- Photon
-- Networking
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []
@@ -14,6 +9,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 119922
   packageName: PUN 2 - FREE
-  packageVersion: 2.43
+  packageVersion: 2.49
   assetPath: Assets/Photon/PhotonRealtime/Code/Extensions.cs
-  uploadId: 609016
+  uploadId: 722643

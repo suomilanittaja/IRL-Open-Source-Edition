@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime; // Tämä voi olla tarpeen myös, riippuen käyttämästäsi Photon-toiminnallisuudesta.
 
-public class CarController : MonoBehaviour
+
+public class CarController : MonoBehaviourPunCallbacks, IPunObservable
 {
     public enum Drivetrain {FWD,
         RWD,
@@ -92,36 +95,44 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-      GetInput();
-      Steer();
-      Accelerate();
-      UpdateWheelPoses();
+        GetInput();
+        Steer();
+        Accelerate();
+        UpdateWheelPoses();
+        HandleBraking();
+    }
 
-      if(Input.GetKey(KeyCode.Space))
-      {
-        WheelFrictionCurve myWfc;
-        myWfc = rearRightWheel.sidewaysFriction;
-        myWfc = rearLeftWheel.sidewaysFriction;
-        myWfc.extremumSlip = 0.1f;
-        myWfc.stiffness = 0.1f;
-        rearRightWheel.sidewaysFriction = myWfc;
-        rearLeftWheel.sidewaysFriction = myWfc;
+    private void HandleBraking()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            // Pysäytysohjeet
+            rearLeftWheel.brakeTorque = brakeTorque;
+            rearRightWheel.brakeTorque = brakeTorque;
+        }
+        else
+        {
+            // Vapauta jarrut
+            rearLeftWheel.brakeTorque = 0;
+            rearRightWheel.brakeTorque = 0;
+        }
+    }
 
-        rearLeftWheel.brakeTorque = brakeTorque;
-        rearRightWheel.brakeTorque = brakeTorque;
-      }
-      else
-      {
-        WheelFrictionCurve myWfc;
-        myWfc = rearRightWheel.sidewaysFriction;
-        myWfc = rearLeftWheel.sidewaysFriction;
-        myWfc.stiffness = 1f;
-        myWfc.extremumSlip = 1f;
-        rearRightWheel.sidewaysFriction = myWfc;
-        rearLeftWheel.sidewaysFriction = myWfc;
-
-        rearLeftWheel.brakeTorque = 0;
-        rearRightWheel.brakeTorque = 0;
-      }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // Lähetetään tiedot
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext(RigidBody.linearVelocity);
+        }
+        else
+        {
+            // Vastaanotetaan tiedot
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+            RigidBody.linearVelocity = (Vector3)stream.ReceiveNext();
+        }
     }
 }

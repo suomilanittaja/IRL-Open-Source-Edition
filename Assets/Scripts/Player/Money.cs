@@ -19,6 +19,9 @@ public class Money : MonoBehaviour
     public TextMeshProUGUI rewardText;
 
     public bool Payed = false;
+    public bool Given = false;
+
+    private float yOffset = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +35,58 @@ public class Money : MonoBehaviour
     {
         text.text = money.ToString() + "€";
 
+        if (job == 0)
+        {
+            StartCoroutine(SupportMoney());
+        }
+
         if (job == 1)
         {
             StartCoroutine(RewardMoney());
         }
-        if (job == 0)
+
+        if (job == 3 && Given == false)
         {
-            StartCoroutine(SupportMoney());
+            // Hae kaikki objektit, joilla on "Waypoint" tagi
+            GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+
+            // Varmista, että listassa on objekteja ennen satunnaista valintaa
+            if (waypoints.Length > 0)
+            {
+                // Valitse satunnainen indeksi
+                int randomIndex = Random.Range(0, waypoints.Length);
+
+                // Hae satunnainen waypoint-objekti
+                GameObject randomWaypoint = waypoints[randomIndex];
+
+                // Siirrä objekti Y-akselilla 100 yksikköä ylöspäin
+                Vector3 newPosition = randomWaypoint.transform.position;
+                newPosition.y += yOffset;
+                randomWaypoint.transform.position = newPosition;
+
+                // Varmista, että objekti on aktiivinen
+                randomWaypoint.SetActive(true);
+
+                Given = true;
+            }
+            else
+            {
+                Debug.LogWarning("Ei löydetty yhtään objektia tagilla 'Waypoint'.");
+            }
+        }
+    }
+
+   
+
+    IEnumerator SupportMoney()
+    {
+        yield return new WaitForSeconds(15);
+        if (job == 0 && Payed == false)
+        {
+            rewardText.text = "unemployment benefit + 5€";
+            money += 5;
+            Payed = true;
+            StartCoroutine(WaitTime());
         }
     }
 
@@ -54,17 +102,7 @@ public class Money : MonoBehaviour
         }
     }
 
-    IEnumerator SupportMoney()
-    {
-        yield return new WaitForSeconds(15);
-        if (job == 0 && Payed == false)
-        {
-            rewardText.text = "unemployment benefit + 5€";
-            money += 5;
-            Payed = true;
-            StartCoroutine(WaitTime());
-        }
-    }
+   
 
     IEnumerator WaitTime()
     {

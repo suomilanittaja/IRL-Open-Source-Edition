@@ -22,14 +22,16 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 	void OnTriggerExit (Collider other)
 	{
 		canEnter = false;
-	}
+        playerControll.canEnter = false;
+    }
 
 	void OnTriggerEnter (Collider Hit)
 	{
 		if (Hit.gameObject.tag == "Player" && isEntered == false)
 		{
 				canEnter = true;
-		}
+                playerControll.canEnter = true;
+        }
 	}
 	void Update()
 	{
@@ -89,6 +91,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
         {
             yield return new WaitForSeconds(1);
             canEnter = false;
+            playerControll.canEnter = false;
         }
     }
 
@@ -97,6 +100,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
   {
     canEnter = true;
     isEntered = false;
+    playerControll.canEnter = true;
   }
 
   void TransferOwnership()
