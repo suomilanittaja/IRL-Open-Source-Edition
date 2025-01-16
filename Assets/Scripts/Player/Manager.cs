@@ -13,9 +13,9 @@ public class Manager : MonoBehaviour
     {
         Respawn = GameObject.FindGameObjectWithTag("Respawn");
         if (died == true)
-      {
+        {
             Respawn.gameObject.SetActive(true);
-      }
+        }
     }
 
     public void Pressed()

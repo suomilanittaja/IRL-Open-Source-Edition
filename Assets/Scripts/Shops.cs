@@ -38,55 +38,34 @@ public class Shops : MonoBehaviourPunCallbacks
     public bool isOpen = false;             //is it open
     private bool canOpen = true;            //can i open it
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        shopUi.gameObject.SetActive(false);
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (GameSetupControllerScript.PlayerSpawned == true)
         {
-            if (playerControllerScript == null)                                       //if controll empty
+            if (playerControllerScript == null)         //if controll empty
+            {
                 playerControllerScript = GameObject.FindWithTag("Player").GetComponent<PlayerController>();  //find it with tag
 
-
-            if (shopUi == null)                                         //if shopui empty
-            {
                 shopUi = GameObject.FindGameObjectWithTag("ShopUi");    //find it with tag
                 shopUi.gameObject.SetActive(false);                     //and set it false
-            }
 
-
-            if (vehicleUi == null)                                      //if VehicleUi empty
-            {
                 vehicleUi = GameObject.FindGameObjectWithTag("CarShopUi");                      //find it with tag
                 vehicleUi.SetActive(false);                             //and set it false
-            }
 
-
-            if (moneyScript == null)                                          //if money empty 
                 moneyScript = GameObject.FindWithTag("Player").GetComponent<Money>();                 //find it with tag
 
-
-            if (rayScript == null)                                      //if raySript emty
                 rayScript = GameObject.FindWithTag("Player").GetComponent<Raycast>();           //find it with tag
 
-
-            if (statsScript == null)                                          //if stats empty
                 statsScript = GameObject.FindWithTag("Player").GetComponent<Stats>();                 //find it with tag
 
-
-            if (atmUi == null)                                          //if AtmUi empty
-            {
                 atmUi = GameObject.FindGameObjectWithTag("AtmUi");      //find it with tag
                 atmUi.SetActive(false);                                 //and set it false
             }
 
-
-            Hit = rayScript.rayHitted;                                  //what it hitted
+            if (rayScript == null)
+                Hit = rayScript.rayHitted;                                  //what it hitted
 
             if (rayScript.rayHitted != null)                            //if it has hitted something
             {

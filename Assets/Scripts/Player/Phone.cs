@@ -12,10 +12,12 @@ public class Phone : MonoBehaviourPunCallbacks
     public bool usingPhone = false;
     public TextMeshProUGUI text;
     public Money jobs;
+    public PlayerController playerControllerScript;
 
     [SerializeField] private Material policeMaterial;
     [SerializeField] private Material robberMaterial;
     [SerializeField] private Material pizzaguyMaterial;
+    [SerializeField] private Material bumMaterial;
 
 
 
@@ -25,15 +27,13 @@ public class Phone : MonoBehaviourPunCallbacks
         if (Input.GetKeyDown(KeyCode.F1) && usingPhone == false)
         {
             smartPhone.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None; //unlock cursor
-            Cursor.visible = true; //make mouse visible
+            playerControllerScript.ToggleCursorLock(false);
             usingPhone = true;
         }
         else if (Input.GetKeyDown(KeyCode.F1) && usingPhone == true)
         {
             smartPhone.gameObject.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked; //lock cursor
-            Cursor.visible = false; //disable visible mouse
+            playerControllerScript.ToggleCursorLock(true);
             usingPhone = false;
         }
     }
@@ -45,36 +45,45 @@ public class Phone : MonoBehaviourPunCallbacks
 
     public void Bum()
     {
-      text.text = "Job - Bum";
-      jobs.job = 0;
+        text.text = "Job - Bum";
+        jobs.job = 0;
+
+        if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
+        {
+            // Kutsu RPC:tä, joka vaihtaa materiaalin kaikille
+            photonView.RPC("SetMaterialToBum", RpcTarget.All);
+        }
     }
 
     public void Police()
     {
-      text.text = "Job - Police";
-      jobs.job = 1;
-      if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
-      {
-          // Kutsu RPC:tä, joka vaihtaa materiaalin kaikille
-          photonView.RPC("SetMaterialToPolice", RpcTarget.All);
-      }
+        text.text = "Job - Police";
+        jobs.job = 1;
+
+        if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
+        {
+            // Kutsu RPC:tä, joka vaihtaa materiaalin kaikille
+            photonView.RPC("SetMaterialToPolice", RpcTarget.All);
+        }
     }
 
     public void Robber()
     {
-      text.text = "Job - Robber";
-      jobs.job = 2;
-      if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
-      {
-          // Kutsu RPC:tä, joka vaihtaa materiaalin kaikille
-          photonView.RPC("SetMaterialToRobber", RpcTarget.All);
-      }
+        text.text = "Job - Robber";
+        jobs.job = 2;
+
+        if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
+        {
+            // Kutsu RPC:tä, joka vaihtaa materiaalin kaikille
+            photonView.RPC("SetMaterialToRobber", RpcTarget.All);
+        }
     }
 
     public void PizzaGuy()
     {
         text.text = "Job - PizzaGuy";
         jobs.job = 3;
+
         if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
         {
             // Kutsu RPC:tä, joka vaihtaa materiaalin kaikille
@@ -84,8 +93,16 @@ public class Phone : MonoBehaviourPunCallbacks
 
     public void Back()
     {
-      mainMenu.gameObject.SetActive(true);
-      jobMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
+        jobMenu.gameObject.SetActive(false);
+    }
+
+    // RPC-metodi, joka synkronoi materiaalin kaikille pelaajille
+    [PunRPC]
+    public void SetMaterialToBum()
+    {
+        // Hae Renderer-komponentti ja vaihda materiaali
+        GetComponent<Renderer>().material = bumMaterial;
     }
 
     // RPC-metodi, joka synkronoi materiaalin kaikille pelaajille

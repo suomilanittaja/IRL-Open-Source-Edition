@@ -20,17 +20,27 @@ public class PauseMenu : MonoBehaviour
         {
             if (!isOpened)
             {
-                isOpened = true;
-                main.SetActive(true);
-                controll?.ToggleCursorLock(false);
+                OpenMenu();
             }
             else
             {
-                isOpened = false;
-                main.SetActive(false);
-                controll?.ToggleCursorLock(true);
+                CloseMenu();
             }
         }
+    }
+
+    public void OpenMenu()
+    {
+        isOpened = true;
+        main.SetActive(true);
+        controll.ToggleCursorLock(false);
+    }
+
+    public void CloseMenu()
+    {
+        isOpened = false;
+        main.SetActive(false);
+        controll.ToggleCursorLock(true);
     }
 
     public void Resume() //resume button

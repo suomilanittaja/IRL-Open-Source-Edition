@@ -9,7 +9,6 @@ public class Raycast : MonoBehaviourPun
    public float hitDis;
 
    [Header("GameObjects")]
-   public GameObject Text;
    public GameObject rayHitted;
 
    private void Update()

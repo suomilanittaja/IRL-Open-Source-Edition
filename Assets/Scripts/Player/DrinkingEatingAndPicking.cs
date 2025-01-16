@@ -24,6 +24,7 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
 
     [Header("GameObjects for picking Gun")]
     public GameObject Gun;
+    public GameObject useText;
     public GameObject remoteGun;
 
     [Header("Scripts")]
@@ -57,7 +58,7 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
                 stats.Drink();
             }
 
-            if (rayScript.rayHitted.CompareTag(selectableTag) && rayScript.hitDis <= 5)
+            if (rayScript.rayHitted.CompareTag(selectableTag) || rayScript.rayHitted.CompareTag(selectableTag2) && rayScript.hitDis <= 5)
             {
                 DrinkText.gameObject.SetActive(true);
             }
@@ -96,6 +97,13 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
                 usingGun = true;
                 photonView.RPC("pickUp", RpcTarget.All);
             }
+
+            if (rayScript.rayHitted.CompareTag(selectableTag4) && rayScript.hitDis <= 5)
+            {
+                useText.gameObject.SetActive(true);
+            }
+            else
+                useText.gameObject.SetActive(false);
 
             if (usingGun == false)
             {

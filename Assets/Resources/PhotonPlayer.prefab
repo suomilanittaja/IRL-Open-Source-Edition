@@ -14098,6 +14098,7 @@ MonoBehaviour:
   shotPos: {fileID: 6295229584634085325}
   pickUp: {fileID: 4679559903994211586}
   rb: {fileID: 4104660592540973693}
+  driveText: {fileID: 3666322566434028118}
   _manager: {fileID: 8397725459413943916}
 --- !u!82 &2200483145837878988
 AudioSource:
@@ -14269,7 +14270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitDis: 5
-  Text: {fileID: 8204207223924305860}
   rayHitted: {fileID: 0}
 --- !u!114 &8023655723943318838
 MonoBehaviour:
@@ -14289,9 +14289,11 @@ MonoBehaviour:
   usingPhone: 0
   text: {fileID: 680654783755686009}
   jobs: {fileID: 4155297826840434253}
+  playerControllerScript: {fileID: 998164041074541116}
   policeMaterial: {fileID: 2100000, guid: 74826f69ff94aad468ff9e3c093c48ef, type: 2}
   robberMaterial: {fileID: 2100000, guid: 60cb09a8f967e5c42bc23d3321257029, type: 2}
   pizzaguyMaterial: {fileID: 2100000, guid: 5988802a8993fc04f9aa63a27ac00c90, type: 2}
+  bumMaterial: {fileID: 2100000, guid: 72b3b0a9638ab8749b4d981a28e18e72, type: 2}
 --- !u!114 &3176683488793873311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14324,6 +14326,7 @@ MonoBehaviour:
   DrinkText: {fileID: 8842316190661042667}
   EatText: {fileID: 6845472473393647564}
   Gun: {fileID: 8648223928987561405}
+  useText: {fileID: 8204207223924305860}
   remoteGun: {fileID: 3524958327567653614}
   controller: {fileID: 998164041074541116}
   stats: {fileID: 2781320059568432450}

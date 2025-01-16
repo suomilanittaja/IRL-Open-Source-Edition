@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     public Transform shotPos;
     public DrinkingEatingAndPicking pickUp;
     public Rigidbody rb;
+    public GameObject driveText;
 
     public Manager _manager;
 
@@ -127,17 +128,25 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
             Fire();
         }
         Cam.gameObject.SetActive(true);
+
+        if (canEnter == true)
+            driveText.gameObject.SetActive(true);
+        else
+            driveText.gameObject.SetActive(false);
     }
 
     private void HandleMouseLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
-        transform.Rotate(Vector3.up * mouseX);
-        float currentRotation = Camera.main.transform.eulerAngles.x;
-        float newRotation = currentRotation - mouseY;
-        newRotation = Mathf.Clamp(newRotation, 0f, 180f);
-        Camera.main.transform.localRotation = Quaternion.Euler(newRotation, 0f, 0f);
+        if (Cam != null)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+            float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
+            transform.Rotate(Vector3.up * mouseX);
+            float currentRotation = Camera.main.transform.eulerAngles.x;
+            float newRotation = currentRotation - mouseY;
+            newRotation = Mathf.Clamp(newRotation, 0f, 180f);
+            Camera.main.transform.localRotation = Quaternion.Euler(newRotation, 0f, 0f);
+        }
     }
 
     private void HandleJump()
@@ -211,9 +220,9 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     public void ToggleCursorLock(bool lockCursor)
     {
+        Cursorlock = lockCursor; // Ensure this is updated first
         Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !lockCursor;
-        Cursorlock = lockCursor;
     }
 
     public void useGun()
