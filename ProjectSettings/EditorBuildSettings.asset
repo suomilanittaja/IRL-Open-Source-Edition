@@ -11,11 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: ce363e2a9b6ca7ba6a1a0411ab153bf2
-  - enabled: 0
-    path: Assets/RealisticCarControllerV4/Demo Scenes/RCC Photon Scenes/RCC_Lobby_Photon_PUN2.unity
-    guid: e8062292ace033f419d3db2f3f34a92e
-  - enabled: 0
-    path: Assets/RealisticCarControllerV4/Demo Scenes/RCC Photon Scenes/RCC_City_Photon_PUN2.unity
-    guid: 1aa7ae7b1a3723a46aadcc7437afe839
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

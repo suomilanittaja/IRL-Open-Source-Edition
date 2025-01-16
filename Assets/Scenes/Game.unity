@@ -1515,7 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcaafafc3cc9cd645ac37af7cd21ee05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 501882912}
   offset: {x: 0, y: 7.23, z: -9.75}
   speed: 10
   roatationSpeed: 20
@@ -2898,7 +2898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectableTag: Shop
-  ShopUi: {fileID: 0}
+  shopUi: {fileID: 0}
   lemonadePrefab: {fileID: 8841248707605193858, guid: 659ce359f3f64de11b58a38dcc8b36f6,
     type: 3}
   macaroniCasserolePrefab: {fileID: 5537098090911493484, guid: 447f7e1de2923f920ae689713f5798fc,
@@ -2906,17 +2906,17 @@ MonoBehaviour:
   gunPrefab: {fileID: 74831693651451361, guid: 713ded10d2e48efe8b43ebdf607dbb54, type: 3}
   beerPrefab: {fileID: 8841248707605193858, guid: 8fdb3522e11ca62efa606d5e13d2937a,
     type: 3}
-  ShopItemSpawn: {fileID: 988746570}
+  shopItemSpawn: {fileID: 988746570}
   selectableTag2: VehicleShop
-  VehicleSpawn: {fileID: 82807063}
-  VehicleUi: {fileID: 0}
+  vehicleSpawn: {fileID: 82807063}
+  vehicleUi: {fileID: 0}
   carPrefab: {fileID: 4147600197055895462, guid: 992a7916d20ebb175babb484b340374a,
     type: 3}
   selectableTag3: Atm
-  AtmUi: {fileID: 0}
-  money: {fileID: 0}
-  controll: {fileID: 0}
-  stats: {fileID: 0}
+  atmUi: {fileID: 0}
+  moneyScript: {fileID: 0}
+  playerControllerScript: {fileID: 0}
+  statsScript: {fileID: 0}
   rayScript: {fileID: 0}
   GameSetupControllerScript: {fileID: 1747652094}
   isOpen: 0

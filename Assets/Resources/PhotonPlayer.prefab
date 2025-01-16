@@ -14304,7 +14304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b176d524c1fe1e4f9a97157ca92fd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shop: {fileID: 0}
+  shopsScript: {fileID: 0}
 --- !u!114 &4679559903994211586
 MonoBehaviour:
   m_ObjectHideFlags: 0
