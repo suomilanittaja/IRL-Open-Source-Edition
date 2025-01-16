@@ -21,6 +21,7 @@ TagManager:
   - Gun
   - Drink
   - Bullet2
+  - Bullet
   layers:
   - Default
   - TransparentFX

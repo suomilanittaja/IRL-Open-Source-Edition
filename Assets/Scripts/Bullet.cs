@@ -20,15 +20,17 @@ public class Bullet : MonoBehaviourPun {
 
 	}
 
-  void OnCollisionEnter()
-  {
-    Destroy(gameObject);
-    StartCoroutine(Timer());
-  }
+    void OnTriggerEnter(Collider other)
+    {
+        if (photonView.IsMine) // Only the owner can destroy the bullet
+        {
+            StartCoroutine(DestroyBullet());
+        }
+    }
 
-  IEnumerator Timer()
-  {
-   yield return new WaitForSeconds(1);
-   PhotonNetwork.Destroy(gameObject);
-  }
+    IEnumerator DestroyBullet()
+    {
+        yield return new WaitForSeconds(0.1f);  // Small delay to allow damage to register
+        PhotonNetwork.Destroy(gameObject);
+    }
 }

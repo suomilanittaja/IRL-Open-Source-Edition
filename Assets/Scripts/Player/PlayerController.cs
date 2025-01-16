@@ -165,8 +165,10 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet")
+        Debug.Log("enter!"); // Log when player is hit
+        if (other.CompareTag("Bullet"))
         {
+            Debug.Log("Player hit by bullet!"); // Log when player is hit
             ChangeHealth(-10);
         }
     }
