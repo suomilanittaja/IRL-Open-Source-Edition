@@ -5592,7 +5592,7 @@ GameObject:
   - component: {fileID: 7519125485062313413}
   - component: {fileID: 4533737330649925974}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: RemoteGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5863,9 +5863,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2416b94f08055b18daca9489a37ec5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  main: {fileID: 4193740952248790421}
-  options: {fileID: 2557294461410785342}
-  controll: {fileID: 998164041074541116}
+  mainMenu: {fileID: 4193740952248790421}
+  optionsMenu: {fileID: 2557294461410785342}
+  playercontrollerScript: {fileID: 998164041074541116}
   isOpened: 0
 --- !u!1 &3666322566434028118
 GameObject:
@@ -14082,13 +14082,13 @@ MonoBehaviour:
   jumpForce: 5
   sensitivity: 2
   interpolationSpeed: 10
-  bulletPrefab: {fileID: 1696170245520886, guid: db3ec868aa3273989862e0016295f347,
+  bulletObject: {fileID: 1696170245520886, guid: db3ec868aa3273989862e0016295f347,
     type: 3}
-  Minicam: {fileID: 2444921321452935177}
-  Cam: {fileID: 5280032346201372117}
-  Remote: {fileID: 6314222579918884377}
-  Canvas: {fileID: 1955866874997560908}
-  GunUi: {fileID: 5621752652556975008}
+  miniCamObject: {fileID: 2444921321452935177}
+  camObject: {fileID: 5280032346201372117}
+  remoteObject: {fileID: 6314222579918884377}
+  canvasObject: {fileID: 1955866874997560908}
+  gunUi: {fileID: 5621752652556975008}
   isGrounded: 0
   hasGun: 0
   isEntered: 0
@@ -14096,10 +14096,10 @@ MonoBehaviour:
   isTabPressed: 0
   Cursorlock: 0
   shotPos: {fileID: 6295229584634085325}
-  pickUp: {fileID: 4679559903994211586}
-  rb: {fileID: 4104660592540973693}
+  drinkEatAndPickScript: {fileID: 4679559903994211586}
+  rigidbodyScript: {fileID: 4104660592540973693}
   driveText: {fileID: 3666322566434028118}
-  _manager: {fileID: 8397725459413943916}
+  managerScript: {fileID: 8397725459413943916}
 --- !u!82 &2200483145837878988
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14210,7 +14210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   died: 0
-  Respawn: {fileID: 0}
+  respawnObject: {fileID: 8735823278907338448}
 --- !u!114 &2781320059568432450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14234,7 +14234,7 @@ MonoBehaviour:
   ThirstBar: {fileID: 7379303933768548488}
   DrunkBar: {fileID: 5837617801400874925}
   HealthBar: {fileID: 8428055144884085836}
-  controll: {fileID: 998164041074541116}
+  playerControllerScript: {fileID: 998164041074541116}
   PPP_Drunk: {fileID: 171740461120384325}
   PPP_Player: {fileID: 6762086930933310792}
 --- !u!114 &4155297826840434253
@@ -14256,7 +14256,7 @@ MonoBehaviour:
   text: {fileID: 7566429815570193622}
   rewardText: {fileID: 6205180148753531294}
   Payed: 0
-  Given: 0
+  waypointGiven: 0
 --- !u!114 &8641951858696576615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14270,7 +14270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitDis: 5
-  rayHitted: {fileID: 0}
+  rayHittedObject: {fileID: 0}
 --- !u!114 &8023655723943318838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14283,12 +14283,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee1eca977259566ba993bcbf38382bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smartPhone: {fileID: 603863077674782134}
+  smartPhoneObject: {fileID: 603863077674782134}
   mainMenu: {fileID: 8287737899125770447}
   jobMenu: {fileID: 295503244916531464}
   usingPhone: 0
-  text: {fileID: 680654783755686009}
-  jobs: {fileID: 4155297826840434253}
+  currentJobText: {fileID: 680654783755686009}
+  moneyScript: {fileID: 4155297826840434253}
   playerControllerScript: {fileID: 998164041074541116}
   policeMaterial: {fileID: 2100000, guid: 74826f69ff94aad468ff9e3c093c48ef, type: 2}
   robberMaterial: {fileID: 2100000, guid: 60cb09a8f967e5c42bc23d3321257029, type: 2}
@@ -14325,11 +14325,11 @@ MonoBehaviour:
   selectableTag4: Gun
   DrinkText: {fileID: 8842316190661042667}
   EatText: {fileID: 6845472473393647564}
-  Gun: {fileID: 8648223928987561405}
+  gunObject: {fileID: 8648223928987561405}
   useText: {fileID: 8204207223924305860}
   remoteGun: {fileID: 3524958327567653614}
-  controller: {fileID: 998164041074541116}
-  stats: {fileID: 2781320059568432450}
+  playerControllerScript: {fileID: 998164041074541116}
+  statsScript: {fileID: 2781320059568432450}
   rayScript: {fileID: 8641951858696576615}
   usingGun: 0
 --- !u!1 &7300264418473541587
@@ -16804,7 +16804,7 @@ GameObject:
   - component: {fileID: 8738987150211870675}
   - component: {fileID: 3501750120999868107}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: LocalGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17192,7 +17192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8152039d66a8f9a43891a86fbce21ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 8735823278907338448}
+  buttonObject: {fileID: 0}
 --- !u!1 &8840106654690551515
 GameObject:
   m_ObjectHideFlags: 0

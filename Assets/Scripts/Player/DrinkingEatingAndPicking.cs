@@ -23,15 +23,15 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
     public GameObject EatText;
 
     [Header("GameObjects for picking Gun")]
-    public GameObject Gun;
+    public GameObject gunObject;
     public GameObject useText;
     public GameObject remoteGun;
 
     [Header("Scripts")]
-    public PlayerController controller;
-    public Stats stats;
+    public PlayerController playerControllerScript;
+    public Stats statsScript;
     public Raycast rayScript;
-    private PhotonView PhotonView;
+    private PhotonView photonViewScript;
 
     [Header("Others")]
     public bool usingGun = false;
@@ -40,25 +40,25 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        Hit = rayScript.rayHitted;
+        Hit = rayScript.rayHittedObject;
 
-        if (rayScript.rayHitted != null)
+        if (rayScript.rayHittedObject != null)
         {
-            if (rayScript.rayHitted.CompareTag(selectableTag) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
+            if (rayScript.rayHittedObject.CompareTag(selectableTag) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
+                photonViewScript = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 TransferOwnershipDrink();
-                stats.drunk();
+                statsScript.drunk();
             }
 
-            if (rayScript.rayHitted.CompareTag(selectableTag2) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
+            if (rayScript.rayHittedObject.CompareTag(selectableTag2) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
+                photonViewScript = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 TransferOwnershipDrink();
-                stats.Drink();
+                statsScript.Drink();
             }
 
-            if (rayScript.rayHitted.CompareTag(selectableTag) || rayScript.rayHitted.CompareTag(selectableTag2) && rayScript.hitDis <= 5)
+            if (rayScript.rayHittedObject.CompareTag(selectableTag) || rayScript.rayHittedObject.CompareTag(selectableTag2) && rayScript.hitDis <= 5)
             {
                 DrinkText.gameObject.SetActive(true);
             }
@@ -67,17 +67,17 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
         }
 
 
-        if (rayScript.rayHitted != null)
+        if (rayScript.rayHittedObject != null)
         {
-            if (rayScript.rayHitted.CompareTag(selectableTag3) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
+            if (rayScript.rayHittedObject.CompareTag(selectableTag3) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
+                photonViewScript = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 TransferOwnershipFood();
-                stats.Eat();
+                statsScript.Eat();
                 print("key was pressed");
             }
 
-            if (rayScript.rayHitted.CompareTag(selectableTag3) && rayScript.hitDis <= 5)
+            if (rayScript.rayHittedObject.CompareTag(selectableTag3) && rayScript.hitDis <= 5)
             {
                 EatText.gameObject.SetActive(true);
             }
@@ -86,19 +86,19 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
         }
 
 
-        if (rayScript.rayHitted != null)
+        if (rayScript.rayHittedObject != null)
         {
-            if (rayScript.rayHitted.CompareTag(selectableTag4) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
+            if (rayScript.rayHittedObject.CompareTag(selectableTag4) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
-                PhotonView = (PhotonView)Hit.GetComponent(typeof(PhotonView));
+                photonViewScript = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 print("key was pressed");
                 PhotonNetwork.Destroy(Hit);
-                controller.hasGun = true;
+                playerControllerScript.hasGun = true;
                 usingGun = true;
                 photonView.RPC("pickUp", RpcTarget.All);
             }
 
-            if (rayScript.rayHitted.CompareTag(selectableTag4) && rayScript.hitDis <= 5)
+            if (rayScript.rayHittedObject.CompareTag(selectableTag4) && rayScript.hitDis <= 5)
             {
                 useText.gameObject.SetActive(true);
             }
@@ -119,10 +119,10 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
 
    public void TransferOwnershipDrink()
    {
-       if (PhotonView.Owner.IsLocal == false)
+       if (photonViewScript.Owner.IsLocal == false)
        {
            Debug.Log("Requesting Ownership");
-           PhotonView.RequestOwnership();
+           photonViewScript.RequestOwnership();
            PhotonNetwork.Destroy(Hit);
        }
        else
@@ -131,10 +131,10 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
 
     public void TransferOwnershipFood()
     {
-        if (PhotonView.Owner.IsLocal == false)
+        if (photonViewScript.Owner.IsLocal == false)
         {
             Debug.Log("Requesting Ownership");
-            PhotonView.RequestOwnership();
+            photonViewScript.RequestOwnership();
             PhotonNetwork.Destroy(Hit);
         }
         else
@@ -144,21 +144,21 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
     [PunRPC]
     void pickUp()
     {
-        Gun.gameObject.SetActive(true);
+        gunObject.gameObject.SetActive(true);
         remoteGun.gameObject.SetActive(true);
     }
 
     [PunRPC]
     void useGun2()
     {
-        Gun.gameObject.SetActive(true);
+        gunObject.gameObject.SetActive(true);
         remoteGun.gameObject.SetActive(true);
     }
 
     [PunRPC]
     void useHand2()
     {
-        Gun.gameObject.SetActive(false);
+        gunObject.gameObject.SetActive(false);
         remoteGun.gameObject.SetActive(false);
     }
 }

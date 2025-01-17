@@ -19,7 +19,7 @@ public class Money : MonoBehaviour
     public TextMeshProUGUI rewardText;
 
     public bool Payed = false;
-    public bool Given = false;
+    public bool waypointGiven = false;
 
     private float yOffset = 100f;
 
@@ -45,7 +45,7 @@ public class Money : MonoBehaviour
             StartCoroutine(RewardMoney());
         }
 
-        if (job == 3 && Given == false)
+        if (job == 3 && waypointGiven == false)
         {
             GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Waypoint"); // Find all objects with Waypoint tag
 
@@ -63,7 +63,7 @@ public class Money : MonoBehaviour
 
                 randomWaypoint.SetActive(true);                                     //set object active
 
-                Given = true;
+                waypointGiven = true;
             }
             else
             {

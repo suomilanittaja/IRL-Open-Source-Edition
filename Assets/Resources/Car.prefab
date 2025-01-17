@@ -639,17 +639,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42e7418179c9c68d93cb545b53c1f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carControll: {fileID: 4147600197055895463}
-  exitPoint: {fileID: 5587286959386262973}
-  Camera: {fileID: 0}
-  photonview: {fileID: 7950207718840567008}
+  carControllerScript: {fileID: 4147600197055895463}
+  exitPointPosition: {fileID: 5587286959386262973}
+  cameraObject: {fileID: 0}
+  photonViewScript: {fileID: 7950207718840567008}
   canEnter: 0
   isEntered: 0
-  player: {fileID: 0}
-  playerControll: {fileID: 0}
-  playerPos: {fileID: 0}
-  RaycastScript: {fileID: 0}
-  cameraController: {fileID: 0}
+  playerObject: {fileID: 0}
+  playerControllerScript: {fileID: 0}
+  playerPosition: {fileID: 0}
+  raycastScript: {fileID: 0}
+  cameraControllerScript: {fileID: 0}
 --- !u!114 &1009067117857702177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 5977148460078770822}
   - component: {fileID: 5878875546451256896}
   m_Layer: 0
-  m_Name: Enter
+  m_Name: Enter Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

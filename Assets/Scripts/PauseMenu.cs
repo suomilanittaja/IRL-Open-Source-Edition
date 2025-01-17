@@ -4,49 +4,49 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject main;
-    public GameObject options;
-    public PlayerController controll;
+    public GameObject mainMenu;
+    public GameObject optionsMenu;
+    public PlayerController playercontrollerScript;
     public bool isOpened = false;
 
     void Start()
     {
-      main.SetActive(false);
+      mainMenu.SetActive(false);    //hide mainmenu
     }
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))         //if esc pressed
         {
-            if (!isOpened)
+            if (!isOpened)                          //if mainmenu not open
             {
-                OpenMenu();
+                OpenMenu();                         //open mainmenu
             }
-            else
+            else                                    //if  mainmenu already open
             {
-                CloseMenu();
+                CloseMenu();                        //close mainmenu
             }
         }
     }
 
-    public void OpenMenu()
+    public void OpenMenu()                          //open mainmenu
     {
         isOpened = true;
-        main.SetActive(true);
-        controll.ToggleCursorLock(false);
+        mainMenu.SetActive(true);                   //active mainmenu 
+        playercontrollerScript.ToggleCursorLock(false); //unlock cursor
     }
 
-    public void CloseMenu()
+    public void CloseMenu()                         //close mainmenu
     {
         isOpened = false;
-        main.SetActive(false);
-        controll.ToggleCursorLock(true);
+        mainMenu.SetActive(false);                  //disable mainmenu
+        playercontrollerScript.ToggleCursorLock(true);  //lock cursor
     }
 
     public void Resume() //resume button
     {
-      main.SetActive(false);
-      controll.ToggleCursorLock(true);
+      mainMenu.SetActive(false);
+      playercontrollerScript.ToggleCursorLock(true);
       isOpened = false;
     }
 
@@ -62,14 +62,14 @@ public class PauseMenu : MonoBehaviour
 
     public void Options() 
     {
-      main.SetActive(false);
-      options.SetActive(true);
+      mainMenu.SetActive(false);
+      optionsMenu.SetActive(true);
     }
 
     public void Back()
     {
-      main.SetActive(true);
-      options.SetActive(false);
+      mainMenu.SetActive(true);
+      optionsMenu.SetActive(false);
     }
 
     public void Quit()

@@ -1515,7 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcaafafc3cc9cd645ac37af7cd21ee05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 501882912}
+  targetPosition: {fileID: 501882912}
   offset: {x: 0, y: 7.23, z: -9.75}
   speed: 10
   roatationSpeed: 20
@@ -2825,7 +2825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8152039d66a8f9a43891a86fbce21ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1674103932}
+  buttonObject: {fileID: 1674103932}
 --- !u!1 &1747652092
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,31 +5,31 @@ using Photon.Pun;
 
 public class EnterandExit : MonoBehaviourPunCallbacks
 {
-    public CarController carControll;
-	public Transform exitPoint;
-	public GameObject Camera;
-    public PhotonView photonview;
+    public CarController carControllerScript;
+	public Transform exitPointPosition;
+	public GameObject cameraObject;
+    public PhotonView photonViewScript;
 
     public bool canEnter;
     public bool isEntered;
 
-    public GameObject player;
-    public PlayerController playerControll;
-    public Transform playerPos;
-    public Raycast RaycastScript;
-    public CameraController cameraController;
+    public GameObject playerObject;
+    public PlayerController playerControllerScript;
+    public Transform playerPosition;
+    public Raycast raycastScript;
+    public CameraController cameraControllerScript;
 
 	void OnTriggerExit (Collider other)
 	{
         if (isEntered == false)
         {
-            playerControll.canEnter = false;
+            playerControllerScript.canEnter = false;
 
             canEnter = false;
-            player = null;
-            playerPos = null;
-            playerControll = null;
-            RaycastScript = null;
+            playerObject = null;
+            playerPosition = null;
+            playerControllerScript = null;
+            raycastScript = null;
         }
     }
 
@@ -37,46 +37,46 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 	{
 		if (other.CompareTag("Player") && isEntered == false)
 		{
-            player = other.gameObject;                              //set player object
-            playerPos = (Transform)player.GetComponent(typeof(Transform));
-            playerControll = (PlayerController)player.GetComponent(typeof(PlayerController));
-            RaycastScript = (Raycast)player.GetComponent(typeof(Raycast));
+            playerObject = other.gameObject;                              //set player object
+            playerPosition = (Transform)playerObject.GetComponent(typeof(Transform));
+            playerControllerScript = (PlayerController)playerObject.GetComponent(typeof(PlayerController));
+            raycastScript = (Raycast)playerObject.GetComponent(typeof(Raycast));
 
             canEnter = true;
-            playerControll.canEnter = true;
+            playerControllerScript.canEnter = true;
         }
 	}
 
 
 	void Update()
 	{
-        if (Camera == null)
-            Camera = GameObject.FindWithTag("VehicleCam");
-            cameraController = (CameraController)Camera.GetComponent(typeof(CameraController));
+        if (cameraObject == null)
+            cameraObject = GameObject.FindWithTag("VehicleCam");
+            cameraControllerScript = (CameraController)cameraObject.GetComponent(typeof(CameraController));
 
-        if (player != null)
+        if (playerObject != null)
         {
-            if (canEnter == true && playerControll.canEnter == true && playerControll.isEntered == false && Input.GetKeyDown(KeyCode.Return) && isEntered == false)
+            if (canEnter == true && playerControllerScript.canEnter == true && playerControllerScript.isEntered == false && Input.GetKeyDown(KeyCode.Return) && isEntered == false)
             {
                 TransferOwnership();
-                RaycastScript = GameObject.FindWithTag("Player").GetComponent<Raycast>();
+                raycastScript = GameObject.FindWithTag("Player").GetComponent<Raycast>();
                 gameObject.tag = "Vehicle";
-                cameraController.Check();
-                carControll.enabled = true;
-                RaycastScript.enabled = false;
-                playerControll.isEntered = true;
+                cameraControllerScript.Check();
+                carControllerScript.enabled = true;
+                raycastScript.enabled = false;
+                playerControllerScript.isEntered = true;
                 isEntered = true;
                 photonView.RPC("Enter", RpcTarget.All);
             }
 
-            if (canEnter == false && playerControll.canEnter == false && playerControll.isEntered == true && Input.GetKeyDown(KeyCode.Return) && isEntered == true && photonView.Owner.IsLocal == true)
+            if (canEnter == false && playerControllerScript.canEnter == false && playerControllerScript.isEntered == true && Input.GetKeyDown(KeyCode.Return) && isEntered == true && photonView.Owner.IsLocal == true)
             {
                 gameObject.tag = "Untagged";
-                playerPos.transform.position = exitPoint.transform.position;
-                player.gameObject.SetActive(true);
-                carControll.enabled = false;
-                RaycastScript.enabled = true;
-                playerControll.isEntered = false;
+                playerPosition.transform.position = exitPointPosition.transform.position;
+                playerObject.gameObject.SetActive(true);
+                carControllerScript.enabled = false;
+                raycastScript.enabled = true;
+                playerControllerScript.isEntered = false;
                 photonView.RPC("Exit", RpcTarget.All);
                 isEntered = false;
             }
@@ -85,7 +85,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
 
 	void Start ()
 	{
-		carControll.enabled = false;
+		carControllerScript.enabled = false;
 	}
 
     IEnumerator Timer()
@@ -104,7 +104,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
         {
             yield return new WaitForSeconds(1);
             canEnter = false;
-            playerControll.canEnter = false;
+            playerControllerScript.canEnter = false;
         }
     }
 
@@ -113,7 +113,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
     {
         canEnter = true;
         isEntered = false;
-        playerControll.canEnter = true;
+        playerControllerScript.canEnter = true;
     }
 
     void TransferOwnership()

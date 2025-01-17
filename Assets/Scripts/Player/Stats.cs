@@ -21,7 +21,7 @@ public class Stats : MonoBehaviour
     public Slider HealthBar;
 
     private float minAmount = 0.1f;
-    public PlayerController controll;
+    public PlayerController playerControllerScript;
 
     public GameObject PPP_Drunk;
 	public GameObject PPP_Player;
@@ -34,13 +34,13 @@ public class Stats : MonoBehaviour
 
     void Update()
     {
-        HealthBar.value = controll.Health;
+        HealthBar.value = playerControllerScript.Health;
         updateUI();
     }
 
     private void updateUI()
     {
-        HealthBar.value = controll.Health;
+        HealthBar.value = playerControllerScript.Health;
         Hunger = Mathf.Clamp(Hunger, 0, 100f);
 	    Thirst = Mathf.Clamp(Thirst, 0, 100f);
         HungerBar.value = Hunger;
@@ -57,7 +57,7 @@ public class Stats : MonoBehaviour
 
         if(Hunger <= minAmount || Thirst <= minAmount)
 		{
-			controll.Health -= healthOverTimer * Time.deltaTime;
+            playerControllerScript.Health -= healthOverTimer * Time.deltaTime;
 		}
 
         if(Drunk <= 0)

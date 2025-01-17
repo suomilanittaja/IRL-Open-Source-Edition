@@ -6,12 +6,12 @@ using Photon.Pun;
 
 public class Phone : MonoBehaviourPunCallbacks
 {
-    public GameObject smartPhone;
+    public GameObject smartPhoneObject;
     public GameObject mainMenu;
     public GameObject jobMenu;
     public bool usingPhone = false;
-    public TextMeshProUGUI text;
-    public Money jobs;
+    public TextMeshProUGUI currentJobText;
+    public Money moneyScript;
     public PlayerController playerControllerScript;
 
     [SerializeField] private Material policeMaterial;
@@ -26,13 +26,13 @@ public class Phone : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.F1) && usingPhone == false)
         {
-            smartPhone.gameObject.SetActive(true);
+            smartPhoneObject.gameObject.SetActive(true);
             playerControllerScript.ToggleCursorLock(false);
             usingPhone = true;
         }
         else if (Input.GetKeyDown(KeyCode.F1) && usingPhone == true)
         {
-            smartPhone.gameObject.SetActive(false);
+            smartPhoneObject.gameObject.SetActive(false);
             playerControllerScript.ToggleCursorLock(true);
             usingPhone = false;
         }
@@ -45,8 +45,8 @@ public class Phone : MonoBehaviourPunCallbacks
 
     public void Bum()
     {
-        text.text = "Job - Bum";
-        jobs.job = 0;
+        currentJobText.text = "Job - Bum";
+        moneyScript.job = 0;
 
         if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
         {
@@ -57,8 +57,8 @@ public class Phone : MonoBehaviourPunCallbacks
 
     public void Police()
     {
-        text.text = "Job - Police";
-        jobs.job = 1;
+        currentJobText.text = "Job - Police";
+        moneyScript.job = 1;
 
         if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
         {
@@ -69,8 +69,8 @@ public class Phone : MonoBehaviourPunCallbacks
 
     public void Robber()
     {
-        text.text = "Job - Robber";
-        jobs.job = 2;
+        currentJobText.text = "Job - Robber";
+        moneyScript.job = 2;
 
         if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
         {
@@ -81,8 +81,8 @@ public class Phone : MonoBehaviourPunCallbacks
 
     public void PizzaGuy()
     {
-        text.text = "Job - PizzaGuy";
-        jobs.job = 3;
+        currentJobText.text = "Job - PizzaGuy";
+        moneyScript.job = 3;
 
         if (photonView.IsMine) // Tarkistaa, että tämä on paikallisen pelaajan omistama objektin PhotonView
         {

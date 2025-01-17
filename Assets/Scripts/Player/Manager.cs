@@ -5,21 +5,21 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public bool died = false;
-    public GameObject Respawn;
+    public GameObject respawnObject;
 
     
 
     public void Update()
     {
-        Respawn = GameObject.FindGameObjectWithTag("Respawn");
+        respawnObject = GameObject.FindGameObjectWithTag("Respawn");
         if (died == true)
         {
-            Respawn.gameObject.SetActive(true);
+            respawnObject.gameObject.SetActive(true);
         }
     }
 
     public void Pressed()
     {
-      Respawn.gameObject.SetActive(false);
+      respawnObject.gameObject.SetActive(false);
     }
 }

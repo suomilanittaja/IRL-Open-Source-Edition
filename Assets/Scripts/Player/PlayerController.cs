@@ -13,12 +13,12 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     public float interpolationSpeed = 10f;
 
     [Header("GameObjects")]
-    public GameObject bulletPrefab;
-    public GameObject Minicam;
-    public GameObject Cam;
-    public GameObject Remote;
-    public GameObject Canvas;
-    public GameObject GunUi;
+    public GameObject bulletObject;
+    public GameObject miniCamObject;
+    public GameObject camObject;
+    public GameObject remoteObject;
+    public GameObject canvasObject;
+    public GameObject gunUi;
 
     [Header("Bools")]
     public bool isGrounded;
@@ -30,11 +30,11 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     [Header("Others")]
     public Transform shotPos;
-    public DrinkingEatingAndPicking pickUp;
-    public Rigidbody rb;
+    public DrinkingEatingAndPicking drinkEatAndPickScript;
+    public Rigidbody rigidbodyScript;
     public GameObject driveText;
 
-    public Manager _manager;
+    public Manager managerScript;
 
     private Vector3 targetPosition;
     private Quaternion targetRotation;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rigidbodyScript = GetComponent<Rigidbody>();
         CheckOwnership();
         targetPosition = transform.position;
         targetRotation = transform.rotation;
@@ -78,8 +78,8 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            stream.SendNext(rb.linearVelocity);
-            stream.SendNext(rb.angularVelocity);
+            stream.SendNext(rigidbodyScript.linearVelocity);
+            stream.SendNext(rigidbodyScript.angularVelocity);
             stream.SendNext(Health);
         }
         else
@@ -114,20 +114,20 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            GunUi.SetActive(true);
+            gunUi.SetActive(true);
             ToggleCursorLock(false);
         }
         else if (Input.GetKeyUp(KeyCode.Tab))
         {
-            GunUi.SetActive(false);
+            gunUi.SetActive(false);
             ToggleCursorLock(true);
         }
 
-        if (Input.GetMouseButtonDown(0) && hasGun && pickUp.usingGun && !Cursor.visible)
+        if (Input.GetMouseButtonDown(0) && hasGun && drinkEatAndPickScript.usingGun && !Cursor.visible)
         {
             Fire();
         }
-        Cam.gameObject.SetActive(true);
+        camObject.gameObject.SetActive(true);
 
         if (canEnter == true)
             driveText.gameObject.SetActive(true);
@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void HandleMouseLook()
     {
-        if (Cam != null)
+        if (camObject != null)
         {
             float mouseX = Input.GetAxis("Mouse X") * sensitivity;
             float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            rigidbodyScript.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             isGrounded = false;
         }
     }
@@ -180,25 +180,23 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     private void Fire()
     {
-        PhotonNetwork.Instantiate(bulletPrefab.name, shotPos.position, shotPos.rotation);
+        PhotonNetwork.Instantiate(bulletObject.name, shotPos.position, shotPos.rotation);
     }
 
     private void CheckOwnership()
     {
         if (photonView.IsMine)
         {
-            //GetComponent<MeshRenderer>().material.color = Color.blue;
             gameObject.tag = "Player";
-            Remote.SetActive(false);
-            Canvas.SetActive(true);
+            remoteObject.SetActive(false);
+            canvasObject.SetActive(true);
         }
         else
         {
-            //GetComponent<MeshRenderer>().material.color = Color.red;
-            Cam.SetActive(false);
-            Minicam.SetActive(false);
-            Remote.SetActive(true);
-            Canvas.SetActive(false);
+            camObject.SetActive(false);
+            miniCamObject.SetActive(false);
+            remoteObject.SetActive(true);
+            canvasObject.SetActive(false);
             GetComponent<DrinkingEatingAndPicking>().enabled = false;
         }
     }
@@ -215,7 +213,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         if (Health <= 0)
         {
-            _manager.died = true;
+            managerScript.died = true;
             StartCoroutine(Die());
         }
     }
@@ -231,13 +229,13 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         if (hasGun)
         {
-            pickUp.usingGun = true;
+            drinkEatAndPickScript.usingGun = true;
         }
     }
 
     public void useHand()
     {
-        pickUp.usingGun = false;
+        drinkEatAndPickScript.usingGun = false;
     }
 
     IEnumerator Die()

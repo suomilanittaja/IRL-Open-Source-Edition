@@ -65,11 +65,11 @@ public class Shops : MonoBehaviourPunCallbacks
             }
 
             if (rayScript == null)
-                Hit = rayScript.rayHitted;                                  //what it hitted
+                Hit = rayScript.rayHittedObject;                                  //what it hitted
 
-            if (rayScript.rayHitted != null)                            //if it has hitted something
+            if (rayScript.rayHittedObject != null)                            //if it has hitted something
             {
-                if (rayScript.rayHitted.CompareTag(selectableTag) && rayScript.hitDis <= 2 && canOpen == true)  //if it hitted this tag from close distance and can open ui 
+                if (rayScript.rayHittedObject.CompareTag(selectableTag) && rayScript.hitDis <= 2 && canOpen == true)  //if it hitted this tag from close distance and can open ui 
                 {
                     shopUi.gameObject.SetActive(true);                  //open ui
                     playerControllerScript.ToggleCursorLock(false);                   //free the mouse
@@ -77,7 +77,7 @@ public class Shops : MonoBehaviourPunCallbacks
                 }
 
 
-                if (rayScript.rayHitted.CompareTag(selectableTag2) && rayScript.hitDis <= 2 && canOpen == true)
+                if (rayScript.rayHittedObject.CompareTag(selectableTag2) && rayScript.hitDis <= 2 && canOpen == true)
                 {
                     vehicleUi.gameObject.SetActive(true);
                     playerControllerScript.ToggleCursorLock(false);
@@ -85,14 +85,14 @@ public class Shops : MonoBehaviourPunCallbacks
                 }
                 
 
-                if (rayScript.rayHitted.CompareTag(selectableTag3) && rayScript.hitDis <= 2 && canOpen == true)
+                if (rayScript.rayHittedObject.CompareTag(selectableTag3) && rayScript.hitDis <= 2 && canOpen == true)
                 {
                     atmUi.gameObject.SetActive(true);
                     playerControllerScript.ToggleCursorLock(false);
                     isOpen = true;
                 }
 
-                if (rayScript.rayHitted.CompareTag(selectableTag) == false && rayScript.rayHitted.CompareTag(selectableTag2) == false && rayScript.rayHitted.CompareTag(selectableTag3) == false && isOpen == true)
+                if (rayScript.rayHittedObject.CompareTag(selectableTag) == false && rayScript.rayHittedObject.CompareTag(selectableTag2) == false && rayScript.rayHittedObject.CompareTag(selectableTag3) == false && isOpen == true)
                 {
                     atmUi.gameObject.SetActive(false);
                     vehicleUi.gameObject.SetActive(false);

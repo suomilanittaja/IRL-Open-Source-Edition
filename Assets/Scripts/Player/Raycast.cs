@@ -9,7 +9,7 @@ public class Raycast : MonoBehaviourPun
    public float hitDis;
 
    [Header("GameObjects")]
-   public GameObject rayHitted;
+   public GameObject rayHittedObject;
 
    private void Update()
    {
@@ -24,7 +24,7 @@ public class Raycast : MonoBehaviourPun
 			{
 				hitDis = hit.distance;
 				var selection = hit.transform;
-				rayHitted = hit.collider.gameObject;
+				rayHittedObject = hit.collider.gameObject;
 			}
 		}
    }

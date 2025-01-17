@@ -3,22 +3,22 @@ using UnityEngine;
 public class DeliveryPoint : MonoBehaviour
 {
     private float yOffset = -100f;
-    private Money money;
+    private Money moneyScript;
 
-    // Kun pelaaja törmää Waypointiin
+    // when something hit waypoint
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player"))         //check if it is player
         {
-            Debug.Log("Pelaaja törmäsi waypointiin: " + gameObject.name);
-            money = GameObject.FindWithTag("Player").GetComponent<Money>(); //etsi scripti
-            // Siirrä objekti Y-akselilla 100 yksikköä ylöspäin
+            moneyScript = GameObject.FindWithTag("Player").GetComponent<Money>(); //find moneyScript with tag
+
+            // move waypoint -100 in y position
             Vector3 newPosition = transform.position;
             newPosition.y += yOffset;
             transform.position = newPosition;
 
-            money.money += 500;
-            money.Given = false;
+            moneyScript.money += 500;           //give money
+            moneyScript.waypointGiven = false;          //request for new waypoint
         }
     }
 }

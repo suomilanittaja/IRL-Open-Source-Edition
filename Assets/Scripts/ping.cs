@@ -10,7 +10,7 @@ public class ping : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        PhotonNetwork.GetPing();
-        Deley = PhotonNetwork.GetPing();
+        PhotonNetwork.GetPing();            //get ping from the server
+        Deley = PhotonNetwork.GetPing();    
     }
 }

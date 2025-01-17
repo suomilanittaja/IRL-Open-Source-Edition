@@ -9,9 +9,7 @@ using Photon.Realtime; // Tämä voi olla tarpeen myös, riippuen käyttämäst�
 
 public class CarController : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public enum Drivetrain {FWD,
-        RWD,
-        FourWD};
+    public enum Drivetrain {FWD,RWD,FourWD};
 
     private float horizontalInput, verticalInput;
     private float steeringAngle;
