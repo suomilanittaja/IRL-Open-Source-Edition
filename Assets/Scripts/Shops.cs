@@ -88,6 +88,7 @@ public class Shops : MonoBehaviourPunCallbacks
                 if (rayScript.rayHittedObject.CompareTag(selectableTag3) && rayScript.hitDis <= 2 && canOpen == true)
                 {
                     atmUi.gameObject.SetActive(true);
+                    moneyScript.currentBalanceText.text = "Balance: $" + moneyScript.money.ToString();
                     playerControllerScript.ToggleCursorLock(false);
                     isOpen = true;
                 }

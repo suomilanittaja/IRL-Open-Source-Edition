@@ -10,18 +10,24 @@ public class Money : MonoBehaviour
     public int money;
     public int job = 10;
 
-    [Header("GameObjects")]
-    public GameObject RobbingUi;
-    public GameObject RobbingInfo;
-
     [Header("Text")]
     public TextMeshProUGUI text;
     public TextMeshProUGUI rewardText;
+    public TextMeshProUGUI currentBalanceText;
 
     public bool Payed = false;
     public bool waypointGiven = false;
 
     private float yOffset = 100f;
+
+    [Header("Banking")]
+    public GameObject robbingUi;
+    public GameObject bankingUi;
+    public Transform lockSprite; // Assign the lock dial GameObject in Unity
+    public float lockRotationSpeed = 100f;
+    public float unlockAngle = 180f; // The correct angle to unlock
+    private bool isUnlocked = false;
+    public bool robbing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +76,38 @@ public class Money : MonoBehaviour
                 Debug.LogWarning("object could not found 'Waypoint'.");
             }
         }
+
+        if (robbing == true)
+        {
+            bankingUi.SetActive(false);
+            robbingUi.SetActive(true);
+            if (!isUnlocked)
+            {
+                // Rotate the lock dial
+                lockSprite.Rotate(0, 0, lockRotationSpeed * Time.deltaTime);
+
+                // Check if the player presses Space at the right time
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    float currentAngle = lockSprite.eulerAngles.z;
+
+                    // Check if the player pressed at the correct angle
+                    if (Mathf.Abs(currentAngle - unlockAngle) < 10f) // 10-degree tolerance
+                    {
+                        Debug.Log("Unlocked!");
+                        robbing = false;
+                        isUnlocked = true;
+                        robbingUi.SetActive(false);
+                        isUnlocked = false;
+                        money += 500;
+                    }
+                    else
+                    {
+                        Debug.Log("Failed! Try again.");
+                    }
+                }
+            }
+        }
     }
 
    
@@ -110,16 +148,6 @@ public class Money : MonoBehaviour
 
     public void ROB()
     {
-        RobbingUi.SetActive(false);
-        RobbingInfo.SetActive(true);
-        StartCoroutine(WaitingTime());
-    }
-
-    IEnumerator WaitingTime()
-    {
-        yield return new WaitForSeconds(5);         //yield on a new YieldInstruction that waits for 5 seconds.
-        RobbingInfo.SetActive(false);
-        yield return new WaitForSeconds(5);
-        money += 500;
+        robbing = true;
     }
 }
