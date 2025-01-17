@@ -3760,8 +3760,8 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: 8917cfd0f5eaebe57870c88158f24b28, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -18183,7 +18183,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1970038906854203871}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.47669995}
+  m_AnchorMin: {x: 0, y: 0.47669998}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}

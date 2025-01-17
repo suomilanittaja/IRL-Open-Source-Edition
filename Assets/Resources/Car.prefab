@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 7950207718840567008}
   - component: {fileID: 8389680319603368862}
   - component: {fileID: 1009067117857702177}
+  - component: {fileID: 7063940460602692250}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -666,6 +667,27 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!65 &7063940460602692250
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147600197055895462}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 5.1103992}
+  m_Center: {x: 0, y: 0, z: 0.25579262}
 --- !u!1 &4282181482767982954
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,8 +794,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.9665332, y: 1, z: 2.550459}
-  m_Center: {x: 1.4832666, y: 0, z: -0.0041389465}
+  m_Size: {x: 2.711565, y: 1, z: 2.550459}
+  m_Center: {x: 0.8557825, y: 0, z: -0.0041389465}
 --- !u!1 &5381468889417852048
 GameObject:
   m_ObjectHideFlags: 0
