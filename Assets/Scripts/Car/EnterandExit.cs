@@ -97,6 +97,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
     [PunRPC]
     void Enter()
     {
+        Debug.Log("PunRPCCall");
         isEntered = true;
         StartCoroutine(Timer());
 
@@ -111,6 +112,7 @@ public class EnterandExit : MonoBehaviourPunCallbacks
     [PunRPC]
     void Exit()
     {
+        Debug.Log("PunRPCCall");
         canEnter = true;
         isEntered = false;
         playerControllerScript.canEnter = true;

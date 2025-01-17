@@ -101,6 +101,7 @@ public class Phone : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SetMaterialToBum()
     {
+        Debug.Log("PunRPCCall");
         // Hae Renderer-komponentti ja vaihda materiaali
         GetComponent<Renderer>().material = bumMaterial;
     }
@@ -109,6 +110,7 @@ public class Phone : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SetMaterialToPolice()
     {
+        Debug.Log("PunRPCCall");
         // Hae Renderer-komponentti ja vaihda materiaali
         GetComponent<Renderer>().material = policeMaterial;
     }
@@ -117,6 +119,7 @@ public class Phone : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SetMaterialToRobber()
     {
+        Debug.Log("PunRPCCall");
         // Hae Renderer-komponentti ja vaihda materiaali
         GetComponent<Renderer>().material = robberMaterial;
     }
@@ -125,6 +128,7 @@ public class Phone : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SetMaterialToPizzaguy()
     {
+        Debug.Log("PunRPCCall");
         // Hae Renderer-komponentti ja vaihda materiaali
         GetComponent<Renderer>().material = pizzaguyMaterial;
     }

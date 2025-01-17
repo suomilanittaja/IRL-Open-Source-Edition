@@ -229,13 +229,13 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         if (hasGun)
         {
-            drinkEatAndPickScript.usingGun = true;
+            drinkEatAndPickScript.UseGun();
         }
     }
 
     public void useHand()
     {
-        drinkEatAndPickScript.usingGun = false;
+        drinkEatAndPickScript.UseHand();
     }
 
     IEnumerator Die()
@@ -247,6 +247,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     [PunRPC]
     private void EnterExit(bool enter)
     {
+        Debug.Log("PunRPCCall");
         gameObject.SetActive(!enter);
     }
 }

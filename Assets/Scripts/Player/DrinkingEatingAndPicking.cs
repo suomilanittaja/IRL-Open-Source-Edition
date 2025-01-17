@@ -42,9 +42,10 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
     {
         Hit = rayScript.rayHittedObject;
 
-        if (rayScript.rayHittedObject != null)
+        if (rayScript.rayHittedObject != null)  //if raycast has hitted something
         {
-            if (rayScript.rayHittedObject.CompareTag(selectableTag) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
+            //drinking staff
+            if (rayScript.rayHittedObject.CompareTag(selectableTag) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)    //if object which raycast is hitted is using this tag 
             {
                 photonViewScript = (PhotonView)Hit.GetComponent(typeof(PhotonView));
                 TransferOwnershipDrink();
@@ -64,11 +65,8 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
             }
             else
                 DrinkText.gameObject.SetActive(false);
-        }
 
-
-        if (rayScript.rayHittedObject != null)
-        {
+            //eating staff
             if (rayScript.rayHittedObject.CompareTag(selectableTag3) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
                 photonViewScript = (PhotonView)Hit.GetComponent(typeof(PhotonView));
@@ -83,11 +81,8 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
             }
             else
                 EatText.gameObject.SetActive(false);
-        }
 
-
-        if (rayScript.rayHittedObject != null)
-        {
+            //using staff
             if (rayScript.rayHittedObject.CompareTag(selectableTag4) && Input.GetKeyDown(KeyCode.F) && rayScript.hitDis <= 5)
             {
                 photonViewScript = (PhotonView)Hit.GetComponent(typeof(PhotonView));
@@ -104,16 +99,6 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
             }
             else
                 useText.gameObject.SetActive(false);
-
-            if (usingGun == false)
-            {
-                photonView.RPC("useHand2", RpcTarget.All);
-            }
-
-            if (usingGun)
-            {
-                photonView.RPC("useGun2", RpcTarget.All);
-            }
         }
     }
 
@@ -141,9 +126,20 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
             PhotonNetwork.Destroy(Hit);
     }
 
+    public void UseHand()
+    {
+        photonView.RPC("useHand2", RpcTarget.All);
+    }
+
+    public void UseGun()
+    {
+        photonView.RPC("useGun2", RpcTarget.All);
+    }
+
     [PunRPC]
     void pickUp()
     {
+        Debug.Log("PunRPCCall");
         gunObject.gameObject.SetActive(true);
         remoteGun.gameObject.SetActive(true);
     }
@@ -151,6 +147,7 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
     [PunRPC]
     void useGun2()
     {
+        Debug.Log("PunRPCCall");
         gunObject.gameObject.SetActive(true);
         remoteGun.gameObject.SetActive(true);
     }
@@ -158,6 +155,7 @@ public class DrinkingEatingAndPicking : MonoBehaviourPunCallbacks
     [PunRPC]
     void useHand2()
     {
+        Debug.Log("PunRPCCall");
         gunObject.gameObject.SetActive(false);
         remoteGun.gameObject.SetActive(false);
     }
