@@ -5,9 +5,7 @@ IRL open source edition is  game Inspired By <a href="https://store.steampowered
 
 This is still in develop and not ready to play!!  
 
-Recommended to use unity 2019.3.10f1 or later  
-
-Join our <a href="https://discord.me/volfase">Discord</a> for latest updates.  
+Recommended to use unity 6000.0.30f1 or later  
 
 Features  
 Multiplayer  
